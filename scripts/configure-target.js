@@ -8,7 +8,7 @@ const target = process.argv[2] || 'web';
 const configPath = path.join(root, 'public', 'config.js');
 const apiBase = process.env.ORDERPILOT_API_BASE_URL || process.env.ORDERPILOT_SERVER_URL || '';
 const envName = process.env.ORDERPILOT_ENV || target;
-const appVersion = '43.0.0';
+const appVersion = '44.0.0';
 
 if ((target === 'mobile' || target === 'desktop-remote') && !apiBase) {
   console.error('Missing ORDERPILOT_API_BASE_URL, for example: https://api.your-domain.co.il');

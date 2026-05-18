@@ -128,5 +128,18 @@
     "expiresAt": "2026-05-19T05:38:21.375Z",
     "ip": "10.100.102.18",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) orderpilot-retail-order-platform/41.0.0 Chrome/126.0.6478.234 Electron/31.7.7 Safari/537.36"
+  },
+  {
+    "id": "sess-20260518183657-61C2C0",
+    "tokenHash": "9ee742cab92e74ad928bc3c8040130ff61ad58af860dd8db3979cdec6341d12a",
+    "kind": "store",
+    "payload": {
+      "branchId": "branch-20260515080051-235DA5"
+    },
+    "createdAt": "2026-05-18T18:36:57.459Z",
+    "lastSeenAt": "2026-05-18T18:36:57.459Z",
+    "expiresAt": "2026-11-14T18:36:57.459Z",
+    "ip": "10.100.102.13",
+    "userAgent": "Dalvik/2.1.0 (Linux; U; Android 16; CPH2663 Build/UKQ1.231108.001)"
   }
 ]

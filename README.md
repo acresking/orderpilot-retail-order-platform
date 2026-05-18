@@ -55,3 +55,16 @@ http://YOUR_PC_IP:3000/api/health
 ## OrderPilot v43 - Android Failed to Fetch diagnostics
 
 This update adds Android local HTTP network security configuration, a visible connection test button on the mobile login screen, and GitHub safety files. It does not include `data/`.
+
+## פרטי כניסה
+
+### אפליקציית סניף
+
+- קוד רשת: `100`
+- קוד סניף: `12`
+- סיסמה: `demo`
+
+### פאנל חברה
+
+- אימייל: `admin@company.demo`
+- סיסמה: `admin123`

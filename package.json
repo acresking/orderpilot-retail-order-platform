@@ -1,6 +1,6 @@
 {
   "name": "orderpilot-retail-order-platform",
-  "version": "43.0.0",
+  "version": "44.0.0",
   "private": true,
   "description": "OrderPilot installable Android, desktop and server packaging workflow with Windows Gradle/Electron fixes.",
   "main": "desktop/main.js",
@@ -39,7 +39,8 @@
     "server:bundle": "node scripts/package-server.js",
     "build:desktop:portable": "node scripts/build-installers.js --desktop --api=http://127.0.0.1:3000",
     "prepare:github": "node scripts/prepare-github.js",
-    "android:diagnose": "node scripts/android-local-diagnose.js"
+    "android:diagnose": "node scripts/android-local-diagnose.js",
+    "github:create": "node scripts/github-create.js"
   },
   "engines": {
     "node": ">=22"
