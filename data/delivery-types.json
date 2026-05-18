@@ -1,0 +1,52 @@
+[
+  {
+    "id": "regular",
+    "icon": "📦",
+    "title": "הזמנה יבשה",
+    "desc": "מוצרי מדף ויבש לפי ימי אספקה נפרדים.",
+    "active": true,
+    "sort": 1,
+    "imageUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20640%20480%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ecfdf5%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffffff%22%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%2218%22%20stdDeviation%3D%2218%22%20flood-opacity%3D%220.18%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20rx%3D%2246%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22500%22%20cy%3D%2292%22%20r%3D%2288%22%20fill%3D%22%230f766e%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22106%22%20cy%3D%22390%22%20r%3D%22120%22%20fill%3D%22%230f766e%22%20opacity%3D%220.10%22%2F%3E%3Cg%20filter%3D%22url(%23s)%22%3E%3Crect%20x%3D%22180%22%20y%3D%22118%22%20width%3D%22280%22%20height%3D%22250%22%20rx%3D%2236%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%22210%22%20y%3D%22156%22%20width%3D%22220%22%20height%3D%22156%22%20rx%3D%2228%22%20fill%3D%22%230f766e%22%20opacity%3D%220.12%22%2F%3E%3Ctext%20x%3D%22320%22%20y%3D%22257%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2288%22%20font-weight%3D%22800%22%20fill%3D%22%230f766e%22%3E%D7%94%D7%A8%3C%2Ftext%3E%3Crect%20x%3D%22230%22%20y%3D%22332%22%20width%3D%22180%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%230f766e%22%20opacity%3D%220.40%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    "kind": "dry"
+  },
+  {
+    "id": "cold",
+    "icon": "❄️",
+    "title": "הזמנה בקירור",
+    "desc": "מוצרי קירור בלבד בחלון אספקה נפרד.",
+    "active": true,
+    "sort": 2,
+    "imageUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20640%20480%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23f0f9ff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffffff%22%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%2218%22%20stdDeviation%3D%2218%22%20flood-opacity%3D%220.18%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20rx%3D%2246%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22500%22%20cy%3D%2292%22%20r%3D%2288%22%20fill%3D%22%230284c7%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22106%22%20cy%3D%22390%22%20r%3D%22120%22%20fill%3D%22%230284c7%22%20opacity%3D%220.10%22%2F%3E%3Cg%20filter%3D%22url(%23s)%22%3E%3Crect%20x%3D%22180%22%20y%3D%22118%22%20width%3D%22280%22%20height%3D%22250%22%20rx%3D%2236%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%22210%22%20y%3D%22156%22%20width%3D%22220%22%20height%3D%22156%22%20rx%3D%2228%22%20fill%3D%22%230284c7%22%20opacity%3D%220.12%22%2F%3E%3Ctext%20x%3D%22320%22%20y%3D%22257%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2288%22%20font-weight%3D%22800%22%20fill%3D%22%230284c7%22%3E%D7%90%D7%91%3C%2Ftext%3E%3Crect%20x%3D%22230%22%20y%3D%22332%22%20width%3D%22180%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%230284c7%22%20opacity%3D%220.40%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    "kind": "cold"
+  },
+  {
+    "id": "promo",
+    "icon": "🏷️",
+    "title": "הזמנת מבצעים",
+    "desc": "מוצרים במבצע, השקות ופעילויות מכירה.",
+    "active": false,
+    "sort": 3,
+    "imageUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20640%20480%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff7ed%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffffff%22%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%2218%22%20stdDeviation%3D%2218%22%20flood-opacity%3D%220.18%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20rx%3D%2246%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22500%22%20cy%3D%2292%22%20r%3D%2288%22%20fill%3D%22%23ea580c%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22106%22%20cy%3D%22390%22%20r%3D%22120%22%20fill%3D%22%23ea580c%22%20opacity%3D%220.10%22%2F%3E%3Cg%20filter%3D%22url(%23s)%22%3E%3Crect%20x%3D%22180%22%20y%3D%22118%22%20width%3D%22280%22%20height%3D%22250%22%20rx%3D%2236%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%22210%22%20y%3D%22156%22%20width%3D%22220%22%20height%3D%22156%22%20rx%3D%2228%22%20fill%3D%22%23ea580c%22%20opacity%3D%220.12%22%2F%3E%3Ctext%20x%3D%22320%22%20y%3D%22257%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2288%22%20font-weight%3D%22800%22%20fill%3D%22%23ea580c%22%3E%D7%94%D7%9E%3C%2Ftext%3E%3Crect%20x%3D%22230%22%20y%3D%22332%22%20width%3D%22180%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%23ea580c%22%20opacity%3D%220.40%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    "kind": "promo"
+  },
+  {
+    "id": "returns",
+    "icon": "↩️",
+    "title": "החזרות והשלמות",
+    "desc": "השלמות, החלפות וטיפול במקרים מיוחדים.",
+    "active": false,
+    "sort": 4,
+    "imageUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20640%20480%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23f5f3ff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffffff%22%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%2218%22%20stdDeviation%3D%2218%22%20flood-opacity%3D%220.18%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20rx%3D%2246%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22500%22%20cy%3D%2292%22%20r%3D%2288%22%20fill%3D%22%237c3aed%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22106%22%20cy%3D%22390%22%20r%3D%22120%22%20fill%3D%22%237c3aed%22%20opacity%3D%220.10%22%2F%3E%3Cg%20filter%3D%22url(%23s)%22%3E%3Crect%20x%3D%22180%22%20y%3D%22118%22%20width%3D%22280%22%20height%3D%22250%22%20rx%3D%2236%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%22210%22%20y%3D%22156%22%20width%3D%22220%22%20height%3D%22156%22%20rx%3D%2228%22%20fill%3D%22%237c3aed%22%20opacity%3D%220.12%22%2F%3E%3Ctext%20x%3D%22320%22%20y%3D%22257%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2288%22%20font-weight%3D%22800%22%20fill%3D%22%237c3aed%22%3E%D7%94%D7%95%3C%2Ftext%3E%3Crect%20x%3D%22230%22%20y%3D%22332%22%20width%3D%22180%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%237c3aed%22%20opacity%3D%220.40%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    "kind": "other"
+  },
+  {
+    "id": "dt-20260515083513-87D75C",
+    "icon": "📦",
+    "title": "חריגים",
+    "desc": "הזמנות חריגים באישור מנהל בלבד!",
+    "active": false,
+    "sort": 5,
+    "imageUrl": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20640%20480%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff1f2%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffffff%22%2F%3E%3C%2FlinearGradient%3E%3Cfilter%20id%3D%22s%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%3CfeDropShadow%20dx%3D%220%22%20dy%3D%2218%22%20stdDeviation%3D%2218%22%20flood-opacity%3D%220.18%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20rx%3D%2246%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%22500%22%20cy%3D%2292%22%20r%3D%2288%22%20fill%3D%22%23be123c%22%20opacity%3D%220.16%22%2F%3E%3Ccircle%20cx%3D%22106%22%20cy%3D%22390%22%20r%3D%22120%22%20fill%3D%22%23be123c%22%20opacity%3D%220.10%22%2F%3E%3Cg%20filter%3D%22url(%23s)%22%3E%3Crect%20x%3D%22180%22%20y%3D%22118%22%20width%3D%22280%22%20height%3D%22250%22%20rx%3D%2236%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%22210%22%20y%3D%22156%22%20width%3D%22220%22%20height%3D%22156%22%20rx%3D%2228%22%20fill%3D%22%23be123c%22%20opacity%3D%220.12%22%2F%3E%3Ctext%20x%3D%22320%22%20y%3D%22257%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2288%22%20font-weight%3D%22800%22%20fill%3D%22%23be123c%22%3E%D7%97%3C%2Ftext%3E%3Crect%20x%3D%22230%22%20y%3D%22332%22%20width%3D%22180%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%23be123c%22%20opacity%3D%220.40%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    "kind": "other"
+  }
+]

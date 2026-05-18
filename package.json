@@ -1,0 +1,115 @@
+{
+  "name": "orderpilot-retail-order-platform",
+  "version": "43.0.0",
+  "private": true,
+  "description": "OrderPilot installable Android, desktop and server packaging workflow with Windows Gradle/Electron fixes.",
+  "main": "desktop/main.js",
+  "scripts": {
+    "start": "node server.js",
+    "server:prod": "NODE_ENV=production node server.js",
+    "desktop:open": "node server.js",
+    "reset-data": "rm -f data/*.json data/db.json && node server.js",
+    "mobile:add:ios": "npx cap add ios",
+    "mobile:add:android": "npx cap add android",
+    "mobile:sync": "npx cap sync",
+    "mobile:open:ios": "npx cap open ios",
+    "mobile:open:android": "npx cap open android",
+    "mobile:doctor": "node scripts/mobile-doctor.js",
+    "server:dev": "NODE_ENV=development node server.js",
+    "doctor": "node scripts/project-doctor.js",
+    "configure:mobile": "node scripts/configure-target.js mobile",
+    "configure:desktop": "node scripts/configure-target.js desktop",
+    "desktop:dev": "node scripts/open-desktop.js --local",
+    "desktop:dev:remote": "node scripts/open-desktop.js --remote",
+    "desktop:pack": "electron-builder --dir",
+    "desktop:dist": "electron-builder",
+    "build:check": "npm run doctor && npm run mobile:doctor",
+    "setup:all": "node scripts/setup-all.js --all",
+    "setup:local": "node scripts/setup-all.js --all --local",
+    "setup:real": "node scripts/setup-all.js --all",
+    "setup:everything": "node scripts/setup-all.js --all",
+    "local:server": "node server.js",
+    "local:all": "node scripts/setup-all.js --all --api=http://YOUR_PC_IP:3000 && npm start",
+    "build:all": "node scripts/build-installers.js --all",
+    "build:local": "node scripts/build-installers.js --all --local",
+    "build:server": "node scripts/package-server.js",
+    "build:android:debug": "node scripts/build-installers.js --android --debug-apk",
+    "build:desktop:installer": "node scripts/build-installers.js --desktop --installer",
+    "run:local": "node scripts/run-local.js",
+    "server:bundle": "node scripts/package-server.js",
+    "build:desktop:portable": "node scripts/build-installers.js --desktop --api=http://127.0.0.1:3000",
+    "prepare:github": "node scripts/prepare-github.js",
+    "android:diagnose": "node scripts/android-local-diagnose.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/haptics": "^8.0.0",
+    "@capacitor/ios": "^8.0.0",
+    "@capacitor/keyboard": "^8.0.0",
+    "@capacitor/network": "^8.0.0",
+    "@capacitor/preferences": "^8.0.0",
+    "@capacitor/push-notifications": "^8.0.0",
+    "@capacitor/filesystem": "^8.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.0.0",
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.orderpilot.desktop",
+    "productName": "OrderPilot Admin",
+    "asar": true,
+    "files": [
+      "server.js",
+      "desktop/**/*",
+      "public/**/*",
+      "scripts/project-doctor.js",
+      "package.json",
+      "README.md",
+      "!data/**/*",
+      "!**/patch_v*.py",
+      "scripts/run-local.js",
+      "scripts/build-installers.js",
+      "scripts/package-server.js",
+      "scripts/open-android-output.js",
+      "scripts/open-dist.js",
+      ".env.example"
+    ],
+    "extraResources": [
+      {
+        "from": "public",
+        "to": "public"
+      }
+    ],
+    "directories": {
+      "output": "dist-desktop"
+    },
+    "mac": {
+      "category": "public.app-category.business",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "signAndEditExecutable": false,
+      "signDlls": false,
+      "verifyUpdateCodeSignature": false
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  }
+}

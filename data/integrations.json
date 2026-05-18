@@ -1,0 +1,57 @@
+[
+  {
+    "id": "comax",
+    "name": "Comax / קומקס",
+    "type": "inventory",
+    "active": false,
+    "mode": "manual",
+    "apiBaseUrl": "",
+    "lastSyncAt": "",
+    "status": "not_configured",
+    "notes": "חיבור API/קבצי יבוא למלאי, מוצרים והזמנות."
+  },
+  {
+    "id": "priority",
+    "name": "Priority",
+    "type": "erp",
+    "active": false,
+    "mode": "manual",
+    "apiBaseUrl": "",
+    "lastSyncAt": "",
+    "status": "not_configured",
+    "notes": "חיבור ERP למוצרים, לקוחות, מלאי והזמנות."
+  },
+  {
+    "id": "hashavshevet",
+    "name": "Hashavshevet / חשבשבת",
+    "type": "erp",
+    "active": false,
+    "mode": "manual",
+    "apiBaseUrl": "",
+    "lastSyncAt": "",
+    "status": "not_configured",
+    "notes": "חיבור חשבונאי/מלאי לפי יצוא ויבוא."
+  },
+  {
+    "id": "sap",
+    "name": "SAP Business One",
+    "type": "erp",
+    "active": false,
+    "mode": "manual",
+    "apiBaseUrl": "",
+    "lastSyncAt": "",
+    "status": "not_configured",
+    "notes": "חיבור B1 Service Layer."
+  },
+  {
+    "id": "custom-api",
+    "name": "Custom API",
+    "type": "custom",
+    "active": false,
+    "mode": "manual",
+    "apiBaseUrl": "",
+    "lastSyncAt": "",
+    "status": "not_configured",
+    "notes": "Webhook/API מותאם לחברה."
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "appId": "com.orderpilot.store",
+  "appName": "OrderPilot Store",
+  "webDir": "public",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
+}

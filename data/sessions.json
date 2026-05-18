@@ -1,0 +1,132 @@
+[
+  {
+    "id": "sess-20260517200557-BA4510",
+    "tokenHash": "dc8d08ccba3710bfaacc28b51296ce00e3e8a61006ea51842bff0c18595153c0",
+    "kind": "store",
+    "payload": {
+      "branchId": "branch-20260515080051-235DA5"
+    },
+    "createdAt": "2026-05-17T20:05:57.586Z",
+    "lastSeenAt": "2026-05-17T20:23:13.859Z",
+    "expiresAt": "2026-05-20T20:05:57.586Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "sess-20260517200613-070891",
+    "tokenHash": "1616e7387e27f0893402b7fafb098f619cefc1cd6951485e620fd68f2849a2d9",
+    "kind": "admin",
+    "payload": {
+      "adminId": "admin-1"
+    },
+    "createdAt": "2026-05-17T20:06:13.876Z",
+    "lastSeenAt": "2026-05-17T20:23:28.215Z",
+    "expiresAt": "2026-05-18T06:06:13.876Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "sess-20260517203434-C88CFF",
+    "tokenHash": "507e9e9f6e5bcba2dd967e0fb143266e629f5c64f9af076d2b8af61ebbfbad3c",
+    "kind": "store",
+    "payload": {
+      "branchId": "branch-20260515080051-235DA5"
+    },
+    "createdAt": "2026-05-17T20:34:34.727Z",
+    "lastSeenAt": "2026-05-17T20:34:34.727Z",
+    "expiresAt": "2026-11-13T20:34:34.727Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "sess-20260517203506-F01AF5",
+    "tokenHash": "17d5b5cf8b4f580525d93c4aeb745d61cac126e15014b7d69ad1d0d5fd15330d",
+    "kind": "admin",
+    "payload": {
+      "adminId": "admin-1"
+    },
+    "createdAt": "2026-05-17T20:35:06.362Z",
+    "lastSeenAt": "2026-05-17T20:35:06.362Z",
+    "expiresAt": "2026-05-18T08:35:06.362Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "sess-20260518141902-030199",
+    "tokenHash": "a714cf5cfc4160273cc3cfdb9935f4ee47ba7daf933a1ce816a3be76e567d305",
+    "kind": "admin",
+    "payload": {
+      "adminId": "admin-1"
+    },
+    "createdAt": "2026-05-18T14:19:02.324Z",
+    "lastSeenAt": "2026-05-18T16:36:21.400Z",
+    "expiresAt": "2026-05-19T02:19:02.324Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "sess-20260518141916-ABCB1E",
+    "tokenHash": "3954dc46b4ec1d1a7d9930c43ad45c75acfb4c929b2d0a4cb34a31877e222be7",
+    "kind": "store",
+    "payload": {
+      "branchId": "branch-20260515080051-235DA5"
+    },
+    "createdAt": "2026-05-18T14:19:16.649Z",
+    "lastSeenAt": "2026-05-18T16:36:29.483Z",
+    "expiresAt": "2026-11-14T14:19:16.649Z",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "sess-20260518171402-FA2679",
+    "tokenHash": "f64838eaf92e005b0eadada6236a61797efe7c373fece7af6bab0b54a4831a72",
+    "kind": "admin",
+    "payload": {
+      "adminId": "admin-1"
+    },
+    "createdAt": "2026-05-18T17:14:02.730Z",
+    "lastSeenAt": "2026-05-18T17:14:02.730Z",
+    "expiresAt": "2026-05-19T05:14:02.730Z",
+    "ip": "10.100.102.18",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.234 Electron/31.7.7 Safari/537.36"
+  },
+  {
+    "id": "sess-20260518171554-002046",
+    "tokenHash": "d6f6e1b09e0f1f0d9eac796cd21347f18a5ba5b26ca869b2a08903c95ecb1de5",
+    "kind": "store",
+    "payload": {
+      "branchId": "branch-20260515080051-235DA5"
+    },
+    "createdAt": "2026-05-18T17:15:54.200Z",
+    "lastSeenAt": "2026-05-18T17:15:54.200Z",
+    "expiresAt": "2026-11-14T17:15:54.200Z",
+    "ip": "10.100.102.8",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36"
+  },
+  {
+    "id": "sess-20260518171735-29AE5B",
+    "tokenHash": "252b6e4818de3d079b8a184cad0a092ab5291723337c6a16bb4116fc16f9338c",
+    "kind": "store",
+    "payload": {
+      "branchId": "branch-1"
+    },
+    "createdAt": "2026-05-18T17:17:35.180Z",
+    "lastSeenAt": "2026-05-18T17:17:38.284Z",
+    "expiresAt": "2026-11-14T17:17:35.180Z",
+    "ip": "10.100.102.8",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36"
+  },
+  {
+    "id": "sess-20260518173821-E13796",
+    "tokenHash": "47579dcb6f797d26ea357574a4295fd5c01b6ec5d539c84aa0672d98caac6b3a",
+    "kind": "admin",
+    "payload": {
+      "adminId": "admin-1"
+    },
+    "createdAt": "2026-05-18T17:38:21.375Z",
+    "lastSeenAt": "2026-05-18T17:38:21.375Z",
+    "expiresAt": "2026-05-19T05:38:21.375Z",
+    "ip": "10.100.102.18",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) orderpilot-retail-order-platform/41.0.0 Chrome/126.0.6478.234 Electron/31.7.7 Safari/537.36"
+  }
+]

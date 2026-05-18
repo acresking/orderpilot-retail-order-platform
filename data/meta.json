@@ -1,0 +1,103 @@
+{
+  "version": 34,
+  "createdAt": "2026-05-17T19:30:00.000Z",
+  "importedFrom": "db(1).json",
+  "importedAt": "2026-05-15T00:00:00.000Z",
+  "sourceMeta": {
+    "version": 6,
+    "createdAt": "2026-05-15T07:33:49.328Z",
+    "demoAnalyticsAdded": true
+  },
+  "splitStorage": true,
+  "storage": "split-json",
+  "deliveryTypeCatalogAdded": true,
+  "updatedAt": "2026-05-18T18:28:29.569Z",
+  "v11": true,
+  "v12": {
+    "branchLevelMinimums": true,
+    "packingReportsSuppliedQuantities": true,
+    "importAndIntegrationDemo": true
+  },
+  "integrations": [
+    {
+      "id": "comax",
+      "name": "Comax ERP / מלאי",
+      "type": "inventory",
+      "active": false,
+      "mode": "api",
+      "lastSyncAt": "",
+      "note": "חיבור דמו: מיפוי מוצרים, מלאי והזמנות מול API של קומקס."
+    },
+    {
+      "id": "priority",
+      "name": "Priority",
+      "type": "erp",
+      "active": false,
+      "mode": "api",
+      "lastSyncAt": "",
+      "note": "חיבור דמו: מוצרים, לקוחות, הזמנות ותנועות מלאי."
+    },
+    {
+      "id": "sap",
+      "name": "SAP Business One",
+      "type": "erp",
+      "active": false,
+      "mode": "api",
+      "lastSyncAt": "",
+      "note": "חיבור דמו למערכות גדולות יותר."
+    },
+    {
+      "id": "hashavshevet",
+      "name": "חשבשבת / ERP מקומי",
+      "type": "inventory",
+      "active": false,
+      "mode": "file",
+      "lastSyncAt": "",
+      "note": "ייבוא/ייצוא קבצים למערכות ישראליות."
+    }
+  ],
+  "importTemplates": {
+    "products": [
+      "name",
+      "barcode",
+      "category",
+      "subcategory",
+      "price",
+      "stockQty",
+      "unitsPerCarton",
+      "deliveryTypeIds",
+      "kosherTypes"
+    ],
+    "networks": [
+      "name",
+      "accessCode",
+      "minOrderType",
+      "minOrderValue",
+      "minOrderCartons"
+    ],
+    "branches": [
+      "networkId",
+      "name",
+      "city",
+      "address",
+      "email",
+      "managerName",
+      "phone",
+      "branchCode",
+      "minOrderType",
+      "minOrderValue",
+      "minOrderCartons"
+    ],
+    "users": [
+      "name",
+      "email",
+      "role",
+      "permissions",
+      "assignedNetworkIds",
+      "assignedBranchIds",
+      "allowedIps"
+    ]
+  },
+  "stableBase": "v12/v16 stable branch",
+  "v18Patch": "modal orders, accordions, non-jumpy search, app cart/product modal fixes, kosher food type split"
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "billing-monthly-network",
+    "scope": "network",
+    "name": "חיוב חודשי לפי רשת",
+    "provider": "monthly_invoice",
+    "active": false,
+    "notes": "סגירת חשבון חודשית לרשת"
+  },
+  {
+    "id": "cardcom",
+    "scope": "branch",
+    "name": "Cardcom",
+    "provider": "cardcom",
+    "active": false,
+    "notes": "חיוב אשראי לאחר אישור/אספקה"
+  },
+  {
+    "id": "meshulam",
+    "scope": "branch",
+    "name": "Meshulam",
+    "provider": "meshulam",
+    "active": false,
+    "notes": "קישור תשלום / הוראת קבע"
+  },
+  {
+    "id": "tranzila",
+    "scope": "branch",
+    "name": "Tranzila",
+    "provider": "tranzila",
+    "active": false,
+    "notes": "מסוף תשלום וחיוב אוטומטי"
+  },
+  {
+    "id": "custom-billing-api",
+    "scope": "custom",
+    "name": "Custom Billing API",
+    "provider": "custom_api",
+    "active": false,
+    "notes": "חיבור מותאם לספק חיוב/חשבוניות"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "stock-20260515080209-E51507",
+    "networkId": "net-20260515080014-264D75",
+    "branchId": "branch-20260515080051-235DA5",
+    "branchName": "הריף",
+    "productId": "p10",
+    "productName": "חטיף אנרגיה תמרים",
+    "status": "sent",
+    "statusText": "נשלחה התראה",
+    "createdAt": "2026-05-15T08:02:09.935Z",
+    "sentAt": "2026-05-15T08:03:59.343Z"
+  }
+]

@@ -1,0 +1,61 @@
+[
+  {
+    "category": "בריאות",
+    "deliveryTypeIds": [
+      "regular"
+    ],
+    "createdAt": "2026-05-15T07:33:49.328Z"
+  },
+  {
+    "category": "חטיפים ומתוקים",
+    "deliveryTypeIds": [
+      "regular"
+    ],
+    "createdAt": "2026-05-15T07:33:49.328Z"
+  },
+  {
+    "category": "מזווה",
+    "deliveryTypeIds": [
+      "regular"
+    ],
+    "createdAt": "2026-05-15T07:33:49.328Z"
+  },
+  {
+    "category": "משקאות",
+    "deliveryTypeIds": [
+      "regular",
+      "cold"
+    ],
+    "createdAt": "2026-05-15T07:33:49.328Z"
+  },
+  {
+    "category": "משקאות חמים",
+    "deliveryTypeIds": [
+      "regular"
+    ],
+    "createdAt": "2026-05-15T07:33:49.328Z",
+    "updatedAt": "2026-05-17T16:43:14.531Z"
+  },
+  {
+    "category": "ניקיון",
+    "deliveryTypeIds": [
+      "regular"
+    ],
+    "createdAt": "2026-05-15T07:33:49.328Z"
+  },
+  {
+    "category": "קירור",
+    "deliveryTypeIds": [
+      "cold"
+    ],
+    "createdAt": "2026-05-15T07:33:49.328Z"
+  },
+  {
+    "category": "כללי",
+    "deliveryTypeIds": [
+      "regular",
+      "cold"
+    ],
+    "createdAt": "2026-05-15T10:03:22.848Z"
+  }
+]
