@@ -7,7 +7,31 @@ const state = {
   selected: new Set(),
   deliveryTypes: [{ title: 'יבש', kind: 'dry', builtin: true }],
   logoDataUrl: null,
+  brandColors: { primary: '#2563eb', accent: '#06b6d4' },
 };
+
+function updatePreviewSwatch(target, primary, accent) {
+  target.style.setProperty('--preview-primary', primary);
+  target.style.setProperty('--preview-accent', accent);
+}
+
+// Wires a color <input type=color> and its paired hex <input type=text> to stay in sync in both
+// directions, and calls onChange(primaryOrAccentHex) whenever either one changes.
+function wireColorPair(colorId, hexId, onChange) {
+  const colorInput = document.getElementById(colorId);
+  const hexInput = document.getElementById(hexId);
+  colorInput.addEventListener('input', () => { hexInput.value = colorInput.value; onChange(colorInput.value); });
+  hexInput.addEventListener('input', () => {
+    if (/^#[0-9a-fA-F]{6}$/.test(hexInput.value)) { colorInput.value = hexInput.value; onChange(hexInput.value); }
+  });
+}
+
+function setupColorPickers() {
+  const preview = document.getElementById('colorPreview');
+  wireColorPair('colorPrimary', 'colorPrimaryHex', (v) => { state.brandColors.primary = v; updatePreviewSwatch(preview, state.brandColors.primary, state.brandColors.accent); });
+  wireColorPair('colorAccent', 'colorAccentHex', (v) => { state.brandColors.accent = v; updatePreviewSwatch(preview, state.brandColors.primary, state.brandColors.accent); });
+  updatePreviewSwatch(preview, state.brandColors.primary, state.brandColors.accent);
+}
 
 function money(n) { return `₪${Number(n || 0).toLocaleString('he-IL')}`; }
 
@@ -150,7 +174,7 @@ async function loadClients() {
       <td>₪${c.price.setup} + ₪${c.price.monthly}/ח׳</td>
       <td class="muted">${escapeHtml(c.folderName)}</td>
       <td class="muted">${c.currentVersionSent ? `v${escapeHtml(c.currentVersionSent)}` : 'טרם נשלח'}</td>
-      <td><button type="button" class="btn ghost" data-open="${c.id}">פתיחת תיקייה</button> <button type="button" class="btn ghost" data-mark-sent="${c.id}">סימון עדכון כנשלח</button></td>
+      <td><button type="button" class="btn ghost" data-open="${c.id}">פתיחת תיקייה</button> <button type="button" class="btn ghost" data-mark-sent="${c.id}">סימון עדכון כנשלח</button> <button type="button" class="btn ghost" data-customize="${c.id}">התאמה אישית</button></td>
     </tr>
   `).join('');
   document.getElementById('clientsBody').innerHTML = rows || '<tr><td colspan="7" class="muted">עדיין לא נוצרו לקוחות</td></tr>';
@@ -166,6 +190,65 @@ async function loadClients() {
       await fetch(`/api/clients/${btn.dataset.markSent}/mark-sent`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ version: exportsData.platformVersion }) });
       loadClients();
     });
+  });
+  document.querySelectorAll('[data-customize]').forEach(btn => {
+    btn.addEventListener('click', () => openExistingClientForm(btn.dataset.customize));
+  });
+}
+
+let editingClientId = null;
+
+function openExistingClientForm(id) {
+  const client = lastClients.find(c => c.id === id);
+  if (!client) return;
+  editingClientId = id;
+  const primary = client.brandColors?.primary || '#2563eb';
+  const accent = client.brandColors?.accent || '#06b6d4';
+  document.getElementById('existingClientTitle').textContent = `התאמה אישית — ${client.name}`;
+  document.getElementById('existingColorPrimary').value = primary;
+  document.getElementById('existingColorPrimaryHex').value = primary;
+  document.getElementById('existingColorAccent').value = accent;
+  document.getElementById('existingColorAccentHex').value = accent;
+  document.getElementById('existingNotesField').value = client.notes || '';
+  document.getElementById('existingClientResult').innerHTML = '';
+  document.getElementById('existingClientForm').classList.add('open');
+  document.getElementById('existingClientForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function setupExistingClientForm() {
+  wireColorPair('existingColorPrimary', 'existingColorPrimaryHex', () => {});
+  wireColorPair('existingColorAccent', 'existingColorAccentHex', () => {});
+  document.getElementById('cancelExistingClientBtn').addEventListener('click', () => {
+    editingClientId = null;
+    document.getElementById('existingClientForm').classList.remove('open');
+  });
+  document.getElementById('saveExistingClientBtn').addEventListener('click', async () => {
+    if (!editingClientId) return;
+    const btn = document.getElementById('saveExistingClientBtn');
+    const resultBox = document.getElementById('existingClientResult');
+    btn.disabled = true;
+    resultBox.innerHTML = '';
+    try {
+      const res = await fetch(`/api/clients/${editingClientId}/customize`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          brandColors: { primary: document.getElementById('existingColorPrimaryHex').value, accent: document.getElementById('existingColorAccentHex').value },
+          notes: document.getElementById('existingNotesField').value,
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        resultBox.innerHTML = `<div class="result-card ok">נשמר בהצלחה.</div>`;
+        loadClients();
+      } else {
+        resultBox.innerHTML = `<div class="result-card fail">${escapeHtml(data.message || 'שגיאה בשמירה')}</div>`;
+      }
+    } catch (err) {
+      resultBox.innerHTML = `<div class="result-card fail">שגיאת רשת: ${escapeHtml(err.message)}</div>`;
+    } finally {
+      btn.disabled = false;
+    }
   });
 }
 
@@ -220,6 +303,8 @@ async function handleSubmit(e) {
     features: [...state.selected],
     deliveryTypes: state.deliveryTypes.filter(t => t.enabled !== false).map(t => ({ title: t.title, kind: t.kind })),
     logoDataUrl: state.logoDataUrl,
+    brandColors: state.brandColors,
+    notes: form.notes.value,
   };
 
   try {
@@ -230,6 +315,12 @@ async function handleSubmit(e) {
       form.reset();
       state.selected = new Set();
       state.logoDataUrl = null;
+      state.brandColors = { primary: '#2563eb', accent: '#06b6d4' };
+      document.getElementById('colorPrimary').value = state.brandColors.primary;
+      document.getElementById('colorPrimaryHex').value = state.brandColors.primary;
+      document.getElementById('colorAccent').value = state.brandColors.accent;
+      document.getElementById('colorAccentHex').value = state.brandColors.accent;
+      updatePreviewSwatch(document.getElementById('colorPreview'), state.brandColors.primary, state.brandColors.accent);
       document.getElementById('logoPreview').style.display = 'none';
       document.getElementById('logoPlaceholder').style.display = 'block';
       renderFeatures();
@@ -251,6 +342,8 @@ document.getElementById('createForm').addEventListener('submit', handleSubmit);
 setupDeliveryTypeDefaults();
 setupLogoUpload();
 setupCustomDeliveryType();
+setupColorPickers();
+setupExistingClientForm();
 loadFeatures();
 loadClients();
 loadExports();

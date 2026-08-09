@@ -5,7 +5,7 @@ const path = require('path');
 const { execSync, exec } = require('child_process');
 const AdmZip = require('adm-zip');
 const { FEATURES, EXTRA_DELIVERY_TYPE_PRICE, defaultFeatureIds, priceFor } = require('../platform/src/shared/features');
-const { createClient, VENDOR_EMAIL } = require('./lib/create-client');
+const { createClient, VENDOR_EMAIL, patchClientBranding } = require('./lib/create-client');
 const registry = require('./lib/registry');
 
 const PORT = Number(process.env.GENERATOR_PORT || 4100);
@@ -99,6 +99,15 @@ function serveStatic(req, res, pathname) {
   });
 }
 
+function sanitizeBrandColors(input) {
+  if (!input || typeof input !== 'object') return null;
+  const hex = /^#[0-9a-fA-F]{6}$/;
+  const primary = hex.test(input.primary || '') ? input.primary : null;
+  const accent = hex.test(input.accent || '') ? input.accent : null;
+  if (!primary && !accent) return null;
+  return { ...(primary ? { primary } : {}), ...(accent ? { accent } : {}) };
+}
+
 function decodeDataUrl(dataUrl) {
   if (!dataUrl || typeof dataUrl !== 'string') return null;
   const match = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
@@ -133,6 +142,7 @@ const server = http.createServer(async (req, res) => {
       const features = Array.isArray(body.features) ? [...new Set(['core', ...body.features])] : defaultFeatureIds();
       const deliveryTypes = Array.isArray(body.deliveryTypes) ? body.deliveryTypes.filter(t => t && t.title) : [];
       const logo = decodeDataUrl(body.logoDataUrl);
+      const brandColors = sanitizeBrandColors(body.brandColors);
 
       const result = await createClient({
         companyName: body.companyName,
@@ -143,6 +153,7 @@ const server = http.createServer(async (req, res) => {
         features,
         deliveryTypes,
         logo,
+        brandColors,
       });
 
       const price = priceFor(features, deliveryTypes.length || 1);
@@ -156,6 +167,8 @@ const server = http.createServer(async (req, res) => {
         features,
         price,
         hasLogo: !!logo,
+        brandColors,
+        notes: typeof body.notes === 'string' ? body.notes.slice(0, 4000) : '',
         currentVersionSent: null,
         lastUpdatedAt: null,
       };
@@ -195,6 +208,30 @@ const server = http.createServer(async (req, res) => {
       const client = registry.updateClient(id, { currentVersionSent: body.version || platformVersion(), lastUpdatedAt: new Date().toISOString() });
       if (!client) return sendJson(res, 404, { error: 'not_found' });
       return sendJson(res, 200, { ok: true, client });
+    }
+
+    if (req.method === 'POST' && pathname.match(/^\/api\/clients\/[^/]+\/customize$/)) {
+      const id = pathname.split('/')[3];
+      const body = await readBody(req);
+      const client = registry.listClients().find(c => c.id === id);
+      if (!client) return sendJson(res, 404, { error: 'not_found' });
+      const patch = {};
+      if (body.notes !== undefined) patch.notes = String(body.notes || '').slice(0, 4000);
+      let brandColors;
+      if (body.brandColors !== undefined) {
+        brandColors = sanitizeBrandColors(body.brandColors);
+        patch.brandColors = brandColors;
+      }
+      const updated = registry.updateClient(id, patch);
+      if (brandColors !== undefined) {
+        const clientDir = path.join(__dirname, '..', 'clients', client.folderName);
+        try {
+          patchClientBranding(clientDir, { brandColors });
+        } catch (err) {
+          return sendJson(res, 207, { ok: false, client: updated, message: `נשמר ברישום, אך עדכון קובץ הלקוח נכשל: ${err.message}. ודאו שהשרת של הלקוח אינו פעיל ונסו שוב.` });
+        }
+      }
+      return sendJson(res, 200, { ok: true, client: updated });
     }
 
     if (req.method === 'POST' && pathname === '/api/open-folder') {

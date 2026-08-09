@@ -28,6 +28,14 @@
   .dt-custom{display:flex;gap:8px}
   .dt-custom input{flex:1}
   .dt-price-note{margin:10px 0 0;font-size:12px;font-weight:700;color:var(--primary-2);background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:8px 12px}
+  .color-field{display:flex;gap:8px;align-items:center}
+  .color-field input[type=color]{width:44px;height:38px;padding:2px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+  .color-field input[type=text]{flex:1;font-family:monospace;text-transform:lowercase}
+  .color-preview{display:flex;gap:12px;align-items:center;margin-top:14px;padding:16px;border-radius:16px;background:#0f172a}
+  .color-preview .preview-btn{border:0;border-radius:12px;padding:10px 18px;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--preview-primary,#2563eb),var(--preview-accent,#06b6d4))}
+  .color-preview .preview-chip{color:#fff;font-weight:700;font-size:13px;border-inline-start:3px solid var(--preview-primary,#2563eb);padding-inline-start:10px}
+  .existing-client-form{display:none}
+  .existing-client-form.open{display:block;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
   .feature-groups{display:grid;gap:16px}
   .feature-group h3{margin:0 0 8px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
   .feature-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fff}
@@ -88,6 +96,32 @@
       </section>
 
       <section class="panel">
+        <h2>עיצוב ומיתוג</h2>
+        <p class="hint">כל חברה מקבלת את הצבעים שלה — בוחרים כאן צבע ראשי וצבע משני, והם משתלבים בכל מסכי האפליקציה והפאנל (כותרות, כפתורים, מסך כניסה). אפשר לשנות את הצבעים גם אחרי היצירה, בלי לגעת בשאר ההתאמות של הלקוח.</p>
+        <div class="form-grid">
+          <label>צבע ראשי
+            <div class="color-field">
+              <input type="color" name="colorPrimary" id="colorPrimary" value="#2563eb" />
+              <input type="text" id="colorPrimaryHex" value="#2563eb" maxlength="7" />
+            </div>
+          </label>
+          <label>צבע משני
+            <div class="color-field">
+              <input type="color" name="colorAccent" id="colorAccent" value="#06b6d4" />
+              <input type="text" id="colorAccentHex" value="#06b6d4" maxlength="7" />
+            </div>
+          </label>
+        </div>
+        <div class="color-preview" id="colorPreview">
+          <button type="button" class="preview-btn">כפתור לדוגמה</button>
+          <span class="preview-chip">צבעי המותג</span>
+        </div>
+        <label>הערות פנימיות (לשימוש הספק בלבד — לא נשלח ללקוח)
+          <textarea name="notes" id="notesField" rows="3" placeholder="לדוגמה: הלוגו שלהם בגוון טורקיז, לתאם איתם הנחה ברבעון הבא..."></textarea>
+        </label>
+      </section>
+
+      <section class="panel">
         <h2>משתמש ראשי (בעלים)</h2>
         <p class="hint">חשבון מלא עם כל ההרשאות, לכניסה הראשונה של הלקוח לפאנל. חשבון תמיכה נוסף לוונדור נוצר אוטומטית בכל לקוח.</p>
         <div class="form-grid">
@@ -130,11 +164,37 @@
 
     <section class="panel">
       <h2>לקוחות שנוצרו</h2>
-      <p class="hint">כל חברה שנוצרה כאן נשמרת ברשימה, כולל הפיצ׳רים והמחיר שנקבעו לה.</p>
+      <p class="hint">כל חברה שנוצרה כאן נשמרת ברשימה, כולל הפיצ׳רים והמחיר שנקבעו לה. אפשר לעדכן צבעים והערות לכל לקוח בנפרד, גם אחרי היצירה — זה משנה רק את ההתאמה האישית שלו ולא נוגע בקוד או בשאר הלקוחות.</p>
       <table>
         <thead><tr><th>חברה</th><th>נוצר</th><th>פיצ׳רים</th><th>מחיר</th><th>תיקייה</th><th>עדכון אחרון שנשלח</th><th></th></tr></thead>
         <tbody id="clientsBody"></tbody>
       </table>
+      <div class="existing-client-form" id="existingClientForm">
+        <h3 id="existingClientTitle"></h3>
+        <p class="hint">חשוב: יש לוודא שהשרת של הלקוח הזה אינו פעיל כרגע לפני השמירה, כדי שהשינוי לא יידרס.</p>
+        <div class="form-grid">
+          <label>צבע ראשי
+            <div class="color-field">
+              <input type="color" id="existingColorPrimary" value="#2563eb" />
+              <input type="text" id="existingColorPrimaryHex" value="#2563eb" maxlength="7" />
+            </div>
+          </label>
+          <label>צבע משני
+            <div class="color-field">
+              <input type="color" id="existingColorAccent" value="#06b6d4" />
+              <input type="text" id="existingColorAccentHex" value="#06b6d4" maxlength="7" />
+            </div>
+          </label>
+        </div>
+        <label>הערות פנימיות
+          <textarea id="existingNotesField" rows="3"></textarea>
+        </label>
+        <div class="modal-actions" style="display:flex;gap:10px;margin-top:12px">
+          <button type="button" class="btn primary" id="saveExistingClientBtn">שמירת שינויים</button>
+          <button type="button" class="btn ghost" id="cancelExistingClientBtn">ביטול</button>
+        </div>
+        <div id="existingClientResult"></div>
+      </div>
     </section>
 
     <section class="panel">

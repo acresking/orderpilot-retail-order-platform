@@ -20,8 +20,7 @@ const opt = {
   ios: false,
   desktop: false,
   server: false,
-  debugApk: true,
-  releaseApk: false,
+  debugApk: false,
   installer: true,
   openAndroid: false,
   openDesktopFolder: true,
@@ -37,7 +36,6 @@ for (const arg of args) {
   else if (arg === '--desktop') opt.desktop = true;
   else if (arg === '--server') opt.server = true;
   else if (arg === '--debug-apk') opt.debugApk = true;
-  else if (arg === '--release-apk') opt.releaseApk = true;
   else if (arg === '--no-installer') opt.installer = false;
   else if (arg === '--open-android') opt.openAndroid = true;
   else if (arg === '--no-open-folder') opt.openDesktopFolder = false;
@@ -52,7 +50,7 @@ if (opt.all || (!opt.android && !opt.ios && !opt.desktop && !opt.server)) {
 }
 
 function help(code) {
-  console.log(`OrderPilot build/installable creator\n\nOne command for local testing from your PC:\n  node scripts/build-installers.js --all --local\n\nOne command for a real server URL:\n  node scripts/build-installers.js --all --api=https://api.your-domain.co.il\n\nOutputs:\n  dist-installers/android/OrderPilot-Android-debug.apk\n  dist-desktop/OrderPilot Admin Setup*.exe or portable app\n  dist-server/orderpilot-server/\n\nOptions:\n  --local          Detect this PC LAN IP and configure Android/desktop to http://IP:3000\n  --api=URL        Configure apps to a specific server URL\n  --all            Build Android, desktop and server package\n  --android        Build Android only\n  --desktop        Build desktop installer only\n  --server         Package server only\n  --ios            Prepare iOS project if running on macOS\n  --skip-install   Do not run npm install\n  --release-apk    Also try Android release APK. Requires signing setup for real distribution.\n`);
+  console.log(`OrderPilot build/installable creator\n\nOne command for local testing from your PC:\n  node scripts/build-installers.js --all --local\n\nOne command for a real server URL:\n  node scripts/build-installers.js --all --api=https://api.your-domain.co.il\n\nOutputs:\n  dist-installers/android/OrderPilot-Android.apk (signed release; auto-generates a release keystore on first build)\n  dist-desktop/OrderPilot Admin Setup*.exe or portable app\n  dist-server/orderpilot-server/\n\nOptions:\n  --local          Detect this PC LAN IP and configure Android/desktop to http://IP:3000\n  --api=URL        Configure apps to a specific server URL\n  --all            Build Android, desktop and server package\n  --android        Build Android only\n  --desktop        Build desktop installer only\n  --server         Package server only\n  --ios            Prepare iOS project if running on macOS\n  --skip-install   Do not run npm install\n  --debug-apk      Build a fast debug-signed APK instead of a signed release build\n`);
   process.exit(code);
 }
 function log(title){ console.log(`\n=== ${title} ===`); }
@@ -197,14 +195,34 @@ function buildAndroid(url){
     console.warn('[WARN] Android Gradle wrapper not found. Open Android Studio once, let it sync, then run this command again.');
     return;
   }
-  run(gradle, ['assembleDebug'], { optional: true, cwd: androidDir });
-  const apk = path.join(root, 'android', 'app', 'build', 'outputs', 'apk', 'debug', 'app-debug.apk');
-  if (fs.existsSync(apk)) {
-    const out = path.join(root, 'dist-installers', 'android', 'OrderPilot-Android-debug.apk');
-    copyFile(apk, out);
-    console.log(`APK ready: ${out}`);
-  } else console.warn('[WARN] APK not found. If Android Studio builds successfully, copy app-debug.apk from android/app/build/outputs/apk/debug/.');
-  if (opt.releaseApk) run(gradle, ['assembleRelease'], { optional: true, cwd: androidDir });
+  if (opt.debugApk) {
+    run(gradle, ['assembleDebug'], { optional: true, cwd: androidDir });
+    const debugApk = path.join(root, 'android', 'app', 'build', 'outputs', 'apk', 'debug', 'app-debug.apk');
+    if (fs.existsSync(debugApk)) {
+      const out = path.join(root, 'dist-installers', 'android', 'OrderPilot-Android-debug.apk');
+      copyFile(debugApk, out);
+      console.log(`Debug APK ready: ${out}`);
+    } else console.warn('[WARN] Debug APK not found.');
+    return;
+  }
+  try { require('./ensure-android-keystore').ensureKeystore(); }
+  catch (e) { console.warn(`[WARN] Could not prepare release keystore: ${e.message}. Release APK will be unsigned.`); }
+  run(gradle, ['assembleRelease'], { optional: true, cwd: androidDir });
+  const releaseApk = path.join(root, 'android', 'app', 'build', 'outputs', 'apk', 'release', 'app-release.apk');
+  if (fs.existsSync(releaseApk)) {
+    const out = path.join(root, 'dist-installers', 'android', 'OrderPilot-Android.apk');
+    copyFile(releaseApk, out);
+    console.log(`Signed release APK ready: ${out}`);
+  } else {
+    console.warn('[WARN] Release APK not found, falling back to a debug build.');
+    run(gradle, ['assembleDebug'], { optional: true, cwd: androidDir });
+    const debugApk = path.join(root, 'android', 'app', 'build', 'outputs', 'apk', 'debug', 'app-debug.apk');
+    if (fs.existsSync(debugApk)) {
+      const out = path.join(root, 'dist-installers', 'android', 'OrderPilot-Android-debug.apk');
+      copyFile(debugApk, out);
+      console.log(`Debug APK ready: ${out}`);
+    } else console.warn('[WARN] APK not found. If Android Studio builds successfully, copy the APK from android/app/build/outputs/apk/.');
+  }
 }
 function buildIos(url){
   log('iOS project');
@@ -326,7 +344,7 @@ if (opt.desktop) buildDesktop(url);
 if (opt.server) packageServer(url);
 log('Done');
 console.log('Outputs to check:');
-console.log('  Android APK:     dist-installers/android/OrderPilot-Android-debug.apk');
+console.log('  Android APK:     dist-installers/android/OrderPilot-Android.apk (signed release)');
 console.log('  Desktop install: dist-desktop/');
 console.log('  Server package:  dist-server/orderpilot-server/');
 console.log('Run local server now with: npm run run:local');

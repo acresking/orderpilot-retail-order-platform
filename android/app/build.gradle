@@ -1,5 +1,17 @@
 apply plugin: 'com.android.application'
 
+// Release signing: reads android/keystore.properties (never committed — see .gitignore), which
+// scripts/ensure-android-keystore.js generates automatically the first time a release build is
+// requested, the same way the server auto-generates DATA_ENCRYPTION_KEY on first boot. Without
+// this file, "release" builds fall back to being unsigned rather than failing outright, so a
+// plain `assembleRelease` still works for local testing.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+def hasKeystoreConfig = keystorePropertiesFile.exists()
+if (hasKeystoreConfig) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace "com.orderpilot.store"
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -15,10 +27,23 @@ android {
              ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        release {
+            if (hasKeystoreConfig) {
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (hasKeystoreConfig) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }

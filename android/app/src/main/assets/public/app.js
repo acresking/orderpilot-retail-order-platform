@@ -1,7 +1,6 @@
 // Generated runtime bundle. Source of truth: src/client/mobile/app.js
 // Run: npm run build:web
-// Generated runtime bundle. Source of truth: src/client/mobile/app.js
-// Run: npm run build:web
+const ORDERPILOT_FEATURES = [{"id":"core","label":"בסיס הפלטפורמה (קטלוג, סל, הזמנות, ניהול רשתות/סניפים, מועדפים, התראות מלאי ופוש)","scope":"both","core":true,"setupPrice":4200,"monthlyPrice":390},{"id":"returns","label":"ניהול חזרות (כולל זיהוי אוטומטי מתעודה)","scope":"both","core":false,"setupPrice":1800,"monthlyPrice":120},{"id":"promotions","label":"מבצעים","scope":"both","core":false,"setupPrice":950,"monthlyPrice":70},{"id":"banners","label":"באנרים (כולל וידיאו וסיבוב אוטומטי)","scope":"both","core":false,"setupPrice":750,"monthlyPrice":45},{"id":"offlineQueue","label":"הזמנה במצב לא מקוון","scope":"app","core":false,"setupPrice":1400,"monthlyPrice":90},{"id":"barcodeScan","label":"סריקת ברקוד","scope":"app","core":false,"setupPrice":750,"monthlyPrice":40},{"id":"stats","label":"סטטיסטיקות וגרפים","scope":"admin","core":false,"setupPrice":1100,"monthlyPrice":80},{"id":"multiLanguage","label":"ריבוי שפות (אנגלית / ערבית / רוסית)","scope":"app","core":false,"setupPrice":850,"monthlyPrice":45},{"id":"integrations","label":"ממשקים וייבוא (ERP)","scope":"admin","core":false,"setupPrice":2600,"monthlyPrice":170},{"id":"multiEmployee","label":"ריבוי עובדים והרשאות","scope":"admin","core":false,"setupPrice":650,"monthlyPrice":40}];
 const root = document.getElementById('app');
 const API_BASE = (function(){
   if (typeof window !== 'undefined' && window.ORDERPILOT_API_BASE !== undefined) return window.ORDERPILOT_API_BASE;
@@ -69,14 +68,15 @@ const appState = {
   cart: {}
 };
 const ui = {
-  he: { login:'התחברות', networkCode:'קוד רשת', branchCode:'קוד סניף', password:'סיסמה', signIn:'כניסה', forgot:'שכחתי סיסמה', chooseType:'בחירת סוג הזמנה', chooseDate:'בחירת תאריך אספקה', chooseDateBtn:'בחירת תאריך אספקה והמשך', catalog:'קטלוג', all:'הכל', search:'חיפוש מוצר או ברקוד', scan:'סריקה', cart:'סל', orders:'הזמנות', notifications:'התראות', settings:'הגדרות', contact:'צור קשר', add:'הוספה', qty:'כמות', cartons:'קרטונים', unitsPerCarton:'יחידות בקרטון', kosher:'כשרות', stock:'מלאי', submit:'שליחת הזמנה', summary:'סיכום הזמנה', minOrder:'מינימום הזמנה', missingMin:'צריך להשלים מינימום', date:'תאריך אספקה', back:'חזרה', close:'סגירה', history:'היסטוריה', productInfo:'מידע מוצר', language:'שפה', theme:'ערכת נושא', light:'בהיר', dark:'כהה', send:'שליחה', subject:'נושא', message:'הודעה', phone:'טלפון', email:'מייל', passwordChange:'קביעת סיסמה קבועה', newPassword:'סיסמה חדשה', save:'שמירה', resetCode:'קוד שחזור', scanHint:'מקם את הברקוד בתוך המלבן', manualBarcode:'הקלדת ברקוד ידנית', noProducts:'אין מוצרים מתאימים', delivered:'סופק', packed:'נארז', missing:'נפל מההזמנה', appSettings:'הגדרות אפליקציה', exception:'חריג', barcode:'ברקוד', noDates:'אין תאריכים זמינים', logout:'התנתקות', fontSize:'גודל כתב', small:'קטן', normal:'רגיל', large:'גדול', barcodeNotFound:'ברקוד לא נמצא' },
-  en: { login:'Login', networkCode:'Network code', branchCode:'Branch code', password:'Password', signIn:'Sign in', forgot:'Forgot password', chooseType:'Choose order type', chooseDate:'Choose delivery date', chooseDateBtn:'Choose delivery date and continue', catalog:'Catalog', all:'All', search:'Search product or barcode', scan:'Scan', cart:'Cart', orders:'Orders', notifications:'Notifications', settings:'Settings', contact:'Contact', add:'Add', qty:'Quantity', cartons:'Cartons', unitsPerCarton:'Units per carton', kosher:'Kosher', stock:'Stock', submit:'Submit order', summary:'Order summary', minOrder:'Minimum order', missingMin:'Minimum not reached', date:'Delivery date', back:'Back', close:'Close', history:'History', productInfo:'Product info', language:'Language', theme:'Theme', light:'Light', dark:'Dark', send:'Send', subject:'Subject', message:'Message', phone:'Phone', email:'Email', passwordChange:'Set permanent password', newPassword:'New password', save:'Save', resetCode:'Reset code', scanHint:'Place the barcode inside the rectangle', manualBarcode:'Enter barcode manually', noProducts:'No matching products', delivered:'Delivered', packed:'Packed', missing:'Missing from order', appSettings:'App settings', exception:'Exception', barcode:'Barcode', noDates:'No available dates', logout:'Logout', fontSize:'Font size', small:'Small', normal:'Normal', large:'Large', barcodeNotFound:'Barcode not found' },
-  ar: { login:'تسجيل الدخول', networkCode:'رمز الشبكة', branchCode:'رمز الفرع', password:'كلمة المرور', signIn:'دخول', forgot:'نسيت كلمة المرور', chooseType:'اختر نوع الطلب', chooseDate:'اختر تاريخ التوريد', chooseDateBtn:'اختيار تاريخ التوريد والمتابعة', catalog:'الكتالوج', all:'الكل', search:'ابحث عن منتج أو باركود', scan:'مسح', cart:'السلة', orders:'الطلبات', notifications:'الإشعارات', settings:'الإعدادات', contact:'تواصل', add:'إضافة', qty:'الكمية', cartons:'كراتين', unitsPerCarton:'وحدات في الكرتون', kosher:'كوشير', stock:'المخزون', submit:'إرسال الطلب', summary:'ملخص الطلب', minOrder:'الحد الأدنى للطلب', missingMin:'لم يتم الوصول للحد الأدنى', date:'تاريخ التوريد', back:'رجوع', close:'إغلاق', history:'السجل', productInfo:'معلومات المنتج', language:'اللغة', theme:'المظهر', light:'فاتح', dark:'داكن', send:'إرسال', subject:'الموضوع', message:'الرسالة', phone:'هاتف', email:'بريد إلكتروني', passwordChange:'تعيين كلمة مرور دائمة', newPassword:'كلمة مرور جديدة', save:'حفظ', resetCode:'رمز الاستعادة', scanHint:'ضع الباركود داخل المستطيل', manualBarcode:'إدخال الباركود يدويًا', noProducts:'لا توجد منتجات مطابقة', delivered:'تم التوريد', packed:'تم التجهيز', missing:'نقص من الطلب', appSettings:'إعدادات التطبيق', exception:'استثناء', barcode:'باركود', noDates:'لا توجد تواريخ متاحة', logout:'تسجيل الخروج', fontSize:'حجم الخط', small:'صغير', normal:'عادي', large:'كبير', barcodeNotFound:'لم يتم العثور على الباركود' },
-  ru: { login:'Вход', networkCode:'Код сети', branchCode:'Код филиала', password:'Пароль', signIn:'Войти', forgot:'Забыли пароль', chooseType:'Выберите тип заказа', chooseDate:'Выберите дату поставки', chooseDateBtn:'Выбрать дату поставки и продолжить', catalog:'Каталог', all:'Все', search:'Поиск товара или штрихкода', scan:'Сканировать', cart:'Корзина', orders:'Заказы', notifications:'Уведомления', settings:'Настройки', contact:'Связаться', add:'Добавить', qty:'Количество', cartons:'Короба', unitsPerCarton:'Ед. в коробе', kosher:'Кашрут', stock:'Склад', submit:'Отправить заказ', summary:'Итог заказа', minOrder:'Минимальный заказ', missingMin:'Минимум не достигнут', date:'Дата поставки', back:'Назад', close:'Закрыть', history:'История', productInfo:'Информация о товаре', language:'Язык', theme:'Тема', light:'Светлая', dark:'Темная', send:'Отправить', subject:'Тема', message:'Сообщение', phone:'Телефон', email:'Email', passwordChange:'Установить постоянный пароль', newPassword:'Новый пароль', save:'Сохранить', resetCode:'Код восстановления', scanHint:'Поместите штрихкод в прямоугольник', manualBarcode:'Ввести штрихкод вручную', noProducts:'Нет подходящих товаров', delivered:'Доставлено', packed:'Упаковано', missing:'Не вошло в заказ', appSettings:'Настройки приложения', exception:'Исключение', barcode:'Штрихкод', noDates:'Нет доступных дат', logout:'Выход', fontSize:'Размер текста', small:'Малый', normal:'Обычный', large:'Крупный', barcodeNotFound:'Штрихкод не найден' }
+  he: { login:'התחברות', networkCode:'קוד רשת', branchCode:'קוד סניף', password:'סיסמה', signIn:'כניסה', forgot:'שכחתי סיסמה', chooseType:'בחירת סוג הזמנה', chooseDate:'בחירת תאריך אספקה', chooseDateBtn:'בחירת תאריך אספקה והמשך', catalog:'קטלוג', all:'הכל', search:'חיפוש מוצר או ברקוד', scan:'סריקה', cart:'סל', orders:'הזמנות', notifications:'התראות', settings:'הגדרות', contact:'צור קשר', add:'הוספה', qty:'כמות', cartons:'קרטונים', unitsPerCarton:'יחידות בקרטון', kosher:'כשרות', stock:'מלאי', submit:'שליחת הזמנה', summary:'סיכום הזמנה', minOrder:'מינימום הזמנה', missingMin:'צריך להשלים מינימום', date:'תאריך אספקה', back:'חזרה', close:'סגירה', history:'היסטוריה', productInfo:'מידע מוצר', language:'שפה', theme:'ערכת נושא', light:'בהיר', dark:'כהה', send:'שליחה', subject:'נושא', message:'הודעה', phone:'טלפון', email:'מייל', passwordChange:'קביעת סיסמה קבועה', newPassword:'סיסמה חדשה', save:'שמירה', resetCode:'קוד שחזור', scanHint:'מקם את הברקוד בתוך המלבן', manualBarcode:'הקלדת ברקוד ידנית', noProducts:'אין מוצרים מתאימים', delivered:'סופק', packed:'נארז', missing:'נפל מההזמנה', appSettings:'הגדרות אפליקציה', exception:'חריג', barcode:'ברקוד', noDates:'אין תאריכים זמינים', logout:'התנתקות', fontSize:'גודל כתב', small:'קטן', normal:'רגיל', large:'גדול', barcodeNotFound:'ברקוד לא נמצא', status:'סטטוס', type:'סוג', product:'מוצר', products:'מוצרים' },
+  en: { login:'Login', networkCode:'Network code', branchCode:'Branch code', password:'Password', signIn:'Sign in', forgot:'Forgot password', chooseType:'Choose order type', chooseDate:'Choose delivery date', chooseDateBtn:'Choose delivery date and continue', catalog:'Catalog', all:'All', search:'Search product or barcode', scan:'Scan', cart:'Cart', orders:'Orders', notifications:'Notifications', settings:'Settings', contact:'Contact', add:'Add', qty:'Quantity', cartons:'Cartons', unitsPerCarton:'Units per carton', kosher:'Kosher', stock:'Stock', submit:'Submit order', summary:'Order summary', minOrder:'Minimum order', missingMin:'Minimum not reached', date:'Delivery date', back:'Back', close:'Close', history:'History', productInfo:'Product info', language:'Language', theme:'Theme', light:'Light', dark:'Dark', send:'Send', subject:'Subject', message:'Message', phone:'Phone', email:'Email', passwordChange:'Set permanent password', newPassword:'New password', save:'Save', resetCode:'Reset code', scanHint:'Place the barcode inside the rectangle', manualBarcode:'Enter barcode manually', noProducts:'No matching products', delivered:'Delivered', packed:'Packed', missing:'Missing from order', appSettings:'App settings', exception:'Exception', barcode:'Barcode', noDates:'No available dates', logout:'Logout', fontSize:'Font size', small:'Small', normal:'Normal', large:'Large', barcodeNotFound:'Barcode not found', status:'Status', type:'Type', product:'Product', products:'Products' },
+  ar: { login:'تسجيل الدخول', networkCode:'رمز الشبكة', branchCode:'رمز الفرع', password:'كلمة المرور', signIn:'دخول', forgot:'نسيت كلمة المرور', chooseType:'اختر نوع الطلب', chooseDate:'اختر تاريخ التوريد', chooseDateBtn:'اختيار تاريخ التوريد والمتابعة', catalog:'الكتالوج', all:'الكل', search:'ابحث عن منتج أو باركود', scan:'مسح', cart:'السلة', orders:'الطلبات', notifications:'الإشعارات', settings:'الإعدادات', contact:'تواصل', add:'إضافة', qty:'الكمية', cartons:'كراتين', unitsPerCarton:'وحدات في الكرتون', kosher:'كوشير', stock:'المخزون', submit:'إرسال الطلب', summary:'ملخص الطلب', minOrder:'الحد الأدنى للطلب', missingMin:'لم يتم الوصول للحد الأدنى', date:'تاريخ التوريد', back:'رجوع', close:'إغلاق', history:'السجل', productInfo:'معلومات المنتج', language:'اللغة', theme:'المظهر', light:'فاتح', dark:'داكن', send:'إرسال', subject:'الموضوع', message:'الرسالة', phone:'هاتف', email:'بريد إلكتروني', passwordChange:'تعيين كلمة مرور دائمة', newPassword:'كلمة مرور جديدة', save:'حفظ', resetCode:'رمز الاستعادة', scanHint:'ضع الباركود داخل المستطيل', manualBarcode:'إدخال الباركود يدويًا', noProducts:'لا توجد منتجات مطابقة', delivered:'تم التوريد', packed:'تم التجهيز', missing:'نقص من الطلب', appSettings:'إعدادات التطبيق', exception:'استثناء', barcode:'باركود', noDates:'لا توجد تواريخ متاحة', logout:'تسجيل الخروج', fontSize:'حجم الخط', small:'صغير', normal:'عادي', large:'كبير', barcodeNotFound:'لم يتم العثور على الباركود', status:'الحالة', type:'النوع', product:'المنتج', products:'المنتجات' },
+  ru: { login:'Вход', networkCode:'Код сети', branchCode:'Код филиала', password:'Пароль', signIn:'Войти', forgot:'Забыли пароль', chooseType:'Выберите тип заказа', chooseDate:'Выберите дату поставки', chooseDateBtn:'Выбрать дату поставки и продолжить', catalog:'Каталог', all:'Все', search:'Поиск товара или штрихкода', scan:'Сканировать', cart:'Корзина', orders:'Заказы', notifications:'Уведомления', settings:'Настройки', contact:'Связаться', add:'Добавить', qty:'Количество', cartons:'Короба', unitsPerCarton:'Ед. в коробе', kosher:'Кашрут', stock:'Склад', submit:'Отправить заказ', summary:'Итог заказа', minOrder:'Минимальный заказ', missingMin:'Минимум не достигнут', date:'Дата поставки', back:'Назад', close:'Закрыть', history:'История', productInfo:'Информация о товаре', language:'Язык', theme:'Тема', light:'Светлая', dark:'Темная', send:'Отправить', subject:'Тема', message:'Сообщение', phone:'Телефон', email:'Email', passwordChange:'Установить постоянный пароль', newPassword:'Новый пароль', save:'Сохранить', resetCode:'Код восстановления', scanHint:'Поместите штрихкод в прямоугольник', manualBarcode:'Ввести штрихкод вручную', noProducts:'Нет подходящих товаров', delivered:'Доставлено', packed:'Упаковано', missing:'Не вошло в заказ', appSettings:'Настройки приложения', exception:'Исключение', barcode:'Штрихкод', noDates:'Нет доступных дат', logout:'Выход', fontSize:'Размер текста', small:'Малый', normal:'Обычный', large:'Крупный', barcodeNotFound:'Штрихкод не найден', status:'Статус', type:'Тип', product:'Товар', products:'Товары' }
 };
 function t(k){ return (ui[appState.lang] || ui.he)[k] || ui.he[k] || k; }
 function tr(value){ const s=String(value||''); if(!s) return ''; if(appState.lang==='he') return s; return appState.data?.translations?.[s]?.[appState.lang] || s; }
 function esc(v){ return String(v ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+function hasFeatureApp(id){ return id==null || (appState.data?.features||[]).includes(id); }
 // Professional line-icon set (MIT-licensed Feather Icons path data, vendored inline — no CDN, works offline).
 // Replaces the emoji previously used across the UI with consistent 24x24 stroke icons.
 const ICONS = {
@@ -149,7 +149,10 @@ const ICONS = {
   "grid":`<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>`,
   "gift":`<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>`,
   "award":`<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>`,
-  "activity":`<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>`
+  "activity":`<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>`,
+  "barcode":`<line x1="3" y1="4" x2="3" y2="20"/><line x1="6.5" y1="4" x2="6.5" y2="20"/><line x1="9.5" y1="4" x2="9.5" y2="20"/><line x1="12.5" y1="4" x2="12.5" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/><line x1="18" y1="4" x2="18" y2="20"/><line x1="21" y1="4" x2="21" y2="20"/>`,
+  "bell-plus":`<path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M15 8h6"/><path d="M18 5v6"/><path d="M20.002 14.464a9 9 0 0 0 .738.863A1 1 0 0 1 20 17H4a1 1 0 0 1-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 0 1 8.75-5.332"/>`,
+  "swipe":`<path d="M8 12h13"/><path d="m17 8 4 4-4 4"/><circle cx="4" cy="12" r="1"/>`
 };
 function icon(name, opts){
   opts = opts || {};
@@ -161,12 +164,15 @@ function icon(name, opts){
   return `<svg class="${cls}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${a11y}>${body}</svg>`;
 }
 function fileToDataUrl(file){ return new Promise((resolve,reject)=>{ if(!file) return resolve(''); const r=new FileReader(); r.onload=()=>resolve(r.result); r.onerror=reject; r.readAsDataURL(file); }); }
+function searchFieldHtml(value){ const v=String(value||''); return `<div class="search-field"><input value="${esc(v)}" data-search placeholder="${t('search')}" aria-label="${t('search')}"/>${v?`<button type="button" class="search-clear" data-clear-search aria-label="${t('close')}">${icon('x',{size:14})}</button>`:''}</div>`; }
 function money(n){ return Number(n||0).toLocaleString(appState.lang==='he'?'he-IL':'en-US',{style:'currency',currency:'ILS',maximumFractionDigits:0}); }
 function dir(){ return ['he','ar'].includes(appState.lang) ? 'rtl' : 'ltr'; }
 function img(p){ return `<img class="product-img" src="${esc(p.imageUrl||'/icon.svg')}" alt="${esc(tr(p.name))}" loading="lazy"/>`; }
 async function api(path, options={}){ const headers={'Content-Type':'application/json',...(options.headers||{})}; if(appState.token) headers.Authorization=`Bearer ${appState.token}`; const res=await fetchWithTimeout(API_BASE+path,{...options,headers},15000); const data=await res.json().catch(()=>({})); if(res.status===428){ showModal(passwordChangeForm()); throw new Error(data.message||t('passwordChange')); } if(!res.ok) throw new Error(data.message||'Error'); return data; }
-async function bootstrap(){ appState.data=await api('/api/app/bootstrap'); applyPreferences(); }
-function toast(msg){ const el=document.createElement('div'); el.className='toast'; el.setAttribute('role','status'); el.setAttribute('aria-live','polite'); el.textContent=msg; document.body.appendChild(el); setTimeout(()=>el.remove(),3500); }
+function shadeHex(hex, percent){ const n=parseInt(String(hex||'').replace('#',''),16); if(Number.isNaN(n)) return hex; let r=(n>>16)&0xff, g=(n>>8)&0xff, b=n&0xff; const t=percent<0?0:255, p=Math.abs(percent); r=Math.round((t-r)*p)+r; g=Math.round((t-g)*p)+g; b=Math.round((t-b)*p)+b; return '#'+(0x1000000+r*0x10000+g*0x100+b).toString(16).slice(1); }
+function applyBrandColors(brandColors){ const primary=brandColors?.primary, accent=brandColors?.accent; const root=document.documentElement.style; if(primary){ root.setProperty('--primary',primary); root.setProperty('--primary-2',shadeHex(primary,-0.18)); root.setProperty('--primary-soft',shadeHex(primary,0.85)); } if(accent) root.setProperty('--accent',accent); }
+async function bootstrap(){ appState.data=await api('/api/app/bootstrap'); applyBrandColors(appState.data.brandColors); applyPreferences(); }
+function toast(msg,type='info'){ const el=document.createElement('div'); el.className=`toast toast-${type}`; el.setAttribute('role','status'); el.setAttribute('aria-live','polite'); const iconName=type==='error'?'alert-circle':type==='success'?'check-circle':'info'; el.innerHTML=`${typeof icon==='function'?icon(iconName,{size:16}):''}<span></span>`; el.querySelector('span').textContent=msg; document.body.appendChild(el); setTimeout(()=>{ el.classList.add('toast-out'); setTimeout(()=>el.remove(),220); },3500); }
 function showModal(html, cls=''){ closeModal(); const div=document.createElement('div'); div.className='modal-backdrop app-modal'; div.innerHTML=`<div class="modal-card ${cls}" role="dialog" aria-modal="true">${html}</div>`; document.body.appendChild(div); div.addEventListener('click',e=>{ if(e.target.classList.contains('modal-backdrop')||e.target.closest('[data-modal-close]')) closeModal(); }); const focusable=div.querySelector('input,select,textarea,button,[href]'); if(focusable) focusable.focus({preventScroll:true}); }
 function closeModal(){ document.querySelectorAll('.modal-backdrop').forEach(x=>x.remove()); }
 function setQty(id,q){ q=Math.max(0,Number(q||0)); if(q) appState.cart[id]=q; else delete appState.cart[id]; render(); }
@@ -191,10 +197,10 @@ function appError(title,msg){
 function render(){ applyPreferences(); if(!appState.token || !appState.data){ root.innerHTML=loginView(); return; } root.innerHTML=`<div class="app-shell" dir="${dir()}"><header class="app-hero"><div><span class="eyebrow">OrderPilot</span><h1>${esc(tr(appState.data.branch.name))}</h1><p>${esc(tr(appState.data.network.name))} · ${esc(tr(appState.data.branch.city||''))}</p></div><button class="round-btn" data-screen="settings">${icon('settings')}</button></header><main class="app-main">${screenView()}</main><nav class="bottom-nav"><button class="${appState.screen==='order'?'active':''}" data-screen="order">${icon('cart')}<span>${t('catalog')}</span></button><button class="${appState.screen==='orders'?'active':''}" data-screen="orders">${icon('box')}<span>${t('orders')}</span></button><button class="${appState.screen==='notifications'?'active':''}" data-screen="notifications">${icon('bell')}<span>${t('notifications')}</span></button><button class="${appState.screen==='contact'?'active':''}" data-screen="contact">${icon('chat')}<span>${t('contact')}</span></button></nav></div>`; }
 function loginView(){ applyPreferences(); return `<main class="login-page" dir="${dir()}"><section class="login-card"><img src="/icon.svg" class="login-logo" alt=""/><h1>${t('login')}</h1><form data-form="login" class="stack"><input name="networkCode" type="password" inputmode="numeric" autocomplete="off" placeholder="${t('networkCode')}" aria-label="${t('networkCode')}" required/><input name="branchCode" type="password" inputmode="numeric" autocomplete="off" placeholder="${t('branchCode')}" aria-label="${t('branchCode')}" required/><input name="password" type="password" autocomplete="current-password" placeholder="${t('password')}" aria-label="${t('password')}" required/><button class="btn primary block">${t('signIn')}</button></form><button class="text-btn" data-action="recover-store">${t('forgot')}</button><div class="lang-row">${['he','en','ar','ru'].map(l=>`<button class="chip ${appState.lang===l?'active':''}" data-lang="${l}">${l==='he'?'עברית':l==='en'?'English':l==='ar'?'العربية':'Русский'}</button>`).join('')}</div></section></main>`; }
 function screenView(){ if(appState.screen==='orders') return ordersView(); if(appState.screen==='notifications') return notificationsView(); if(appState.screen==='settings') return settingsView(); if(appState.screen==='contact') return contactView(); return orderFlowView(); }
-function orderFlowView(){ if(!appState.selectedTypeId) return typeStep(); if(!appState.selectedDate) return dateStep(); return catalogView(); }
+function orderFlowView(){ const types=appState.data.deliveryTypes||[]; if(!appState.selectedTypeId && types.length===1) appState.selectedTypeId=types[0].id; if(!appState.selectedTypeId) return typeStep(); if(!appState.selectedDate) return dateStep(); return catalogView(); }
 function typeStep(){ return `<section class="flow-card enter"><h2>${t('chooseType')}</h2><div class="type-grid">${appState.data.deliveryTypes.map(type=>`<article class="type-card" data-select-type="${type.id}"><img src="${esc(type.imageUrl||'/icon.svg')}" alt=""/><div><h3>${esc(tr(type.title))}</h3><p>${esc(tr(type.desc||''))}</p></div><span>←</span></article>`).join('')}</div></section>`; }
-function dateStep(){ const type=appState.data.deliveryTypes.find(t=>t.id===appState.selectedTypeId); return `<section class="flow-card enter"><button class="text-btn" data-action="back-type">${t('back')}</button><div class="selected-type"><img src="${esc(type?.imageUrl||'/icon.svg')}" alt=""/><div><span>${t('chooseType')}</span><b>${esc(tr(type?.title||''))}</b></div></div><button class="btn primary big pulse" data-action="open-date-picker">${t('chooseDateBtn')}</button></section>`; }
-async function openDatePicker(){ try{ const data=await api(`/api/app/delivery-dates?deliveryTypeId=${encodeURIComponent(appState.selectedTypeId)}`); showModal(`<h2>${t('chooseDate')}</h2><div class="floating-dates">${(data.dates||[]).map(d=>`<button data-date-choice="${d.date}"><b>${esc(d.label)}</b>${d.exception?`<span>${t('exception')}</span>`:''}</button>`).join('') || `<p>${t('noDates')}</p>`}</div>`, 'date-popover'); }catch(e){ toast(e.message); } }
+function dateStep(){ const type=appState.data.deliveryTypes.find(t=>t.id===appState.selectedTypeId); const singleType=(appState.data.deliveryTypes||[]).length===1; const backAttr=singleType?'data-screen="home"':'data-action="back-type"'; return `<section class="flow-card enter"><button class="text-btn" ${backAttr}>${t('back')}</button><div class="selected-type"><img src="${esc(type?.imageUrl||'/icon.svg')}" alt=""/><div><span>${t('chooseType')}</span><b>${esc(tr(type?.title||''))}</b></div></div><button class="btn primary big pulse" data-action="open-date-picker">${t('chooseDateBtn')}</button></section>`; }
+async function openDatePicker(){ try{ const data=await api(`/api/app/delivery-dates?deliveryTypeId=${encodeURIComponent(appState.selectedTypeId)}`); showModal(`<h2>${t('chooseDate')}</h2><div class="floating-dates">${(data.dates||[]).map(d=>`<button data-date-choice="${d.date}"><b>${esc(d.label)}</b>${d.exception?`<span>${t('exception')}</span>`:''}</button>`).join('') || `<p>${t('noDates')}</p>`}</div>`, 'date-popover'); }catch(e){ toast(e.message,'error'); } }
 function productsForCurrent(){ const q=appState.search.trim().toLowerCase(); return appState.data.products.filter(p=>p.active!==false && (p.deliveryTypeIds||[]).includes(appState.selectedTypeId)).filter(p=>{ if(appState.selectedCategory!=='all' && p.category!==appState.selectedCategory) return false; if(appState.selectedSubcategory && p.subcategory!==appState.selectedSubcategory) return false; if(!q) return true; return [tr(p.name),p.name,p.barcode,tr(p.category),p.category,tr(p.subcategory),p.subcategory,(p.tags||[]).map(tr).join(' '),(p.kosherTypes||[]).map(tr).join(' ')].join(' ').toLowerCase().includes(q); }); }
 function categoriesForCurrent(){ return [...new Set(appState.data.products.filter(p=>(p.deliveryTypeIds||[]).includes(appState.selectedTypeId)).map(p=>p.category).filter(Boolean))]; }
 function subsForCat(){ if(appState.selectedCategory==='all') return []; return [...new Set(appState.data.products.filter(p=>p.category===appState.selectedCategory && (p.deliveryTypeIds||[]).includes(appState.selectedTypeId)).map(p=>p.subcategory).filter(Boolean))]; }
@@ -213,21 +219,21 @@ function resetForm(payload, code){ return `<h2>${t('forgot')}</h2><form data-for
 
 function manualBarcodeForm(){ return `<h2>${t('manualBarcode')}</h2><form data-form="manual-barcode" class="stack"><input name="barcode" inputmode="numeric" placeholder="${t('barcode')}" required/><button class="btn primary">${t('search')}</button></form>`; }
 
-async function scanBarcode(){ showModal(`<h2>${t('scan')}</h2><div class="scanner-box"><video autoplay playsinline></video><div class="scan-frame"><span></span></div></div><p>${t('scanHint')}</p><button class="btn ghost" data-action="manual-barcode">${t('manualBarcode')}</button>`, 'scanner-modal'); const video=document.querySelector('.scanner-box video'); try{ const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}); video.srcObject=stream; if('BarcodeDetector' in window){ const detector=new BarcodeDetector({formats:['ean_13','ean_8','code_128','upc_a','upc_e']}); const loop=async()=>{ if(!video.isConnected){ stream.getTracks().forEach(t=>t.stop()); return; } try{ const codes=await detector.detect(video); if(codes[0]){ stream.getTracks().forEach(t=>t.stop()); closeModal(); findBarcode(codes[0].rawValue); return; } }catch{} requestAnimationFrame(loop); }; loop(); } }catch(e){ toast(e.message); } }
+async function scanBarcode(){ showModal(`<h2>${t('scan')}</h2><div class="scanner-box"><video autoplay playsinline></video><div class="scan-frame"><span></span></div></div><p>${t('scanHint')}</p><button class="btn ghost" data-action="manual-barcode">${t('manualBarcode')}</button>`, 'scanner-modal'); const video=document.querySelector('.scanner-box video'); try{ const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}); video.srcObject=stream; if('BarcodeDetector' in window){ const detector=new BarcodeDetector({formats:['ean_13','ean_8','code_128','upc_a','upc_e']}); const loop=async()=>{ if(!video.isConnected){ stream.getTracks().forEach(t=>t.stop()); return; } try{ const codes=await detector.detect(video); if(codes[0]){ stream.getTracks().forEach(t=>t.stop()); closeModal(); findBarcode(codes[0].rawValue); return; } }catch{} requestAnimationFrame(loop); }; loop(); } }catch(e){ toast(e.message,'error'); } }
 function findBarcode(code){ appState.search=String(code||''); const p=appState.data.products.find(x=>String(x.barcode)===String(code)); render(); if(p) showModal(productModal(p)); else toast(t('barcodeNotFound')); }
-async function submitOrder(){ try{ const items=cartItems().map(x=>({productId:x.product.id,quantity:x.quantity})); const data=await api('/api/app/orders',{method:'POST',body:JSON.stringify({deliveryTypeId:appState.selectedTypeId,deliveryDate:appState.selectedDate,items})}); appState.cart={}; closeModal(); await bootstrap(); appState.screen='orders'; render(); toast(`${t('submit')} ${icon('check')} ${data.order.orderNumber}`); }catch(e){ toast(e.message); } }
+async function submitOrder(){ try{ const items=cartItems().map(x=>({productId:x.product.id,quantity:x.quantity})); const data=await api('/api/app/orders',{method:'POST',body:JSON.stringify({deliveryTypeId:appState.selectedTypeId,deliveryDate:appState.selectedDate,items})}); appState.cart={}; closeModal(); await bootstrap(); appState.screen='orders'; render(); toast(`${t('submit')} · ${data.order.orderNumber}`,'success'); }catch(e){ toast(e.message,'error'); } }
 function formObject(form){ return Object.fromEntries(new FormData(form).entries()); }
-async function handleSubmit(e){ const form=e.target.closest('form[data-form]'); if(!form) return; e.preventDefault(); const type=form.dataset.form; try{ if(type==='login'){ const data=await api('/api/auth/login',{method:'POST',body:JSON.stringify(formObject(form))}); appState.token=data.token; localStorage.setItem(tokenKey,appState.token); window.OrderPilotMobile?.saveToken?.(appState.token); if(data.passwordChangeRequired){ showModal(passwordChangeForm()); } else { appState.data=data.bootstrap; render(); } return; } if(type==='change-password'){ const data=await api('/api/app/password/change',{method:'POST',body:JSON.stringify(formObject(form))}); appState.data=data.bootstrap; closeModal(); render(); return; } if(type==='recover'){ const payload=formObject(form); const data=await api('/api/auth/recover',{method:'POST',body:JSON.stringify(payload)}); showModal(resetForm(payload,data.demoResetCode)); return; } if(type==='reset'){ await api('/api/auth/reset',{method:'POST',body:JSON.stringify(formObject(form))}); closeModal(); toast('OK'); return; } if(type==='manual-barcode'){ const obj=formObject(form); closeModal(); findBarcode(obj.barcode); return; } if(type==='contact'){ await api('/api/app/contact',{method:'POST',body:JSON.stringify(formObject(form))}); toast('✓'); form.reset(); return; } }catch(err){ toast(err.message); } }
-function handleClick(e){ const screen=e.target.closest('[data-screen]'); if(screen){ appState.screen=screen.dataset.screen; render(); return; } const lang=e.target.closest('[data-lang]'); if(lang){ appState.lang=lang.dataset.lang; localStorage.setItem(langKey,appState.lang); render(); return; } const type=e.target.closest('[data-select-type]'); if(type){ appState.selectedTypeId=type.dataset.selectType; appState.selectedDate=''; appState.selectedCategory='all'; appState.selectedSubcategory=''; render(); return; } const action=e.target.closest('[data-action]')?.dataset.action; if(action==='back-type'){ appState.selectedTypeId=''; render(); return; } if(action==='back-date'){ appState.selectedDate=''; render(); return; } if(action==='open-date-picker'){ openDatePicker(); return; } if(action==='open-cart'){ showModal(cartModal(),'cart-modal'); return; } if(action==='submit-order'){ submitOrder(); return; } if(action==='scan-barcode'){ scanBarcode(); return; } if(action==='manual-barcode'){ showModal(manualBarcodeForm()); return; } if(action==='recover-store'){ showModal(recoverForm()); return; } if(action==='logout'){ localStorage.removeItem(tokenKey); window.OrderPilotMobile?.removeToken?.(); appState.token=''; appState.data=null; render(); return; } const date=e.target.closest('[data-date-choice]'); if(date){ appState.selectedDate=date.dataset.dateChoice; closeModal(); render(); return; } const cat=e.target.closest('[data-cat]'); if(cat){ appState.selectedCategory=cat.dataset.cat; appState.selectedSubcategory=''; render(); return; } const sub=e.target.closest('[data-subcat]'); if(sub){ appState.selectedSubcategory=sub.dataset.subcat; render(); return; } const p=e.target.closest('[data-product]'); if(p){ const product=appState.data.products.find(x=>x.id===p.dataset.product); showModal(productModal(product)); return; } const inc=e.target.closest('[data-qty-inc]'); if(inc){ setQty(inc.dataset.qtyInc,(appState.cart[inc.dataset.qtyInc]||0)+1); return; } const dec=e.target.closest('[data-qty-dec]'); if(dec){ setQty(dec.dataset.qtyDec,(appState.cart[dec.dataset.qtyDec]||0)-1); return; } }
-function handleInput(e){ if(e.target.matches('[data-search]')){ appState.search=e.target.value; render(); } if(e.target.matches('[data-qty-input]')) setQty(e.target.dataset.qtyInput,e.target.value); if(e.target.matches('[data-lang-select]')){ appState.lang=e.target.value; localStorage.setItem(langKey,appState.lang); render(); } if(e.target.matches('[data-theme-select]')){ appState.theme=e.target.value; localStorage.setItem(themeKey,appState.theme); render(); } if(e.target.matches('[data-font-select]')){ appState.fontSize=e.target.value; localStorage.setItem(fontKey,appState.fontSize); render(); } }
+async function handleSubmit(e){ const form=e.target.closest('form[data-form]'); if(!form) return; e.preventDefault(); const type=form.dataset.form; try{ if(type==='login'){ const data=await api('/api/auth/login',{method:'POST',body:JSON.stringify(formObject(form))}); appState.token=data.token; localStorage.setItem(tokenKey,appState.token); window.OrderPilotMobile?.saveToken?.(appState.token); if(data.passwordChangeRequired){ showModal(passwordChangeForm()); } else { appState.data=data.bootstrap; render(); } return; } if(type==='change-password'){ const data=await api('/api/app/password/change',{method:'POST',body:JSON.stringify(formObject(form))}); appState.data=data.bootstrap; closeModal(); render(); return; } if(type==='recover'){ const payload=formObject(form); const data=await api('/api/auth/recover',{method:'POST',body:JSON.stringify(payload)}); showModal(resetForm(payload,data.demoResetCode)); return; } if(type==='reset'){ await api('/api/auth/reset',{method:'POST',body:JSON.stringify(formObject(form))}); closeModal(); toast('OK'); return; } if(type==='manual-barcode'){ const obj=formObject(form); closeModal(); findBarcode(obj.barcode); return; } if(type==='contact'){ await api('/api/app/contact',{method:'POST',body:JSON.stringify(formObject(form))}); toast('✓'); form.reset(); return; } }catch(err){ toast(err.message,'error'); } }
+function handleClick(e){ const clearSearch=e.target.closest('[data-clear-search]'); if(clearSearch){ appState.search=''; render(); const el=document.querySelector('[data-search]'); if(el) el.focus(); return; } const screen=e.target.closest('[data-screen]'); if(screen){ appState.screen=screen.dataset.screen; render(); return; } const lang=e.target.closest('[data-lang]'); if(lang){ appState.lang=lang.dataset.lang; localStorage.setItem(langKey,appState.lang); render(); return; } const type=e.target.closest('[data-select-type]'); if(type){ appState.selectedTypeId=type.dataset.selectType; appState.selectedDate=''; appState.selectedCategory='all'; appState.selectedSubcategory=''; render(); return; } const action=e.target.closest('[data-action]')?.dataset.action; if(action==='back-type'){ appState.selectedTypeId=''; render(); return; } if(action==='back-date'){ appState.selectedDate=''; render(); return; } if(action==='open-date-picker'){ openDatePicker(); return; } if(action==='open-cart'){ showModal(cartModal(),'cart-modal'); return; } if(action==='submit-order'){ submitOrder(); return; } if(action==='scan-barcode'){ scanBarcode(); return; } if(action==='manual-barcode'){ showModal(manualBarcodeForm()); return; } if(action==='recover-store'){ showModal(recoverForm()); return; } if(action==='logout'){ localStorage.removeItem(tokenKey); window.OrderPilotMobile?.removeToken?.(); appState.token=''; appState.data=null; render(); return; } const date=e.target.closest('[data-date-choice]'); if(date){ appState.selectedDate=date.dataset.dateChoice; closeModal(); render(); return; } const cat=e.target.closest('[data-cat]'); if(cat){ appState.selectedCategory=cat.dataset.cat; appState.selectedSubcategory=''; render(); return; } const sub=e.target.closest('[data-subcat]'); if(sub){ appState.selectedSubcategory=sub.dataset.subcat; render(); return; } const p=e.target.closest('[data-product]'); if(p){ const product=appState.data.products.find(x=>x.id===p.dataset.product); showModal(productModal(product)); return; } const inc=e.target.closest('[data-qty-inc]'); if(inc){ setQty(inc.dataset.qtyInc,(appState.cart[inc.dataset.qtyInc]||0)+1); return; } const dec=e.target.closest('[data-qty-dec]'); if(dec){ setQty(dec.dataset.qtyDec,(appState.cart[dec.dataset.qtyDec]||0)-1); return; } }
+function handleInput(e){ if(e.target.matches('[data-search]')){ const pos=e.target.selectionStart; appState.search=e.target.value; render(); const el=document.querySelector('[data-search]'); if(el){ el.focus(); try{ el.setSelectionRange(pos,pos); }catch(_){} } return; } if(e.target.matches('[data-qty-input]')) setQty(e.target.dataset.qtyInput,e.target.value); if(e.target.matches('[data-lang-select]')){ appState.lang=e.target.value; localStorage.setItem(langKey,appState.lang); render(); } if(e.target.matches('[data-theme-select]')){ appState.theme=e.target.value; localStorage.setItem(themeKey,appState.theme); render(); } if(e.target.matches('[data-font-select]')){ appState.fontSize=e.target.value; localStorage.setItem(fontKey,appState.fontSize); render(); } }
 document.addEventListener('submit',handleSubmit); document.addEventListener('click',handleClick); document.addEventListener('input',handleInput);
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
-(async function boot(){ applyPreferences(); try{ if(!appState.token && window.OrderPilotMobile?.getToken){ appState.token = await window.OrderPilotMobile.getToken(); if(appState.token) localStorage.setItem(tokenKey, appState.token); } if(appState.token) await bootstrap(); render(); } catch(err){ localStorage.removeItem(tokenKey); window.OrderPilotMobile?.removeToken?.(); appState.token=''; appState.data=null; toast(err.message||'שגיאת טעינה'); render(); } })();
+(async function boot(){ applyPreferences(); try{ const branding=await api('/api/branding'); applyBrandColors(branding.brandColors); }catch{} try{ if(!appState.token && window.OrderPilotMobile?.getToken){ appState.token = await window.OrderPilotMobile.getToken(); if(appState.token) localStorage.setItem(tokenKey, appState.token); } if(appState.token) await bootstrap(); render(); } catch(err){ localStorage.removeItem(tokenKey); window.OrderPilotMobile?.removeToken?.(); appState.token=''; appState.data=null; toast(err.message||'שגיאת טעינה'); render(); } })();
 
 /* v17 focused app patch: secure login, stable scanner, readable themes */
 function loginView(){ applyPreferences(); return `<main class="login-page" dir="${dir()}"><section class="login-card"><img src="/icon.svg" class="login-logo" alt=""/><h1>${t('login')}</h1><form data-form="login" class="stack"><input name="networkCode" type="password" inputmode="numeric" autocomplete="off" placeholder="${t('networkCode')}" aria-label="${t('networkCode')}" required/><input name="branchCode" type="password" inputmode="numeric" autocomplete="off" placeholder="${t('branchCode')}" aria-label="${t('branchCode')}" required/><input name="password" type="password" autocomplete="current-password" placeholder="${t('password')}" aria-label="${t('password')}" required/><button class="btn primary block">${t('signIn')}</button></form><button class="text-btn" data-action="recover-store">${t('forgot')}</button><div class="lang-row">${['he','en','ar','ru'].map(l=>`<button class="chip ${appState.lang===l?'active':''}" data-lang="${l}">${l==='he'?'עברית':l==='en'?'English':l==='ar'?'العربية':'Русский'}</button>`).join('')}</div></section></main>`; }
 function render(){ applyPreferences(); if(!appState.token || !appState.data){ root.innerHTML=loginView(); return; } root.innerHTML=`<div class="app-shell" dir="${dir()}"><header class="app-hero"><div><span class="eyebrow">OrderPilot</span><h1>${esc(tr(appState.data.branch.name))}</h1><p>${esc(tr(appState.data.network.name))} · ${esc(tr(appState.data.branch.city||''))}</p></div><button class="round-btn" data-screen="settings">${icon('settings')}</button></header><main class="app-main">${screenView()}</main><nav class="bottom-nav"><button class="${appState.screen==='order'?'active':''}" data-screen="order">${icon('cart')}<span>${t('catalog')}</span></button><button class="${appState.screen==='notifications'?'active':''}" data-screen="notifications">${icon('bell')}<span>${t('notifications')}</span></button><button class="${appState.screen==='contact'?'active':''}" data-screen="contact">${icon('chat')}<span>${t('contact')}</span></button><button class="${appState.screen==='settings'?'active':''}" data-screen="settings">${icon('settings')}<span>${t('settings')}</span></button></nav></div>`; }
-async function openDatePicker(){ try{ const data=await api(`/api/app/delivery-dates?deliveryTypeId=${encodeURIComponent(appState.selectedTypeId)}`); const orders=appState.data.orders||[]; showModal(`<h2>${t('chooseDate')}</h2><div class="floating-dates">${(data.dates||[]).map(d=>{ const dup=orders.find(o=>o.deliveryTypeId===appState.selectedTypeId && o.deliveryDate===d.date && o.status!=='cancelled'); return `<button data-date-choice="${d.date}" ${dup?'data-existing-order="'+dup.id+'"':''}><b>${esc(d.label)}</b>${d.exception?`<span>${t('exception')}</span>`:''}${dup?`<em>כבר קיימת הזמנה · ${esc(dup.orderNumber)}</em>`:''}</button>`; }).join('') || `<p>${t('noDates')}</p>`}</div>`, 'date-popover'); }catch(e){ toast(e.message); } }
+async function openDatePicker(){ try{ const data=await api(`/api/app/delivery-dates?deliveryTypeId=${encodeURIComponent(appState.selectedTypeId)}`); const orders=appState.data.orders||[]; showModal(`<h2>${t('chooseDate')}</h2><div class="floating-dates">${(data.dates||[]).map(d=>{ const dup=orders.find(o=>o.deliveryTypeId===appState.selectedTypeId && o.deliveryDate===d.date && o.status!=='cancelled'); return `<button data-date-choice="${d.date}" ${dup?'data-existing-order="'+dup.id+'"':''}><b>${esc(d.label)}</b>${d.exception?`<span>${t('exception')}</span>`:''}${dup?`<em>כבר קיימת הזמנה · ${esc(dup.orderNumber)}</em>`:''}</button>`; }).join('') || `<p>${t('noDates')}</p>`}</div>`, 'date-popover'); }catch(e){ toast(e.message,'error'); } }
 function productModal(p){ const q=appState.cart[p.id]||0; const hist=appState.data.orders.flatMap(o=>(o.items||[]).filter(i=>i.productId===p.id).map(i=>({date:o.deliveryDate, order:o.orderNumber, q:i.quantity, packed:i.packedQty??i.suppliedQty??i.quantity, missing:Math.max(0,Number(i.quantity||0)-Number((i.packedQty??i.suppliedQty??i.quantity)||0))}))).sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,8); return `<h2>${esc(tr(p.name))}</h2><div class="product-modal-head">${img(p)}<div><p><b>${t('unitsPerCarton')}:</b> ${Number(p.unitsPerCarton||0)}</p><p><b>${t('kosher')}:</b> ${esc((p.kosherTypes||[]).map(tr).join(', '))}</p><p><b>${t('stock')}:</b> ${Number(p.stockQty||0)}</p><p><b>${t('barcode')}:</b> ${esc(p.barcode||'')}</p><div class="qty-controls modal-qty"><button data-qty-dec="${p.id}">−</button><input data-qty-input="${p.id}" type="number" min="0" value="${q}"/><button data-qty-inc="${p.id}">+</button></div></div></div><h3>${t('history')}</h3><div class="history-list">${hist.map(h=>`<div><span>${esc(h.date)} · ${esc(h.order)}</span><b>${h.q} / ${h.packed} ${t('cartons')}</b>${h.missing?`<em>${t('missing')}: ${h.missing}</em>`:''}</div>`).join('') || '<p class="muted">—</p>'}</div><div class="modal-actions"><button class="btn primary" data-modal-close>${t('close')}</button></div>`; }
 function recommendedStep(){ const inCart=new Set(Object.keys(appState.cart).filter(id=>appState.cart[id]>0)); const rec=(appState.data.products||[]).filter(p=>!inCart.has(p.id) && (p.deliveryTypeIds||[]).includes(appState.selectedTypeId) && (p.usual||p.trending||p.newItem||Number(p.recommendedQty||0)>0)).slice(0,6); if(!rec.length) return submitOrder(); showModal(`<h2>אולי שכחת להזמין</h2><p class="muted">מוצרים שמוזמנים בדרך כלל / חמים / חדשים ולא נמצאים בסל.</p><div class="product-grid modal-products">${rec.map(productCard).join('')}</div><div class="modal-actions"><button class="btn primary" data-action="submit-order-final">שליחת הזמנה</button><button class="btn ghost" data-modal-close>חזרה לסל</button></div>`); }
 async function scanBarcode(){ showModal(`<h2>${t('scan')}</h2><div class="scanner-box stable"><video autoplay muted playsinline></video><div class="scan-frame"><span></span></div></div><p>${t('scanHint')}</p><button class="btn ghost" data-action="manual-barcode">${t('manualBarcode')}</button>`, 'scanner-modal'); const video=document.querySelector('.scanner-box video'); try{ const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}, width:{ideal:1280}, height:{ideal:720}}}); video.srcObject=stream; await video.play().catch(()=>{}); if('BarcodeDetector' in window){ const detector=new BarcodeDetector({formats:['ean_13','ean_8','code_128','upc_a','upc_e']}); let busy=false,last=0; const loop=async(ts)=>{ if(!video.isConnected){ stream.getTracks().forEach(t=>t.stop()); return; } if(!busy && ts-last>350){ busy=true; last=ts; try{ const codes=await detector.detect(video); if(codes[0]){ stream.getTracks().forEach(t=>t.stop()); closeModal(); findBarcode(codes[0].rawValue); return; } }catch{} busy=false; } requestAnimationFrame(loop); }; requestAnimationFrame(loop); } }catch(e){ toast(e.message || 'לא ניתן לפתוח מצלמה'); } }
@@ -327,7 +333,7 @@ document.addEventListener('click', e=>{ const p=e.target.closest('.product-open[
       const data=await api(`/api/app/delivery-dates?deliveryTypeId=${encodeURIComponent(appState.selectedTypeId)}`);
       const orders=appState.data.orders||[];
       showModal(`<h2>${t('chooseDate')}</h2><div class="floating-dates">${(data.dates||[]).map(d=>{ const dup=orders.find(o=>o.deliveryTypeId===appState.selectedTypeId && o.deliveryDate===d.date && o.status!=='cancelled'); return `<button data-date-choice="${d.date}" ${dup?'data-existing-order="'+dup.id+'"':''}><b>${esc(formatAppDate(d.date))}</b>${d.exception?`<span>${t('exception')}</span>`:''}${dup?`<em>${t('editable')} · ${esc(dup.orderNumber)}</em>`:''}</button>`; }).join('') || `<p>${t('noDates')}</p>`}</div>`, 'date-popover');
-    }catch(e){ toast(e.message); }
+    }catch(e){ toast(e.message,'error'); }
   };
   const oldProductModal = productModal;
   productModal=function(p){
@@ -353,7 +359,7 @@ document.addEventListener('click', e=>{ const p=e.target.closest('.product-open[
       showModal(`<h2>${t('contactSentTitle')}</h2><p>${t('contactSentBody')}</p><div class="contact-ticket"><b>#${esc(data.contact?.id || '')}</b><span>${esc(formatAppDate(data.contact?.createdAt,{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}))}</span></div><div class="modal-actions"><button class="btn primary" data-modal-close>${t('close')}</button></div>`);
       form.reset();
       render();
-    }catch(err){ toast(err.message); }
+    }catch(err){ toast(err.message,'error'); }
   };
   const oldSubmitOrderV20=submitOrder;
   submitOrder=async function(){
@@ -362,14 +368,14 @@ document.addEventListener('click', e=>{ const p=e.target.closest('.product-open[
       const url=appState.editingOrderId ? `/api/app/orders/${encodeURIComponent(appState.editingOrderId)}` : '/api/app/orders';
       const method=appState.editingOrderId ? 'PUT' : 'POST';
       const data=await api(url,{method,body:JSON.stringify({deliveryTypeId:appState.selectedTypeId,deliveryDate:appState.selectedDate,items})});
-      appState.cart={}; appState.editingOrderId=''; closeModal(); await bootstrap(); appState.screen='orders'; render(); toast(`${t('submit')} ${icon('check')} ${(data.order||{}).orderNumber||''}`);
-    }catch(e){ toast(e.message); }
+      appState.cart={}; appState.editingOrderId=''; closeModal(); await bootstrap(); appState.screen='orders'; render(); toast(`${t('submit')} · ${(data.order||{}).orderNumber||''}`,'success');
+    }catch(e){ toast(e.message,'error'); }
   };
   document.addEventListener('click', e=>{
     const edit=e.target.closest('[data-edit-history-order]');
     if(edit){ e.preventDefault(); e.stopPropagation(); const order=(appState.data.orders||[]).find(o=>o.id===edit.dataset.editHistoryOrder); loadOrderForEdit(order); return; }
     const existing=e.target.closest('[data-existing-order]');
-    if(existing){ const order=(appState.data.orders||[]).find(o=>o.id===existing.dataset.existingOrder); if(order && canEditOrder(order)){ e.preventDefault(); e.stopPropagation(); showModal(`<h2>${t('editable')}</h2><p>${esc(order.orderNumber)} · ${esc(formatAppDate(order.deliveryDate))}</p><div class="modal-actions"><button class="btn primary" data-edit-history-order="${esc(order.id)}">${t('openExisting')}</button><button class="btn ghost" data-modal-close>${t('chooseOtherDate')}</button></div>`); } }
+    if(existing){ const order=(appState.data.orders||[]).find(o=>o.id===existing.dataset.existingOrder); if(order && canEditOrder(order)){ e.preventDefault(); e.stopPropagation(); showModal(`<div class="confirm-dialog"><div class="confirm-icon warn">${icon('alert-triangle')}</div><h2>${t('editable')}</h2><p>${esc(order.orderNumber)} · ${esc(formatAppDate(order.deliveryDate))}</p><div class="modal-actions"><button class="btn primary" data-edit-history-order="${esc(order.id)}">${t('openExisting')}</button><button class="btn ghost" data-modal-close>${t('chooseOtherDate')}</button></div></div>`); } }
   }, true);
 })();
 
@@ -418,7 +424,7 @@ document.addEventListener('click', e=>{ const p=e.target.closest('.product-open[
       const data=await api(`/api/app/products/similar?productId=${encodeURIComponent(productId)}&deliveryTypeId=${encodeURIComponent(appState.selectedTypeId||'')}`);
       const products=data.products||[];
       showModal(`<h2>${original && (!original.inStock || Number(original.stockQty||0)<=0) ? t('alternativeProducts') : t('similarProducts')}</h2><div class="product-grid modal-products">${products.map(productCard).join('') || `<p class="empty">${t('noProducts')}</p>`}</div><div class="modal-actions"><button class="btn primary" data-modal-close>${t('close')}</button></div>`);
-    }catch(e){ toast(e.message); }
+    }catch(e){ toast(e.message,'error'); }
   }
 
   const oldSettings=settingsView;
@@ -479,7 +485,7 @@ document.addEventListener('click', e=>{ const p=e.target.closest('.product-open[
   function promoBadge(p){ return p.promotion ? `<span class="promo-badge">${icon('tag')} ${esc(tr(p.promotion.title||t('sale')))}</span>` : ''; }
   productCard=function(p){ const q=appState.cart[p.id]||0; const price=showPrices()?`<span>${money(p.pricePerCarton||0)}</span>`:''; return `<article class="product-card"><button class="product-open" data-product="${esc(p.id)}">${img(p)}${promoBadge(p)}<div class="product-body"><div class="tags">${(p.tags||[]).slice(0,3).map(tag=>`<span>${esc(tr(tag))}</span>`).join('')}</div><h3>${esc(tr(p.name))}</h3><p>${esc(tr(p.category))} · ${esc(tr(p.subcategory||''))}</p><div class="product-meta"><span>${t('stock')}: ${Number(p.stockQty||0)}</span>${price}</div></div></button><div class="quick-actions"><button class="btn sm ghost" data-action="show-similar" data-product-id="${esc(p.id)}">${t('similarShort')}</button>${Number(p.recommendedQty||0)>0?`<button class="btn sm ghost" data-recommended-qty="${esc(p.id)}">${t('useRecommended')}: ${Number(p.recommendedQty||0)}</button>`:''}</div><div class="qty-controls"><button data-qty-dec="${esc(p.id)}" type="button">−</button><input data-qty-input="${esc(p.id)}" type="number" min="0" value="${q}"/><button data-qty-inc="${esc(p.id)}" type="button">+</button></div></article>`; };
   productModal=function(p){ const q=appState.cart[p.id]||0; const food=p.foodType||p.dairyType||'פרווה'; const rows=(appState.data.orders||[]).flatMap(o=>(o.items||[]).filter(i=>i.productId===p.id).map(i=>({date:o.deliveryDate, order:o.orderNumber, arrived:Number((i.packedQty??i.suppliedQty??i.quantity)||0)}))).sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,12); return `<h2>${esc(tr(p.name))}</h2><div class="product-modal-head">${img(p)}<div>${promoBadge(p)}<p><b>${t('unitsPerCarton')}:</b> ${Number(p.unitsPerCarton||0)}</p><p><b>${t('cartonsPerPallet')}:</b> ${Number(p.cartonsPerPallet||0)}</p><p><b>${t('kosher')}:</b> ${esc((p.kosherTypes||[]).map(tr).join(', '))}</p><p><b>סוג:</b> ${esc(tr(food))}</p><p><b>${t('stock')}:</b> ${Number(p.stockQty||0)}</p><p><b>${t('barcode')}:</b> ${esc(p.barcode||'')}</p>${showPrices()?`<p><b>מחיר:</b> ${money(p.pricePerCarton||0)}</p>`:''}<div class="qty-controls modal-qty"><button data-qty-dec="${esc(p.id)}" type="button">−</button><input data-qty-input="${esc(p.id)}" type="number" min="0" value="${q}"/><button data-qty-inc="${esc(p.id)}" type="button">+</button></div></div></div><div class="modal-actions modal-actions-inline"><button class="btn ghost" data-action="show-similar" data-product-id="${esc(p.id)}">${(!p.inStock||Number(p.stockQty||0)<=0)?t('alternativeProducts'):t('chooseSimilar')}</button>${Number(p.recommendedQty||0)>0?`<button class="btn primary" data-recommended-qty="${esc(p.id)}">${t('useRecommended')}: ${Number(p.recommendedQty||0)}</button>`:''}</div><div class="product-extra-table"><h3>${t('ingredients')}</h3><p>${esc(tr(p.ingredients||'—'))}</p><h3>${t('allergens')}</h3><p>${esc(tr(p.allergens||'—'))}</p></div><h3>${t('history')}</h3><div class="table-wrap product-history-wrap"><table class="app-history-table"><thead><tr><th>${t('date')}</th><th>${t('orderNo')}</th><th>${t('arrived')}</th></tr></thead><tbody>${rows.map(h=>`<tr><td>${esc(typeof formatAppDate==='function'?formatAppDate(h.date):h.date)}</td><td>${esc(h.order)}</td><td>${h.arrived}</td></tr>`).join('') || `<tr><td colspan="3" class="empty">${t('noHistory')}</td></tr>`}</tbody></table></div><div class="modal-actions"><button class="btn primary" data-modal-close>${t('close')}</button></div>`; };
-  catalogView=function(){ const products=productsForCurrent(); const cats=categoriesForCurrent(); const subs=subsForCat(); const totals=cartTotals(); return `<section class="catalog-screen enter"><div class="catalog-head"><button class="text-btn" data-action="back-date">${t('back')}</button><div><h2>${t('catalog')}</h2><p>${t('date')}: ${esc(typeof formatAppDate==='function'?formatAppDate(appState.selectedDate):appState.selectedDate)} · ${esc(tr(appState.data.deliveryTypes.find(t=>t.id===appState.selectedTypeId)?.title||''))}</p></div></div><div class="search-row"><input value="${esc(appState.search)}" data-search placeholder="${t('search')}" aria-label="${t('search')}"/><button class="btn ghost icon-scan" aria-label="${t('scan')}" data-action="scan-barcode">${t('scanIcon')}</button></div><div class="category-rail"><button class="cat-chip ${appState.selectedCategory==='all'?'active':''}" data-cat="all">${t('all')}</button>${cats.map(c=>`<button class="cat-chip ${appState.selectedCategory===c?'active':''}" data-cat="${esc(c)}">${esc(tr(c))}</button>`).join('')}</div>${subs.length?`<div class="subcategory-rail"><button class="sub-chip ${!appState.selectedSubcategory?'active':''}" data-subcat="">${t('all')}</button>${subs.map(s=>`<button class="sub-chip ${appState.selectedSubcategory===s?'active':''}" data-subcat="${esc(s)}">${esc(tr(s))}</button>`).join('')}</div>`:''}<div class="product-grid">${products.map(productCard).join('') || `<p class="empty">${t('noProducts')}</p>`}</div>${totals.lines?cartBar(totals):''}</section>`; };
+  catalogView=function(){ const products=productsForCurrent(); const cats=categoriesForCurrent(); const subs=subsForCat(); const totals=cartTotals(); return `<section class="catalog-screen enter"><div class="catalog-head"><button class="text-btn" data-action="back-date">${t('back')}</button><div><h2>${t('catalog')}</h2><p>${t('date')}: ${esc(typeof formatAppDate==='function'?formatAppDate(appState.selectedDate):appState.selectedDate)} · ${esc(tr(appState.data.deliveryTypes.find(t=>t.id===appState.selectedTypeId)?.title||''))}</p></div></div><div class="search-row">${searchFieldHtml(appState.search)}${hasFeatureApp('barcodeScan')?`<button class="btn ghost icon-scan" aria-label="${t('scan')}" data-action="scan-barcode">${icon('barcode')}</button>`:''}</div><div class="category-rail"><button class="cat-chip ${appState.selectedCategory==='all'?'active':''}" data-cat="all">${t('all')}</button>${cats.map(c=>`<button class="cat-chip ${appState.selectedCategory===c?'active':''}" data-cat="${esc(c)}">${esc(tr(c))}</button>`).join('')}</div>${subs.length?`<div class="subcategory-rail"><button class="sub-chip ${!appState.selectedSubcategory?'active':''}" data-subcat="">${t('all')}</button>${subs.map(s=>`<button class="sub-chip ${appState.selectedSubcategory===s?'active':''}" data-subcat="${esc(s)}">${esc(tr(s))}</button>`).join('')}</div>`:''}<div class="product-grid">${products.map(productCard).join('') || `<p class="empty">${t('noProducts')}</p>`}</div>${totals.lines?cartBar(totals):''}</section>`; };
   function recommendedProducts(){ const inCart=new Set(Object.keys(appState.cart)); return (appState.data.products||[]).filter(p=>p.active!==false && (p.deliveryTypeIds||[]).includes(appState.selectedTypeId) && !inCart.has(p.id) && (p.usual || p.trending || p.newItem || Number(p.recommendedQty||0)>0)).slice(0,8); }
   window.recommendedStep=function(){ const rec=recommendedProducts(); showModal(`<h2>${t('recommended')}</h2><p class="muted">${t('recommended')}</p><div class="product-grid modal-products">${rec.map(productCard).join('') || `<p class="empty">${t('noProducts')}</p>`}</div><div class="modal-actions"><button class="btn primary" data-action="submit-order-final">${t('submit')}</button><button class="btn ghost" data-modal-close>${t('close')}</button></div>`); };
   cartModal=function(){ const items=cartItems(); const totals=cartTotals(); return `<h2>${t('summary')}</h2><div class="cart-lines">${items.map(({product,quantity})=>`<div class="cart-line"><div>${img(product)}<b>${esc(tr(product.name))}</b></div><div class="qty-controls"><button data-qty-dec="${esc(product.id)}">−</button><input data-qty-input="${esc(product.id)}" type="number" min="0" value="${quantity}"/><button data-qty-inc="${esc(product.id)}">+</button></div></div>`).join('')}</div><div class="summary-box"><div><b>${totals.lines}</b><span>${t('cart')}</span></div><div><b>${totals.cartons}</b><span>${t('cartons')}</span></div>${showPrices()?`<div><b>${money(totals.value)}</b><span>${t('summary')}</span></div>`:''}</div>${!minOk()?`<p class="danger-text">${t('missingMin')} · ${t('minOrder')}: ${minText()}</p>`:''}<div class="modal-actions"><button class="btn primary" data-action="pre-submit-recommendations" ${!minOk()?'disabled':''}>${t('submit')}</button><button class="btn ghost" data-modal-close>${t('close')}</button></div>`; };
@@ -657,7 +663,7 @@ document.addEventListener('click', e=>{ const p=e.target.closest('.product-open[
   function returnForm(productId=''){ const products=(appState.data.products||[]).filter(p=>p.active!==false); return `<h2>${t('createReturn')}</h2><form data-form="return-request" class="stack return-form"><div class="return-products">${products.map(p=>`<label class="return-product-row"><span>${returnBadge(p)} ${esc(tr(p.name))}<small>${esc(p.barcode||'')} · ${Number(p.unitsPerCarton||1)} ${t('unitsPerCarton')}</small></span><input type="number" min="0" name="units__${esc(p.id)}" value="${p.id===productId?'1':''}" placeholder="${t('returnUnits')}"/></label>`).join('')}</div><label>${t('returnCertificate')}<input type="file" name="certificateImageUrl" accept="image/*"/></label><label>${t('returnImages')}<input type="file" name="returnImages" accept="image/*" multiple/></label><textarea name="note" placeholder="${t('returnReason')}"></textarea><div class="modal-actions"><button class="btn primary">${t('send')}</button><button class="btn ghost" type="button" data-modal-close>${t('close')}</button></div></form>`; }
   function collectReturnItems(form){ return [...form.querySelectorAll('input[name^="units__"]')].map(i=>({ productId:i.name.replace('units__',''), units:Number(i.value||0) })).filter(x=>x.units>0); }
   document.addEventListener('click', e=>{ const nr=e.target.closest('[data-action="new-return"]'); if(nr){ e.preventDefault(); showModal(returnForm()); return; } const rp=e.target.closest('[data-action="return-one-product"]'); if(rp){ e.preventDefault(); e.stopPropagation(); showModal(returnForm(rp.dataset.productId)); return; } }, true);
-  document.addEventListener('submit', async e=>{ const form=e.target.closest('form[data-form="return-request"]'); if(!form) return; e.preventDefault(); e.stopPropagation(); try{ const cert=await fileToDataUrl(form.querySelector('[name="certificateImageUrl"]')?.files?.[0]); const photos=[]; for(const f of form.querySelector('[name="returnImages"]')?.files||[]) photos.push(await fileToDataUrl(f)); const data=await api('/api/app/returns',{method:'POST',body:JSON.stringify({ items:collectReturnItems(form), note:form.note.value, certificateImageUrl:cert, returnImageUrls:photos })}); closeModal(); await bootstrap(); appState.screen='returns'; render(); toast(`${t('createReturn')} ${icon('check')} ${data.return.returnNumber}`); }catch(err){ toast(err.message); } }, true);
+  document.addEventListener('submit', async e=>{ const form=e.target.closest('form[data-form="return-request"]'); if(!form) return; e.preventDefault(); e.stopPropagation(); try{ const cert=await fileToDataUrl(form.querySelector('[name="certificateImageUrl"]')?.files?.[0]); const photos=[]; for(const f of form.querySelector('[name="returnImages"]')?.files||[]) photos.push(await fileToDataUrl(f)); const data=await api('/api/app/returns',{method:'POST',body:JSON.stringify({ items:collectReturnItems(form), note:form.note.value, certificateImageUrl:cert, returnImageUrls:photos })}); closeModal(); await bootstrap(); appState.screen='returns'; render(); toast(`${t('createReturn')} ${icon('check')} ${data.return.returnNumber}`); }catch(err){ toast(err.message,'error'); } }, true);
 })();
 
 
@@ -752,7 +758,7 @@ document.addEventListener('click', e=>{ const p=e.target.closest('.product-open[
     if(!form) return;
     const imgs=form.querySelector('[name="returnImages"]');
     if(imgs && (!imgs.files || imgs.files.length===0)){
-      e.preventDefault(); e.stopPropagation(); toast('חובה לצרף לפחות תמונה אחת של ההחזרה');
+      e.preventDefault(); e.stopPropagation(); toast('חובה לצרף לפחות תמונה אחת של ההחזרה','error');
       return false;
     }
   }, true);
@@ -865,7 +871,7 @@ document.addEventListener('click', e=>{ const p=e.target.closest('.product-open[
   function place33(){ const n=tr(appState.data?.network?.name||''); const address=addr33(); return [n,address].filter(Boolean).join(' - '); }
   function banners33(){ const custom=(appState.data?.appBanners||[]).filter(x=>x.active!==false); const fallback=[{icon:'🏷️',title:t('deals'),text:t('newOrder')},{icon:'✨',title:t('newProducts'),text:t('catalog')},{icon:'✅',title:t('recommendedProducts'),text:t('useRecommended')},{icon:'↩️',title:t('returns'),text:t('createReturn')},{icon:'💬',title:t('contact'),text:t('contactSentBody')}]; return (custom.length?custom:fallback).slice(0,5); }
   function home33(){ const banners=banners33(); return `<section class="home-screen v33-home enter"><div class="banner-carousel v33-banners">${banners.map((x,i)=>`<article class="home-banner ${i===0?'active':''}" style="--i:${i}">${x.imageUrl?`<img src="${esc33(x.imageUrl)}" alt="">`:''}<span>${esc33(x.icon||'📣')}</span><div><b>${esc33(tr(x.title||''))}</b><p>${esc33(tr(x.text||''))}</p></div></article>`).join('')}</div><div class="home-actions v33-actions">${(cartTotals().cartons > 0) ? `<button class="action-card primary" data-screen="catalog"><span>${icon('cart')}</span><b>${t('continueOrder')} (${cartTotals().cartons} ${t('cartons')})</b></button>` : `<button class="action-card primary" data-action="start-new-order"><span>${icon('cart')}</span><b>${t('newOrder')}</b></button>`}<button class="action-card" data-screen="promotions"><span>${icon('tag')}</span><b>${t('deals')}</b></button><button class="action-card" data-quick-mode="new"><span>${icon('sparkle')}</span><b>${t('newProducts')}</b></button><button class="action-card" data-quick-mode="recommended"><span>${icon('check-circle')}</span><b>${t('recommendedProducts')}</b></button></div></section>`; }
-  function quickProducts33(){ const mode=appState.quickMode||'new'; const rows=(appState.data?.products||[]).filter(p=>{ if(p.active===false) return false; if(mode==='new') return p.newItem || (p.tags||[]).some(x=>String(x).includes('חדש')); if(mode==='recommended') return p.usual || p.trending || Number(p.recommendedQty||0)>0; return p.promotion || (p.tags||[]).some(x=>String(x).includes('מבצע')); }); const q=(appState.search||'').trim().toLowerCase(); const visible=rows.filter(p=>!q || [tr(p.name),p.name,p.barcode,tr(p.category),p.category,tr(p.subcategory),p.subcategory,(p.tags||[]).map(tr).join(' ')].join(' ').toLowerCase().includes(q)); const title=mode==='new'?t('newProducts'):mode==='recommended'?t('recommendedProducts'):t('deals'); return `<section class="catalog-screen quick-products enter"><div class="catalog-head"><button class="text-btn" data-screen="home">${t('backHome')}</button><div><h2>${title}</h2><p>${esc33(place33())}</p></div></div><div class="search-row"><input value="${esc33(appState.search||'')}" data-search placeholder="${t('search')}" aria-label="${t('search')}"/><button class="btn ghost" data-action="scan-barcode">${icon('camera')}</button></div><div class="product-grid">${visible.map(productCard).join('') || `<p class="empty">${t('noProducts')}</p>`}</div></section>`; }
+  function quickProducts33(){ const mode=appState.quickMode||'new'; const rows=(appState.data?.products||[]).filter(p=>{ if(p.active===false) return false; if(mode==='new') return p.newItem || (p.tags||[]).some(x=>String(x).includes('חדש')); if(mode==='recommended') return p.usual || p.trending || Number(p.recommendedQty||0)>0; return p.promotion || (p.tags||[]).some(x=>String(x).includes('מבצע')); }); const q=(appState.search||'').trim().toLowerCase(); const visible=rows.filter(p=>!q || [tr(p.name),p.name,p.barcode,tr(p.category),p.category,tr(p.subcategory),p.subcategory,(p.tags||[]).map(tr).join(' ')].join(' ').toLowerCase().includes(q)); const title=mode==='new'?t('newProducts'):mode==='recommended'?t('recommendedProducts'):t('deals'); return `<section class="catalog-screen quick-products enter"><div class="catalog-head"><button class="text-btn" data-screen="home">${t('backHome')}</button><div><h2>${title}</h2><p>${esc33(place33())}</p></div></div><div class="search-row">${searchFieldHtml(appState.search)}${hasFeatureApp('barcodeScan')?`<button class="btn ghost" data-action="scan-barcode">${icon('barcode')}</button>`:''}</div><div class="product-grid">${visible.map(productCard).join('') || `<p class="empty">${t('noProducts')}</p>`}</div></section>`; }
   const prevScreen33=screenView;
   screenView=function(){ if(appState.screen==='home') return home33(); if(appState.screen==='quick-products') return quickProducts33(); return prevScreen33(); };
   render=function(){ applyPreferences(); if(!appState.token||!appState.data){ root.innerHTML=loginView(); return; } const totals=cartTotals(); const unread=(appState.data.notifications||[]).filter(n=>n.status!=='read').length; const b=appState.data.branch||{}; root.innerHTML=`<div class="app-shell v33-shell" dir="${dir()}"><header class="app-topbar v33-topbar"><div class="v33-title"><span class="eyebrow">OrderPilot</span><b>${esc33(place33())}</b><small>${esc33(greeting33())}, ${esc33(b.managerName||b.name||'')}</small></div><div class="topbar-actions"><button class="round-btn notify-btn" aria-label="${t('notifications')}" data-action="open-notifications">${icon('bell')}${unread?`<em>${Math.min(99,unread)}</em>`:''}</button><button class="round-btn settings-btn" aria-label="${t('settings')}" data-action="open-settings-modal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button></div></header><main class="app-main">${screenView()}</main>${totals.lines?`<button class="floating-cart home-floating-cart" data-action="open-cart">${icon('cart')} <b>${totals.cartons}</b></button>`:''}<nav class="bottom-nav"><button class="${appState.screen==='home'?'active':''}" data-screen="home">${icon('home')}<span>${t('home')}</span></button><button class="${appState.screen==='orders'?'active':''}" data-screen="orders">${icon('box')}<span>${t('orderHistory')||t('orders')}</span></button><button class="${appState.screen==='returns'?'active':''}" data-screen="returns">${icon('return')}<span>${t('returns')}</span></button><button class="${appState.screen==='contact'?'active':''}" data-screen="contact">${icon('chat')}<span>${t('contact')}</span></button></nav></div>`; };
@@ -910,7 +916,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
     <span>${esc45(x.icon||'📣')}</span>
     <div><b>${esc45(tr(x.title||''))}</b><p>${esc45(tr(x.text||''))}</p></div>
   </article>`;
-}).join('')}</div><div class="home-actions v45-actions">${(cartTotals().cartons > 0) ? `<button class="action-card primary" data-screen="catalog"><span>${icon('cart')}</span><b>${t('continueOrder')} (${cartTotals().cartons} ${t('cartons')})</b></button>` : `<button class="action-card primary" data-action="start-new-order"><span>${icon('cart')}</span><b>${t('newOrder')}</b></button>`}<button class="action-card" data-screen="promotions"><span>${icon('tag')}</span><b>${t('deals')}</b></button><button class="action-card" data-quick-mode="new"><span>${icon('sparkle')}</span><b>${t('newProducts')}</b></button><button class="action-card" data-quick-mode="recommended"><span>${icon('check-circle')}</span><b>${t('recommendedProducts')}</b></button></div></section>`; }
+}).join('')}</div><div class="home-actions v45-actions">${(cartTotals().cartons > 0) ? `<button class="action-card primary" data-screen="catalog"><span>${icon('cart')}</span><b>${t('continueOrder')} (${cartTotals().cartons} ${t('cartons')})</b></button>` : `<button class="action-card primary" data-action="start-new-order"><span>${icon('cart')}</span><b>${t('newOrder')}</b></button>`}${hasFeatureApp('promotions')?`<button class="action-card" data-screen="promotions"><span>${icon('tag')}</span><b>${t('deals')}</b></button>`:''}<button class="action-card" data-quick-mode="new"><span>${icon('sparkle')}</span><b>${t('newProducts')}</b></button><button class="action-card" data-quick-mode="recommended"><span>${icon('check-circle')}</span><b>${t('recommendedProducts')}</b></button></div></section>`; }
   const prevScreen45=screenView;
   screenView=function(){ if(appState.screen==='home') return home45(); if(appState.screen==='order-success') return orderSuccessView45(); return prevScreen45(); };
 
@@ -921,7 +927,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
     applyPreferences();
     if(!appState.token||!appState.data){ root.innerHTML=loginView().replace(/<button class="text-btn" data-action="test-connection">[\s\S]*?<\/button>/,''); return; }
     const totals=cartTotals(); const unread=unreadCount45();
-    root.innerHTML=`<div class="app-shell v45-shell" dir="${dir()}"><header class="app-topbar v45-topbar"><div class="v49-brand"><img src="/icon.svg" alt="OrderPilot"/><div class="v45-title"><span class="eyebrow">OrderPilot</span><b>${esc45(currentNetworkBranchLine())}</b><small>${esc45(greeting45())}, ${esc45(currentManager())}</small></div></div><div class="topbar-actions"><button class="round-btn notify-btn" aria-label="${t('notifications')}" data-action="open-notifications">${icon('bell')}${unread?`<em>${Math.min(99,unread)}</em>`:''}</button><button class="round-btn settings-btn" aria-label="${t('settings')}" data-action="open-settings-modal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button></div></header><main class="app-main">${screenView()}</main>${totals.lines?`<button class="floating-cart v45-cart" data-action="open-cart" aria-label="${t('cart')}">${icon('cart')}<b>${totals.cartons}</b></button>`:''}<nav class="bottom-nav v45-bottom-nav"><button class="${appState.screen==='home'?'active':''}" data-screen="home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>${t('home')}</span></button><button class="${appState.screen==='orders'?'active':''}" data-screen="orders"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span>${t('orderHistory')||t('orders')}</span></button><button class="${appState.screen==='returns'?'active':''}" data-screen="returns"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg><span>${t('returns')}</span></button><button class="${appState.screen==='contact'?'active':''}" data-screen="contact"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>${t('contact')}</span></button></nav></div>`;
+    root.innerHTML=`<div class="app-shell v45-shell" dir="${dir()}"><header class="app-topbar v45-topbar"><div class="v49-brand"><img src="/icon.svg" alt="OrderPilot"/><div class="v45-title"><span class="eyebrow">OrderPilot</span><b>${esc45(currentNetworkBranchLine())}</b><small>${esc45(greeting45())}, ${esc45(currentManager())}</small></div></div><div class="topbar-actions"><button class="round-btn notify-btn" aria-label="${t('notifications')}" data-action="open-notifications">${icon('bell')}${unread?`<em>${Math.min(99,unread)}</em>`:''}</button><button class="round-btn settings-btn" aria-label="${t('settings')}" data-action="open-settings-modal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button></div></header><main class="app-main">${screenView()}</main>${totals.lines?`<button class="floating-cart v45-cart" data-action="open-cart" aria-label="${t('cart')}">${icon('cart')}<b>${totals.cartons}</b></button>`:''}<nav class="bottom-nav v45-bottom-nav"><button class="${appState.screen==='home'?'active':''}" data-screen="home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>${t('home')}</span></button><button class="${appState.screen==='orders'?'active':''}" data-screen="orders"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span>${t('orderHistory')||t('orders')}</span></button>${hasFeatureApp('returns')?`<button class="${appState.screen==='returns'?'active':''}" data-screen="returns"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg><span>${t('returns')}</span></button>`:''}<button class="${appState.screen==='contact'?'active':''}" data-screen="contact"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>${t('contact')}</span></button></nav></div>`;
   };
 
   // Remove the temporary connection test button from login even if older patches re-add it.
@@ -941,7 +947,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
       appState.screen='order-success';
       render();
       localNotify45(t('orderSentTitle'), `${t('orderNumber')}: ${data.order.orderNumber || ''}`);
-    }catch(e){ toast(e.message); }
+    }catch(e){ toast(e.message,'error'); }
   };
 
   // Cleaner contact form with attachments and stable success state.
@@ -964,7 +970,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
         appState.contactSent=true;
         render();
         localNotify45(t('sendSuccess'), t('contactSentBody'));
-      }catch(err){ toast(err.message); }
+      }catch(err){ toast(err.message,'error'); }
       return;
     }
     return originalHandleSubmit45(e);
@@ -1171,7 +1177,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
       <div class="ocr-status" data-ocr-status hidden></div>
       <div class="return-products" data-return-detected>${initialRows}</div>
       <div class="return-add-manual"><input type="search" data-return-add-search placeholder="${t('addProductManually')}"><div class="return-add-results" data-return-add-results hidden></div></div>
-      <label>${t('returnImages')} <b class="required">*</b><small>${t('chooseFromCameraOrGallery')}</small><input type="file" name="returnImages" accept="image/*" capture="environment" multiple required></label>
+      <label class="photo-upload-label">${t('returnImages')} <b class="required">*</b><small>${t('chooseFromCameraOrGallery')}</small><input type="file" name="returnImages" accept="image/*" capture="environment" multiple required></label>
       <textarea name="note" placeholder="${t('returnReason')}"></textarea>
       <div class="modal-actions"><button class="btn primary">${t('send')}</button><button class="btn ghost" type="button" data-modal-close>${t('close')}</button></div>
     </form>`;
@@ -1261,7 +1267,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
       appState.contactSent=true;
       render();
       window.OrderPilotLocalNotify?.(t('sendSuccess')||'OrderPilot', t('contactSentBody')||'');
-    }catch(err){ toast(err.message); }
+    }catch(err){ toast(err.message,'error'); }
   }, true);
 })();
 
@@ -1304,7 +1310,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
       render();
       toast('כל ההתראות סומנו כנקראו');
     } catch(e) {
-      toast(e.message);
+      toast(e.message,'error');
     }
   }
 
@@ -1425,7 +1431,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
   function favoritesView(){
     const q=(appState.search||'').trim().toLowerCase();
     const rows=favoriteProducts().filter(p=>!q || [tr(p.name),p.name,p.barcode,tr(p.category),p.category].join(' ').toLowerCase().includes(q));
-    return `<section class="catalog-screen quick-products enter"><div class="catalog-head"><button class="text-btn" data-screen="home">${t('backHome')||t('back')}</button><div><h2>${t('myFavorites')}</h2><p>${t('favoritesHint')}</p></div></div><div class="search-row"><input value="${esc46(appState.search||'')}" data-search placeholder="${t('search')}" aria-label="${t('search')}"/></div><div class="product-grid">${rows.map(productCard).join('') || `<p class="empty">${t('noFavoritesYet')}</p>`}</div></section>`;
+    return `<section class="catalog-screen quick-products enter"><div class="catalog-head"><button class="text-btn" data-screen="home">${t('backHome')||t('back')}</button><div><h2>${t('myFavorites')}</h2><p>${t('favoritesHint')}</p></div></div><div class="search-row">${searchFieldHtml(appState.search)}</div><div class="product-grid">${rows.map(productCard).join('') || `<p class="empty">${t('noFavoritesYet')}</p>`}</div></section>`;
   }
 
   // ---- Banner in-app navigation (targetCategory renders as data-home-cat) ----
@@ -1472,17 +1478,18 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
         appState.cart={};
         closeModal();
         render();
-        toast(t('cartReset'));
+        toast(t('cartReset'),'success');
       }
       return;
     }
   }, true);
 
   // ---- Notifications: mark all as read ----
+  function notifTypeIcon46(type){ return ({order:'box',return:'return','return-status':'return','contact-sent':'chat','contact-reply':'chat','stock-back':'bell-plus'})[type] || 'bell'; }
   function notificationsModal46(){
     const notes=(appState.data?.notifications||[]).slice(0,30);
     const hasUnread = notes.some(n=>n.status!=='read');
-    return `<h2>${t('notifications')}</h2>${notes.length && hasUnread ? `<div class="modal-actions inline-actions"><button type="button" class="btn sm ghost" data-action="notif-mark-all-read">${icon('check')} ${t('markAllRead')}</button></div>` : ''}<div class="notifications-mini">${notes.map(n=>`<article class="note-card ${n.status!=='read'?'unread':''}"><b>${esc46(tr(n.title||''))}</b><p>${esc46(tr(n.message||''))}</p><span>${esc46(typeof formatAppDate==='function'?formatAppDate(n.createdAt):String(n.createdAt||'').slice(0,10))}</span></article>`).join('') || `<p class="empty">${t('noNotificationsShort')}</p>`}</div><div class="modal-actions"><button type="button" class="btn ghost" data-modal-close>${t('close')}</button></div>`;
+    return `<h2>${t('notifications')}</h2>${notes.length && hasUnread ? `<div class="modal-actions inline-actions"><button type="button" class="btn sm ghost" data-action="notif-mark-all-read">${icon('check')} ${t('markAllRead')}</button></div>` : ''}<div class="notifications-mini">${notes.map(n=>`<article class="note-card ${n.status!=='read'?'unread':''}"><span class="note-icon">${icon(notifTypeIcon46(n.type),{size:16})}</span><div><b>${esc46(tr(n.title||''))}</b><p>${esc46(tr(n.message||''))}</p><span class="note-date">${esc46(typeof formatAppDate==='function'?formatAppDate(n.createdAt):String(n.createdAt||'').slice(0,10))}</span></div></article>`).join('') || `<p class="empty">${t('noNotificationsShort')}</p>`}</div><div class="modal-actions"><button type="button" class="btn ghost" data-modal-close>${t('close')}</button></div>`;
   }
   async function markAllRead46(){
     try{
@@ -1491,8 +1498,8 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
       const card=document.querySelector('.modal-backdrop .modal-card');
       if(card && card.querySelector('.notifications-mini')) card.innerHTML=notificationsModal46();
       render();
-      toast(t('allMarkedRead'));
-    }catch(e){ toast(e.message); }
+      toast(t('allMarkedRead'),'success');
+    }catch(e){ toast(e.message,'error'); }
   }
   document.addEventListener('click', e=>{
     const notif=e.target.closest('[data-action="open-notifications"]');
@@ -1584,7 +1591,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
           const idx = q.findIndex(x=>x.id===entry.id);
           if(idx>=0) q.splice(idx,1);
           saveQueue(q);
-          toast(err.message);
+          toast(err.message,'error');
         }
       }
       if(sentAny && !silent){ try{ await bootstrap(); render(); }catch(_){ } }
@@ -1595,7 +1602,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
   if(isNativeCapacitor() && window.Capacitor?.Plugins?.Network){
     window.Capacitor.Plugins.Network.addListener('networkStatusChange', status=>{ if(status.connected) flushQueue(); });
   } else {
-    window.addEventListener('online', ()=>{ toast(t('backOnline')); flushQueue(); });
+    window.addEventListener('online', ()=>{ toast(t('backOnline'),'success'); flushQueue(); });
   }
   setTimeout(()=>flushQueue(true), 2500);
 
@@ -1630,7 +1637,7 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
         window.OrderPilotLocalNotify?.(t('orderSentTitle'), `${t('orderNumber')}: ${data.order.orderNumber || ''}`);
       }catch(err){
         if(isNetworkError(err)) goOfflineSuccess();
-        else toast(err.message);
+        else toast(err.message,'error');
       }
     } finally {
       submitOrderInFlight49 = false;
@@ -1655,4 +1662,194 @@ document.addEventListener('click', e=>{ const el=e.target.closest('[data-action=
     }
     return html;
   };
+})();
+
+/* v50 patch: out-of-stock "notify me when back in stock" subscription */
+(function(){
+  Object.assign(ui.he,{ notifyWhenBackInStock:'התראה כשחוזר למלאי', notifyStockSubscribed:'תישלח התראה כשיחזור', stockAlertConfirmed:'תישלח לכם התראה כשהמוצר יחזור למלאי' });
+  Object.assign(ui.en,{ notifyWhenBackInStock:'Notify when back in stock', notifyStockSubscribed:"We'll notify you", stockAlertConfirmed:"We'll notify you when this product is back in stock" });
+  Object.assign(ui.ar,{ notifyWhenBackInStock:'تنبيه عند توفره', notifyStockSubscribed:'سيتم إعلامك', stockAlertConfirmed:'سيتم إعلامك عند عودة المنتج للمخزون' });
+  Object.assign(ui.ru,{ notifyWhenBackInStock:'Уведомить при поступлении', notifyStockSubscribed:'Мы вас уведомим', stockAlertConfirmed:'Мы уведомим вас, когда товар снова появится в наличии' });
+
+  const stockSubsKey='orderpilot_stock_subs_v1';
+  function loadStockSubs(){ try{ return new Set(JSON.parse(localStorage.getItem(stockSubsKey)||'[]')); }catch(_){ return new Set(); } }
+  function saveStockSubs(set){ localStorage.setItem(stockSubsKey, JSON.stringify([...set])); }
+  const stockSubs = loadStockSubs();
+  (appState.data?.stockAlertProductIds||[]).forEach(id=>stockSubs.add(id));
+
+  const prevBootstrap50 = bootstrap;
+  bootstrap = async function(){
+    await prevBootstrap50();
+    (appState.data?.stockAlertProductIds||[]).forEach(id=>stockSubs.add(id));
+  };
+
+  function isOut(p){ return !p.inStock || Number(p.stockQty||0)<=0; }
+  function stockNotifyBtn(p){
+    const subscribed = stockSubs.has(p.id);
+    return `<button type="button" class="btn ${subscribed?'ghost':'primary'} sm block stock-notify-btn" data-notify-stock="${esc(p.id)}" ${subscribed?'disabled':''}>${icon(subscribed?'check':'bell-plus',{size:14})} ${subscribed?t('notifyStockSubscribed'):t('notifyWhenBackInStock')}</button>`;
+  }
+
+  async function subscribeStock(productId){
+    if(!productId || stockSubs.has(productId)) return;
+    stockSubs.add(productId); saveStockSubs(stockSubs);
+    render();
+    toast(t('stockAlertConfirmed'),'success');
+    try{ await api('/api/app/stock-alerts',{method:'POST',body:JSON.stringify({productId})}); }catch(_){ }
+  }
+
+  const prevProductCard50 = productCard;
+  productCard = function(p){
+    let html = prevProductCard50(p);
+    if(isOut(p)) html = html.replace(/<div class="qty-controls">[\s\S]*?<\/div><\/article>$/, stockNotifyBtn(p) + '</article>');
+    return html;
+  };
+
+  const prevProductModal50 = productModal;
+  productModal = function(p){
+    let html = prevProductModal50(p);
+    if(isOut(p)) html = html.replace(/<div class="qty-controls modal-qty">[\s\S]*?<\/div>/, stockNotifyBtn(p));
+    return html;
+  };
+
+  document.addEventListener('click', e=>{
+    const btn = e.target.closest('[data-notify-stock]');
+    if(btn){ e.preventDefault(); subscribeStock(btn.dataset.notifyStock); }
+  });
+})();
+
+/* v51 patch: swipeable banner carousel + admin-configurable auto-rotation */
+(function(){
+  let bannerIndex = 0;
+  let bannerTimer = null;
+
+  function bannerTrack(){ return document.querySelector('.v45-banners'); }
+  function applyBannerActive(){
+    const track = bannerTrack();
+    if(!track) return;
+    const banners = [...track.querySelectorAll('.home-banner')];
+    if(!banners.length) return;
+    if(bannerIndex >= banners.length) bannerIndex = 0;
+    banners.forEach((el,i)=>el.classList.toggle('active', i===bannerIndex));
+    const dots = [...document.querySelectorAll('.banner-dot')];
+    dots.forEach((el,i)=>el.classList.toggle('active', i===bannerIndex));
+  }
+  function stepBanner(dir){
+    const track = bannerTrack();
+    if(!track) return;
+    const count = track.querySelectorAll('.home-banner').length;
+    if(count<2) return;
+    bannerIndex = (bannerIndex + dir + count) % count;
+    applyBannerActive();
+  }
+  function goToBanner(i){
+    const track = bannerTrack();
+    if(!track) return;
+    const count = track.querySelectorAll('.home-banner').length;
+    if(!count) return;
+    bannerIndex = ((i % count) + count) % count;
+    applyBannerActive();
+  }
+  function ensureBannerTimer(){
+    if(bannerTimer){ clearInterval(bannerTimer); bannerTimer=null; }
+    const track = bannerTrack();
+    if(!track) return;
+    const count = track.querySelectorAll('.home-banner').length;
+    const rotation = appState.data?.bannerRotation || {enabled:true, seconds:5};
+    if(rotation.enabled===false || count<2) return;
+    const seconds = Math.min(30, Math.max(2, Number(rotation.seconds)||5));
+    bannerTimer = setInterval(()=>stepBanner(1), seconds*1000);
+  }
+
+  function ensureBannerDots(){
+    const track = bannerTrack();
+    if(!track) return;
+    const count = track.querySelectorAll('.home-banner').length;
+    if(count<2) return;
+    if(track.nextElementSibling?.classList?.contains('banner-dots')) return;
+    const dots = document.createElement('div');
+    dots.className = 'banner-dots';
+    dots.innerHTML = Array.from({length:count}).map((_,i)=>`<button type="button" class="banner-dot ${i===bannerIndex?'active':''}" data-banner-dot="${i}" aria-label="${i+1}"></button>`).join('');
+    track.after(dots);
+  }
+
+  const prevRender51 = render;
+  render = function(){
+    prevRender51();
+    ensureBannerDots();
+    applyBannerActive();
+    ensureBannerTimer();
+  };
+
+  let touchStartX=0, touchStartY=0, touchTracking=false;
+  document.addEventListener('touchstart', e=>{
+    if(!e.target.closest('.v45-banners')) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX; touchStartY = t.clientY; touchTracking = true;
+  }, {passive:true});
+  document.addEventListener('touchend', e=>{
+    if(!touchTracking) return;
+    touchTracking = false;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX, dy = t.clientY - touchStartY;
+    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)*1.5){
+      stepBanner(dx < 0 ? 1 : -1);
+      ensureBannerTimer();
+    }
+  }, {passive:true});
+
+  document.addEventListener('click', e=>{
+    const dot = e.target.closest('[data-banner-dot]');
+    if(dot){ e.preventDefault(); goToBanner(Number(dot.dataset.bannerDot)); ensureBannerTimer(); return; }
+  });
+})();
+
+/* v52 patch: richer home screen — search shortcut + current-order status card */
+(function(){
+  Object.assign(ui.he,{ homeSearchPlaceholder:'חיפוש מוצר או ברקוד...', currentOrder:'ההזמנה הנוכחית', noCurrentOrder:'אין הזמנה פתוחה כרגע' });
+  Object.assign(ui.en,{ homeSearchPlaceholder:'Search product or barcode...', currentOrder:'Current order', noCurrentOrder:'No open order right now' });
+  Object.assign(ui.ar,{ homeSearchPlaceholder:'ابحث عن منتج أو باركود...', currentOrder:'الطلب الحالي', noCurrentOrder:'لا يوجد طلب مفتوح حاليًا' });
+  Object.assign(ui.ru,{ homeSearchPlaceholder:'Поиск товара или штрихкода...', currentOrder:'Текущий заказ', noCurrentOrder:'Сейчас нет открытого заказа' });
+
+  function pendingQueue52(){ try{ return JSON.parse(localStorage.getItem('orderpilot_pending_orders_v1')||'[]'); }catch(_){ return []; } }
+  function activeOrder52(){
+    const orders = appState.data?.orders || [];
+    return orders.find(o=>!['supplied','cancelled','closed'].includes(o.status)) || null;
+  }
+  function currentOrderCardHtml(){
+    const pending = pendingQueue52();
+    if(pending.length){
+      const p = pending[0];
+      const cartons = (p.payload?.items||[]).reduce((s,i)=>s+Number(i.quantity||0),0);
+      return `<button type="button" class="current-order-pill pending" data-screen="orders">${icon('cloud-off',{size:16})}<span><b>${esc(t('pendingBadge'))}</b><small>${cartons} ${esc(t('cartons'))}</small></span></button>`;
+    }
+    const order = activeOrder52();
+    if(!order) return '';
+    return `<button type="button" class="current-order-pill" data-order-detail="${esc(order.id)}"><span class="pill-dot"></span><span><b>${esc(order.orderNumber||'')}</b><small>${esc(tr(order.statusText||''))}</small></span>${icon('chevron-left',{size:16})}</button>`;
+  }
+
+  function ensureHomeExtras(){
+    const home = document.querySelector('.v45-home');
+    if(!home) return;
+    if(!home.querySelector('.home-search-shortcut')){
+      home.insertAdjacentHTML('afterbegin', `<button type="button" class="home-search-shortcut" data-action="home-search-shortcut">${icon('search',{size:16})}<span>${esc(t('homeSearchPlaceholder'))}</span></button>`);
+    }
+    const banners = home.querySelector('.v45-banners');
+    const dots = home.querySelector('.banner-dots');
+    const anchor = dots || banners;
+    if(anchor && !home.querySelector('.current-order-pill')){
+      const cardHtml = currentOrderCardHtml();
+      if(cardHtml) anchor.insertAdjacentHTML('afterend', cardHtml);
+    }
+  }
+
+  const prevRender52 = render;
+  render = function(){
+    prevRender52();
+    ensureHomeExtras();
+  };
+
+  document.addEventListener('click', e=>{
+    const shortcut = e.target.closest('[data-action="home-search-shortcut"]');
+    if(shortcut){ e.preventDefault(); appState.screen='order'; appState.selectedTypeId=''; appState.selectedDate=''; appState.selectedCategory='all'; appState.selectedSubcategory=''; render(); return; }
+  });
 })();

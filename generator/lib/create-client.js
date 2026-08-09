@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
-const { passwordRecord, makeId, randomHex } = require('./crypto-utils');
+const { passwordRecord, makeId, randomHex, encryptJsonString, decryptJsonString } = require('./crypto-utils');
 
 const ROOT = path.join(__dirname, '..', '..');
 const PLATFORM_DIR = path.join(ROOT, 'platform');
@@ -19,7 +19,11 @@ const PERMISSIONS = [
 ];
 
 const IGNORE_NAMES = new Set([
-  'node_modules', 'dist-desktop', 'dist-installers', 'dist-server', 'data', 'build', '.gradle', 'Pods', '.git', '.env'
+  'node_modules', 'dist-desktop', 'dist-installers', 'dist-server', 'data', 'build', '.gradle', 'Pods', '.git', '.env',
+  // Signing secrets: never copied from the template into a client. Each client gets its own,
+  // generated fresh the first time that client's own Android/desktop build actually needs one —
+  // the same principle as DATA_ENCRYPTION_KEY never being copied between deployments.
+  'keystore.properties', 'release.keystore', 'local.properties',
 ]);
 
 function slugify(name) {
@@ -134,7 +138,38 @@ function seedData(clientDir, opts) {
     companyLogo: opts.logo ? 'icon-512.png' : '',
     features: opts.features,
     bannerRotation: { enabled: true, seconds: 5 },
+    brandColors: opts.brandColors || null,
   });
+}
+
+// Reads a client's own DATA_ENCRYPTION_KEY from its .env (if the client has ever booted, its data
+// is encrypted with this key; if not, decryptJsonString transparently passes plain JSON through
+// unchanged). Used to update an already-generated client's branding/colors later without having
+// to regenerate the whole deployment or push a full code update. The target client's server must
+// not be running while this executes — it caches its DB in memory and would silently overwrite
+// this change on its next write otherwise.
+function readClientDataKey(clientDir) {
+  try {
+    const env = fs.readFileSync(path.join(clientDir, '.env'), 'utf8');
+    const match = env.match(/DATA_ENCRYPTION_KEY=([0-9a-f]{64})/);
+    return match ? Buffer.from(match[1], 'hex') : null;
+  } catch (_) {
+    return null;
+  }
+}
+
+function patchClientBranding(clientDir, updates) {
+  const metaPath = path.join(clientDir, 'data', 'meta.json');
+  if (!fs.existsSync(metaPath)) throw new Error('הלקוח עדיין לא הופעל, אין קובץ נתונים ליצירה');
+  const key = readClientDataKey(clientDir);
+  const raw = fs.readFileSync(metaPath, 'utf8');
+  const plain = key ? decryptJsonString(raw, key) : raw;
+  const meta = JSON.parse(plain);
+  if (updates.brandColors !== undefined) meta.brandColors = updates.brandColors;
+  if (updates.companyName !== undefined) meta.companyName = updates.companyName;
+  const nextStr = JSON.stringify(meta, null, 2);
+  fs.writeFileSync(metaPath, key ? encryptJsonString(nextStr, key) : nextStr, 'utf8');
+  return meta;
 }
 
 function writeEnv(clientDir, opts) {
@@ -189,4 +224,4 @@ async function createClient(opts) {
   return { slug, clientDir, installOk, buildOk, log };
 }
 
-module.exports = { createClient, slugify, VENDOR_EMAIL };
+module.exports = { createClient, slugify, VENDOR_EMAIL, patchClientBranding };
