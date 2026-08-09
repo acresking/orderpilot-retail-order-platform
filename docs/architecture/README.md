@@ -1,6 +1,6 @@
 # OrderPilot Architecture
 
-This project is now organized around a clear runtime boundary while staying compatible with the existing v45 codebase.
+This project is organized around a clear runtime boundary between editable source and built output.
 
 ## Runtime layers
 

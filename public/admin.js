@@ -1,8 +1,6 @@
 // Generated runtime bundle. Source of truth: src/client/admin/admin.js
 // Run: npm run build:web
 const ORDERPILOT_FEATURES = [{"id":"core","label":"בסיס הפלטפורמה (קטלוג, סל, הזמנות, ניהול רשתות/סניפים, מועדפים, התראות מלאי ופוש)","scope":"both","core":true,"setupPrice":4200,"monthlyPrice":390},{"id":"returns","label":"ניהול חזרות (כולל זיהוי אוטומטי מתעודה)","scope":"both","core":false,"setupPrice":1800,"monthlyPrice":120},{"id":"promotions","label":"מבצעים","scope":"both","core":false,"setupPrice":950,"monthlyPrice":70},{"id":"banners","label":"באנרים (כולל וידיאו וסיבוב אוטומטי)","scope":"both","core":false,"setupPrice":750,"monthlyPrice":45},{"id":"offlineQueue","label":"הזמנה במצב לא מקוון","scope":"app","core":false,"setupPrice":1400,"monthlyPrice":90},{"id":"barcodeScan","label":"סריקת ברקוד","scope":"app","core":false,"setupPrice":750,"monthlyPrice":40},{"id":"stats","label":"סטטיסטיקות וגרפים","scope":"admin","core":false,"setupPrice":1100,"monthlyPrice":80},{"id":"multiLanguage","label":"ריבוי שפות (אנגלית / ערבית / רוסית)","scope":"app","core":false,"setupPrice":850,"monthlyPrice":45},{"id":"integrations","label":"ממשקים וייבוא (ERP)","scope":"admin","core":false,"setupPrice":2600,"monthlyPrice":170},{"id":"multiEmployee","label":"ריבוי עובדים והרשאות","scope":"admin","core":false,"setupPrice":650,"monthlyPrice":40}];
-// Generated runtime bundle. Source of truth: src/client/admin/admin.js
-// Run: npm run build:web
 const adminRoot = document.getElementById('admin');
 const API_BASE = (function(){
   if (typeof window !== 'undefined' && window.ORDERPILOT_API_BASE !== undefined) return window.ORDERPILOT_API_BASE;

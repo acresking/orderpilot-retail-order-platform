@@ -1,5 +1,3 @@
-// Generated runtime bundle. Source of truth: src/client/admin/admin.js
-// Run: npm run build:web
 const adminRoot = document.getElementById('admin');
 const API_BASE = (function(){
   if (typeof window !== 'undefined' && window.ORDERPILOT_API_BASE !== undefined) return window.ORDERPILOT_API_BASE;

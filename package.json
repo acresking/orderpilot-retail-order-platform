@@ -2,7 +2,7 @@
   "name": "orderpilot-retail-order-platform",
   "version": "49.0.1",
   "private": true,
-  "description": "OrderPilot v49 stable architecture cleanup from v45 with proper app branding.",
+  "description": "OrderPilot — B2B ordering platform for distributors and retail chains: mobile/PWA branch app, company admin panel, and desktop app.",
   "main": "desktop/main.js",
   "scripts": {
     "start": "node server.js",
