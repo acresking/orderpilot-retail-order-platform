@@ -167,7 +167,32 @@ function dir(){ return ['he','ar'].includes(appState.lang) ? 'rtl' : 'ltr'; }
 function img(p){ return `<img class="product-img" src="${esc(p.imageUrl||'/icon.svg')}" alt="${esc(tr(p.name))}" loading="lazy"/>`; }
 async function api(path, options={}){ const headers={'Content-Type':'application/json',...(options.headers||{})}; if(appState.token) headers.Authorization=`Bearer ${appState.token}`; const res=await fetchWithTimeout(API_BASE+path,{...options,headers},15000); const data=await res.json().catch(()=>({})); if(res.status===428){ showModal(passwordChangeForm()); throw new Error(data.message||t('passwordChange')); } if(!res.ok) throw new Error(data.message||'Error'); return data; }
 function shadeHex(hex, percent){ const n=parseInt(String(hex||'').replace('#',''),16); if(Number.isNaN(n)) return hex; let r=(n>>16)&0xff, g=(n>>8)&0xff, b=n&0xff; const t=percent<0?0:255, p=Math.abs(percent); r=Math.round((t-r)*p)+r; g=Math.round((t-g)*p)+g; b=Math.round((t-b)*p)+b; return '#'+(0x1000000+r*0x10000+g*0x100+b).toString(16).slice(1); }
-function applyBrandColors(brandColors){ const primary=brandColors?.primary, accent=brandColors?.accent; const root=document.documentElement.style; if(primary){ root.setProperty('--primary',primary); root.setProperty('--primary-2',shadeHex(primary,-0.18)); root.setProperty('--primary-soft',shadeHex(primary,0.85)); } if(accent) root.setProperty('--accent',accent); }
+function hueRotateHex(hex, deg){
+  const n=parseInt(String(hex||'').replace('#',''),16); if(Number.isNaN(n)) return hex;
+  let r=((n>>16)&0xff)/255, g=((n>>8)&0xff)/255, b=(n&0xff)/255;
+  const max=Math.max(r,g,b), min=Math.min(r,g,b); let h=0, s=0; const l=(max+min)/2;
+  if(max!==min){ const d=max-min; s=l>0.5?d/(2-max-min):d/(max+min);
+    if(max===r) h=(g-b)/d+(g<b?6:0); else if(max===g) h=(b-r)/d+2; else h=(r-g)/d+4; h/=6; }
+  h=((h+deg/360)%1+1)%1;
+  const hue2rgb=(p,q,t)=>{ if(t<0)t+=1; if(t>1)t-=1; if(t<1/6) return p+(q-p)*6*t; if(t<1/2) return q; if(t<2/3) return p+(q-p)*(2/3-t)*6; return p; };
+  let r2,g2,b2;
+  if(s===0){ r2=g2=b2=l; } else { const q=l<0.5?l*(1+s):l+s-l*s, p=2*l-q; r2=hue2rgb(p,q,h+1/3); g2=hue2rgb(p,q,h); b2=hue2rgb(p,q,h-1/3); }
+  const toHex=v=>Math.round(v*255).toString(16).padStart(2,'0');
+  return '#'+toHex(r2)+toHex(g2)+toHex(b2);
+}
+function applyBrandColors(brandColors){
+  const palette=(Array.isArray(brandColors?.palette)?brandColors.palette:[]).filter(c=>/^#[0-9a-fA-F]{6}$/.test(c||''));
+  if(!palette.length) return;
+  const root=document.documentElement.style, primary=palette[0];
+  root.setProperty('--primary',primary);
+  root.setProperty('--primary-2',shadeHex(primary,-0.18));
+  root.setProperty('--primary-soft',shadeHex(primary,0.85));
+  root.setProperty('--accent',palette[1]||hueRotateHex(primary,40));
+  root.setProperty('--tertiary',palette[2]||hueRotateHex(primary,-40));
+  root.setProperty('--quaternary',palette[3]||shadeHex(primary,0.4));
+  palette.forEach((c,i)=>root.setProperty(`--brand-${i+1}`,c));
+  root.setProperty('--brand-count',String(palette.length));
+}
 async function bootstrap(){ appState.data=await api('/api/app/bootstrap'); applyBrandColors(appState.data.brandColors); applyPreferences(); }
 function toast(msg,type='info'){ const el=document.createElement('div'); el.className=`toast toast-${type}`; el.setAttribute('role','status'); el.setAttribute('aria-live','polite'); const iconName=type==='error'?'alert-circle':type==='success'?'check-circle':'info'; el.innerHTML=`${typeof icon==='function'?icon(iconName,{size:16}):''}<span></span>`; el.querySelector('span').textContent=msg; document.body.appendChild(el); setTimeout(()=>{ el.classList.add('toast-out'); setTimeout(()=>el.remove(),220); },3500); }
 function showModal(html, cls=''){ closeModal(); const div=document.createElement('div'); div.className='modal-backdrop app-modal'; div.innerHTML=`<div class="modal-card ${cls}" role="dialog" aria-modal="true">${html}</div>`; document.body.appendChild(div); div.addEventListener('click',e=>{ if(e.target.classList.contains('modal-backdrop')||e.target.closest('[data-modal-close]')) closeModal(); }); const focusable=div.querySelector('input,select,textarea,button,[href]'); if(focusable) focusable.focus({preventScroll:true}); }

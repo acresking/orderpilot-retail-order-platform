@@ -99,13 +99,14 @@ function serveStatic(req, res, pathname) {
   });
 }
 
+// No fixed limit on palette length — one client may have a single brand color, another four or
+// more; only hex format and a sane upper bound (to stop an abusive payload) are enforced here.
 function sanitizeBrandColors(input) {
   if (!input || typeof input !== 'object') return null;
   const hex = /^#[0-9a-fA-F]{6}$/;
-  const primary = hex.test(input.primary || '') ? input.primary : null;
-  const accent = hex.test(input.accent || '') ? input.accent : null;
-  if (!primary && !accent) return null;
-  return { ...(primary ? { primary } : {}), ...(accent ? { accent } : {}) };
+  const palette = (Array.isArray(input.palette) ? input.palette : []).filter(c => hex.test(c)).slice(0, 12);
+  if (!palette.length) return null;
+  return { palette };
 }
 
 function decodeDataUrl(dataUrl) {

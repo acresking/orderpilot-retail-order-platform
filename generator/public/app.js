@@ -7,30 +7,98 @@ const state = {
   selected: new Set(),
   deliveryTypes: [{ title: 'יבש', kind: 'dry', builtin: true }],
   logoDataUrl: null,
-  brandColors: { primary: '#2563eb', accent: '#06b6d4' },
+  palette: ['#2563eb'],
 };
 
-function updatePreviewSwatch(target, primary, accent) {
-  target.style.setProperty('--preview-primary', primary);
-  target.style.setProperty('--preview-accent', accent);
+function updatePreviewSwatch(target, palette) {
+  target.style.setProperty('--preview-primary', palette[0] || '#2563eb');
+  target.style.setProperty('--preview-accent', palette[1] || palette[0] || '#06b6d4');
+  target.style.setProperty('--preview-tertiary', palette[2] || palette[0] || '#a78bfa');
 }
 
-// Wires a color <input type=color> and its paired hex <input type=text> to stay in sync in both
-// directions, and calls onChange(primaryOrAccentHex) whenever either one changes.
-function wireColorPair(colorId, hexId, onChange) {
-  const colorInput = document.getElementById(colorId);
-  const hexInput = document.getElementById(hexId);
-  colorInput.addEventListener('input', () => { hexInput.value = colorInput.value; onChange(colorInput.value); });
-  hexInput.addEventListener('input', () => {
-    if (/^#[0-9a-fA-F]{6}$/.test(hexInput.value)) { colorInput.value = hexInput.value; onChange(hexInput.value); }
+// Renders a palette (array of hex strings, any length) as a row of editable swatches — a color
+// picker + hex text field + remove button each — into `containerEl`. Mutates `palette` in place
+// as the user edits, and calls `onChange` after every add/remove/edit so callers can refresh
+// price/preview. No fixed limit on how many colors a client can have: some brands are one color,
+// others are four or more, and the UI has to support both without assuming a count.
+function renderPalette(containerEl, palette, onChange) {
+  containerEl.innerHTML = palette.length ? palette.map((hex, i) => `
+    <span class="palette-swatch">
+      <input type="color" data-idx="${i}" class="palette-color" value="${hex}" />
+      <input type="text" data-idx="${i}" class="palette-hex" value="${hex}" maxlength="7" />
+      <button type="button" class="palette-remove" data-idx="${i}" title="הסרה">×</button>
+    </span>
+  `).join('') : '<span class="palette-empty">אין עדיין צבעים — אפשר להעלות לוגו או להוסיף ידנית.</span>';
+
+  containerEl.querySelectorAll('.palette-color').forEach(el => {
+    el.addEventListener('input', () => {
+      const i = Number(el.dataset.idx);
+      palette[i] = el.value;
+      const hexTwin = containerEl.querySelector(`.palette-hex[data-idx="${i}"]`);
+      if (hexTwin) hexTwin.value = el.value;
+      onChange();
+    });
+  });
+  containerEl.querySelectorAll('.palette-hex').forEach(el => {
+    el.addEventListener('input', () => {
+      if (!/^#[0-9a-fA-F]{6}$/.test(el.value)) return;
+      const i = Number(el.dataset.idx);
+      palette[i] = el.value;
+      const colorTwin = containerEl.querySelector(`.palette-color[data-idx="${i}"]`);
+      if (colorTwin) colorTwin.value = el.value;
+      onChange();
+    });
+  });
+  containerEl.querySelectorAll('.palette-remove').forEach(el => {
+    el.addEventListener('click', () => {
+      palette.splice(Number(el.dataset.idx), 1);
+      renderPalette(containerEl, palette, onChange);
+      onChange();
+    });
   });
 }
 
-function setupColorPickers() {
-  const preview = document.getElementById('colorPreview');
-  wireColorPair('colorPrimary', 'colorPrimaryHex', (v) => { state.brandColors.primary = v; updatePreviewSwatch(preview, state.brandColors.primary, state.brandColors.accent); });
-  wireColorPair('colorAccent', 'colorAccentHex', (v) => { state.brandColors.accent = v; updatePreviewSwatch(preview, state.brandColors.primary, state.brandColors.accent); });
-  updatePreviewSwatch(preview, state.brandColors.primary, state.brandColors.accent);
+// Dominant-color extraction from an uploaded logo, entirely client-side (Canvas pixel sampling —
+// no image library). Downscales the image, buckets pixels into a reduced color space, drops
+// near-transparent/near-white/near-black pixels (usually background, not brand color), then picks
+// the most frequent buckets while enforcing a minimum distance between picks so the result is a
+// a few genuinely distinct colors rather than near-duplicate shades of the same one.
+function extractDominantColors(imageDataUrl, count = 4) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const size = 80;
+        const canvas = document.createElement('canvas');
+        canvas.width = size; canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, size, size);
+        const data = ctx.getImageData(0, 0, size, size).data;
+        const step = 24;
+        const buckets = new Map();
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+          if (a < 200) continue;
+          const max = Math.max(r, g, b), min = Math.min(r, g, b);
+          if (min > 235 || max < 20) continue; // near-white / near-black background
+          const key = [Math.round(r / step) * step, Math.round(g / step) * step, Math.round(b / step) * step].join(',');
+          buckets.set(key, (buckets.get(key) || 0) + 1);
+        }
+        const sorted = [...buckets.entries()].sort((a, b) => b[1] - a[1]).map(([k]) => k.split(',').map(Number));
+        const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+        const picked = [];
+        for (const c of sorted) {
+          if (picked.length >= count) break;
+          if (picked.some(p => dist(p, c) < 60)) continue;
+          picked.push(c);
+        }
+        const toHex = v => Math.max(0, Math.min(255, v)).toString(16).padStart(2, '0');
+        resolve(picked.map(([r, g, b]) => `#${toHex(r)}${toHex(g)}${toHex(b)}`));
+      } catch (err) { resolve([]); }
+    };
+    img.onerror = () => resolve([]);
+    img.src = imageDataUrl;
+  });
 }
 
 function money(n) { return `₪${Number(n || 0).toLocaleString('he-IL')}`; }
@@ -131,6 +199,27 @@ function setupDeliveryTypeDefaults() {
   renderDeliveryTypes();
 }
 
+function setupPalette() {
+  const container = document.getElementById('paletteRow');
+  const preview = document.getElementById('colorPreview');
+  const onChange = () => updatePreviewSwatch(preview, state.palette);
+  renderPalette(container, state.palette, onChange);
+  onChange();
+  document.getElementById('paletteAddBtn').addEventListener('click', () => {
+    state.palette.push('#64748b');
+    renderPalette(container, state.palette, onChange);
+    onChange();
+  });
+}
+
+function resetPalette(colors) {
+  const container = document.getElementById('paletteRow');
+  const preview = document.getElementById('colorPreview');
+  state.palette = colors;
+  renderPalette(container, state.palette, () => updatePreviewSwatch(preview, state.palette));
+  updatePreviewSwatch(preview, state.palette);
+}
+
 function setupLogoUpload() {
   const input = document.getElementById('logoInput');
   const preview = document.getElementById('logoPreview');
@@ -139,11 +228,13 @@ function setupLogoUpload() {
     const file = input.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.onload = async () => {
       state.logoDataUrl = reader.result;
       preview.src = reader.result;
       preview.style.display = 'block';
       placeholder.style.display = 'none';
+      const extracted = await extractDominantColors(reader.result, 4);
+      if (extracted.length) resetPalette(extracted);
     };
     reader.readAsDataURL(file);
   });
@@ -197,18 +288,18 @@ async function loadClients() {
 }
 
 let editingClientId = null;
+let existingPalette = [];
 
 function openExistingClientForm(id) {
   const client = lastClients.find(c => c.id === id);
   if (!client) return;
   editingClientId = id;
-  const primary = client.brandColors?.primary || '#2563eb';
-  const accent = client.brandColors?.accent || '#06b6d4';
+  existingPalette = Array.isArray(client.brandColors?.palette) && client.brandColors.palette.length
+    ? [...client.brandColors.palette]
+    : ['#2563eb'];
   document.getElementById('existingClientTitle').textContent = `התאמה אישית — ${client.name}`;
-  document.getElementById('existingColorPrimary').value = primary;
-  document.getElementById('existingColorPrimaryHex').value = primary;
-  document.getElementById('existingColorAccent').value = accent;
-  document.getElementById('existingColorAccentHex').value = accent;
+  document.getElementById('existingLogoInput').value = '';
+  renderPalette(document.getElementById('existingPaletteRow'), existingPalette, () => {});
   document.getElementById('existingNotesField').value = client.notes || '';
   document.getElementById('existingClientResult').innerHTML = '';
   document.getElementById('existingClientForm').classList.add('open');
@@ -216,8 +307,23 @@ function openExistingClientForm(id) {
 }
 
 function setupExistingClientForm() {
-  wireColorPair('existingColorPrimary', 'existingColorPrimaryHex', () => {});
-  wireColorPair('existingColorAccent', 'existingColorAccentHex', () => {});
+  document.getElementById('existingPaletteAddBtn').addEventListener('click', () => {
+    existingPalette.push('#64748b');
+    renderPalette(document.getElementById('existingPaletteRow'), existingPalette, () => {});
+  });
+  document.getElementById('existingLogoInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const extracted = await extractDominantColors(reader.result, 4);
+      if (extracted.length) {
+        existingPalette = extracted;
+        renderPalette(document.getElementById('existingPaletteRow'), existingPalette, () => {});
+      }
+    };
+    reader.readAsDataURL(file);
+  });
   document.getElementById('cancelExistingClientBtn').addEventListener('click', () => {
     editingClientId = null;
     document.getElementById('existingClientForm').classList.remove('open');
@@ -233,7 +339,7 @@ function setupExistingClientForm() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          brandColors: { primary: document.getElementById('existingColorPrimaryHex').value, accent: document.getElementById('existingColorAccentHex').value },
+          brandColors: { palette: existingPalette },
           notes: document.getElementById('existingNotesField').value,
         }),
       });
@@ -303,7 +409,7 @@ async function handleSubmit(e) {
     features: [...state.selected],
     deliveryTypes: state.deliveryTypes.filter(t => t.enabled !== false).map(t => ({ title: t.title, kind: t.kind })),
     logoDataUrl: state.logoDataUrl,
-    brandColors: state.brandColors,
+    brandColors: { palette: state.palette.filter(c => /^#[0-9a-fA-F]{6}$/.test(c)) },
     notes: form.notes.value,
   };
 
@@ -315,12 +421,7 @@ async function handleSubmit(e) {
       form.reset();
       state.selected = new Set();
       state.logoDataUrl = null;
-      state.brandColors = { primary: '#2563eb', accent: '#06b6d4' };
-      document.getElementById('colorPrimary').value = state.brandColors.primary;
-      document.getElementById('colorPrimaryHex').value = state.brandColors.primary;
-      document.getElementById('colorAccent').value = state.brandColors.accent;
-      document.getElementById('colorAccentHex').value = state.brandColors.accent;
-      updatePreviewSwatch(document.getElementById('colorPreview'), state.brandColors.primary, state.brandColors.accent);
+      resetPalette(['#2563eb']);
       document.getElementById('logoPreview').style.display = 'none';
       document.getElementById('logoPlaceholder').style.display = 'block';
       renderFeatures();
@@ -342,7 +443,7 @@ document.getElementById('createForm').addEventListener('submit', handleSubmit);
 setupDeliveryTypeDefaults();
 setupLogoUpload();
 setupCustomDeliveryType();
-setupColorPickers();
+setupPalette();
 setupExistingClientForm();
 loadFeatures();
 loadClients();

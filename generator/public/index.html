@@ -31,9 +31,16 @@
   .color-field{display:flex;gap:8px;align-items:center}
   .color-field input[type=color]{width:44px;height:38px;padding:2px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
   .color-field input[type=text]{flex:1;font-family:monospace;text-transform:lowercase}
-  .color-preview{display:flex;gap:12px;align-items:center;margin-top:14px;padding:16px;border-radius:16px;background:#0f172a}
+  .palette-row{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
+  .palette-swatch{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:12px;padding:6px 8px;background:#fff}
+  .palette-swatch input[type=color]{width:34px;height:34px;padding:2px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+  .palette-swatch input[type=text]{width:90px;font-family:monospace;text-transform:lowercase;padding:8px 9px}
+  .palette-swatch .palette-remove{border:0;background:#fee2e2;color:#991b1b;width:26px;height:26px;border-radius:8px;font-weight:900;cursor:pointer;flex:0 0 auto}
+  .palette-empty{color:var(--muted);font-size:13px;padding:8px 0}
+  .color-preview{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px;padding:16px;border-radius:16px;background:#0f172a}
   .color-preview .preview-btn{border:0;border-radius:12px;padding:10px 18px;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--preview-primary,#2563eb),var(--preview-accent,#06b6d4))}
   .color-preview .preview-chip{color:#fff;font-weight:700;font-size:13px;border-inline-start:3px solid var(--preview-primary,#2563eb);padding-inline-start:10px}
+  .color-preview .preview-chip2{color:var(--preview-tertiary,#a78bfa);font-weight:700;font-size:13px;background:rgba(255,255,255,.1);border-radius:999px;padding:6px 12px}
   .existing-client-form{display:none}
   .existing-client-form.open{display:block;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
   .feature-groups{display:grid;gap:16px}
@@ -97,27 +104,21 @@
 
       <section class="panel">
         <h2>עיצוב ומיתוג</h2>
-        <p class="hint">כל חברה מקבלת את הצבעים שלה — בוחרים כאן צבע ראשי וצבע משני, והם משתלבים בכל מסכי האפליקציה והפאנל (כותרות, כפתורים, מסך כניסה). אפשר לשנות את הצבעים גם אחרי היצירה, בלי לגעת בשאר ההתאמות של הלקוח.</p>
-        <div class="form-grid">
-          <label>צבע ראשי
-            <div class="color-field">
-              <input type="color" name="colorPrimary" id="colorPrimary" value="#2563eb" />
-              <input type="text" id="colorPrimaryHex" value="#2563eb" maxlength="7" />
-            </div>
-          </label>
-          <label>צבע משני
-            <div class="color-field">
-              <input type="color" name="colorAccent" id="colorAccent" value="#06b6d4" />
-              <input type="text" id="colorAccentHex" value="#06b6d4" maxlength="7" />
-            </div>
-          </label>
-        </div>
+        <p class="hint">כל חברה מקבלת את הצבעים שלה. עם העלאת לוגו הצבעים העיקריים שבו מזוהים אוטומטית ומוצעים כאן — ואפשר תמיד להוסיף, להסיר או לשנות ידנית. אין הגבלה על הכמות: חברה אחת עם צבע בודד וחברה אחרת עם ארבעה, שתיהן נתמכות. הצבעים משתלבים בכל מסכי האפליקציה והפאנל — כותרות, כפתורים, צ'יפים, ניווט, מסך כניסה ועוד — לא רק כפתור בודד. אפשר לשנות את הצבעים גם אחרי היצירה, בלי לגעת בשאר ההתאמות של הלקוח.</p>
+        <div class="palette-row" id="paletteRow"></div>
+        <button type="button" class="btn ghost" id="paletteAddBtn">+ הוספת צבע</button>
         <div class="color-preview" id="colorPreview">
           <button type="button" class="preview-btn">כפתור לדוגמה</button>
-          <span class="preview-chip">צבעי המותג</span>
+          <span class="preview-chip">צ'יפ לדוגמה</span>
+          <span class="preview-chip2">גם ככה</span>
         </div>
-        <label>הערות פנימיות (לשימוש הספק בלבד — לא נשלח ללקוח)
-          <textarea name="notes" id="notesField" rows="3" placeholder="לדוגמה: הלוגו שלהם בגוון טורקיז, לתאם איתם הנחה ברבעון הבא..."></textarea>
+      </section>
+
+      <section class="panel">
+        <h2>הערות כלליות</h2>
+        <p class="hint">מקום פנימי לכל הערה שרוצים לשמור על הלקוח הזה — לא רק עיצוב: תנאי מחיר, פרטי קשר נוספים, בקשות מיוחדות, תזכורות להמשך. לא נשלח ללקוח ולא מוצג בפאנל שלו.</p>
+        <label>הערות
+          <textarea name="notes" id="notesField" rows="4" placeholder="לדוגמה: סוכמה הנחה של 5% לשנה הראשונה, איש הקשר מעדיף תיאום בוואטסאפ, לבדוק חידוש חוזה במרץ..."></textarea>
         </label>
       </section>
 
@@ -172,22 +173,13 @@
       <div class="existing-client-form" id="existingClientForm">
         <h3 id="existingClientTitle"></h3>
         <p class="hint">חשוב: יש לוודא שהשרת של הלקוח הזה אינו פעיל כרגע לפני השמירה, כדי שהשינוי לא יידרס.</p>
-        <div class="form-grid">
-          <label>צבע ראשי
-            <div class="color-field">
-              <input type="color" id="existingColorPrimary" value="#2563eb" />
-              <input type="text" id="existingColorPrimaryHex" value="#2563eb" maxlength="7" />
-            </div>
-          </label>
-          <label>צבע משני
-            <div class="color-field">
-              <input type="color" id="existingColorAccent" value="#06b6d4" />
-              <input type="text" id="existingColorAccentHex" value="#06b6d4" maxlength="7" />
-            </div>
-          </label>
-        </div>
-        <label>הערות פנימיות
-          <textarea id="existingNotesField" rows="3"></textarea>
+        <label>לוגו חדש (אופציונלי — לזיהוי צבעים מחדש)
+          <input type="file" id="existingLogoInput" accept="image/*" />
+        </label>
+        <div class="palette-row" id="existingPaletteRow"></div>
+        <button type="button" class="btn ghost" id="existingPaletteAddBtn">+ הוספת צבע</button>
+        <label>הערות
+          <textarea id="existingNotesField" rows="4"></textarea>
         </label>
         <div class="modal-actions" style="display:flex;gap:10px;margin-top:12px">
           <button type="button" class="btn primary" id="saveExistingClientBtn">שמירת שינויים</button>

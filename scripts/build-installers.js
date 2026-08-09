@@ -50,7 +50,7 @@ if (opt.all || (!opt.android && !opt.ios && !opt.desktop && !opt.server)) {
 }
 
 function help(code) {
-  console.log(`OrderPilot build/installable creator\n\nOne command for local testing from your PC:\n  node scripts/build-installers.js --all --local\n\nOne command for a real server URL:\n  node scripts/build-installers.js --all --api=https://api.your-domain.co.il\n\nOutputs:\n  dist-installers/android/OrderPilot-Android.apk (signed release; auto-generates a release keystore on first build)\n  dist-desktop/OrderPilot Admin Setup*.exe or portable app\n  dist-server/orderpilot-server/\n\nOptions:\n  --local          Detect this PC LAN IP and configure Android/desktop to http://IP:3000\n  --api=URL        Configure apps to a specific server URL\n  --all            Build Android, desktop and server package\n  --android        Build Android only\n  --desktop        Build desktop installer only\n  --server         Package server only\n  --ios            Prepare iOS project if running on macOS\n  --skip-install   Do not run npm install\n  --debug-apk      Build a fast debug-signed APK instead of a signed release build\n`);
+  console.log(`OrderPilot build/installable creator\n\nOne command for local testing from your PC:\n  node scripts/build-installers.js --all --local\n\nOne command for a real server URL:\n  node scripts/build-installers.js --all --api=https://api.your-domain.co.il\n\nOutputs:\n  dist-installers/android/OrderPilot-Android.apk (signed release; auto-generates a release keystore on first build)\n  dist-installers/android/OrderPilot-Android.aab (signed release, for Google Play)\n  dist-desktop/OrderPilot Admin Setup*.exe or portable app\n  dist-server/orderpilot-server/\n\nOptions:\n  --local          Detect this PC LAN IP and configure Android/desktop to http://IP:3000\n  --api=URL        Configure apps to a specific server URL\n  --all            Build Android, desktop and server package\n  --android        Build Android only\n  --desktop        Build desktop installer only\n  --server         Package server only\n  --ios            Prepare iOS project if running on macOS\n  --skip-install   Do not run npm install\n  --debug-apk      Build a fast debug-signed APK instead of a signed release build\n`);
   process.exit(code);
 }
 function log(title){ console.log(`\n=== ${title} ===`); }
@@ -222,6 +222,19 @@ function buildAndroid(url){
       copyFile(debugApk, out);
       console.log(`Debug APK ready: ${out}`);
     } else console.warn('[WARN] APK not found. If Android Studio builds successfully, copy the APK from android/app/build/outputs/apk/.');
+    return;
+  }
+  // Android App Bundle (.aab) — the format Google Play requires for new/updated listings. Uses
+  // the same release signingConfig as the APK above; bundleRelease is available for free once the
+  // com.android.application plugin is applied, no extra Gradle setup needed.
+  run(gradle, ['bundleRelease'], { optional: true, cwd: androidDir });
+  const releaseAab = path.join(root, 'android', 'app', 'build', 'outputs', 'bundle', 'release', 'app-release.aab');
+  if (fs.existsSync(releaseAab)) {
+    const out = path.join(root, 'dist-installers', 'android', 'OrderPilot-Android.aab');
+    copyFile(releaseAab, out);
+    console.log(`Signed release AAB ready: ${out}`);
+  } else {
+    console.warn('[WARN] Release AAB not found.');
   }
 }
 function buildIos(url){
@@ -344,7 +357,8 @@ if (opt.desktop) buildDesktop(url);
 if (opt.server) packageServer(url);
 log('Done');
 console.log('Outputs to check:');
-console.log('  Android APK:     dist-installers/android/OrderPilot-Android.apk (signed release)');
+console.log('  Android APK:     dist-installers/android/OrderPilot-Android.apk (signed release, direct install)');
+console.log('  Android AAB:     dist-installers/android/OrderPilot-Android.aab (signed release, for Google Play)');
 console.log('  Desktop install: dist-desktop/');
 console.log('  Server package:  dist-server/orderpilot-server/');
 console.log('Run local server now with: npm run run:local');

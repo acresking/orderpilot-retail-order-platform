@@ -141,7 +141,40 @@ async function api(path, options={}){
   return data;
 }
 function shadeHex(hex, percent){ const n=parseInt(String(hex||'').replace('#',''),16); if(Number.isNaN(n)) return hex; let r=(n>>16)&0xff, g=(n>>8)&0xff, b=n&0xff; const t=percent<0?0:255, p=Math.abs(percent); r=Math.round((t-r)*p)+r; g=Math.round((t-g)*p)+g; b=Math.round((t-b)*p)+b; return '#'+(0x1000000+r*0x10000+g*0x100+b).toString(16).slice(1); }
-function applyBrandColors(brandColors){ const primary=brandColors?.primary, accent=brandColors?.accent; const root=document.documentElement.style; if(primary){ root.setProperty('--primary',primary); root.setProperty('--primary-2',shadeHex(primary,-0.18)); root.setProperty('--primary-soft',shadeHex(primary,0.85)); } if(accent) root.setProperty('--accent',accent); }
+// Rotates a hex color's hue by `deg` degrees, used to synthesize a second brand color when a
+// client only ever gave one — so a single-color palette still gets a coherent, non-identical
+// accent instead of every gradient/highlight collapsing onto the exact same shade.
+function hueRotateHex(hex, deg){
+  const n=parseInt(String(hex||'').replace('#',''),16); if(Number.isNaN(n)) return hex;
+  let r=((n>>16)&0xff)/255, g=((n>>8)&0xff)/255, b=(n&0xff)/255;
+  const max=Math.max(r,g,b), min=Math.min(r,g,b); let h=0, s=0; const l=(max+min)/2;
+  if(max!==min){ const d=max-min; s=l>0.5?d/(2-max-min):d/(max+min);
+    if(max===r) h=(g-b)/d+(g<b?6:0); else if(max===g) h=(b-r)/d+2; else h=(r-g)/d+4; h/=6; }
+  h=((h+deg/360)%1+1)%1;
+  const hue2rgb=(p,q,t)=>{ if(t<0)t+=1; if(t>1)t-=1; if(t<1/6) return p+(q-p)*6*t; if(t<1/2) return q; if(t<2/3) return p+(q-p)*(2/3-t)*6; return p; };
+  let r2,g2,b2;
+  if(s===0){ r2=g2=b2=l; } else { const q=l<0.5?l*(1+s):l+s-l*s, p=2*l-q; r2=hue2rgb(p,q,h+1/3); g2=hue2rgb(p,q,h); b2=hue2rgb(p,q,h-1/3); }
+  const toHex=v=>Math.round(v*255).toString(16).padStart(2,'0');
+  return '#'+toHex(r2)+toHex(g2)+toHex(b2);
+}
+// Applies a client's brand palette (1 or more colors, vendor's choice) as CSS custom properties.
+// The first color always drives --primary (and its derived shade/tint); a second color becomes
+// --accent if given, otherwise one is synthesized by hue-rotating the primary. Any 3rd/4th+ colors
+// become --tertiary/--quaternary, and the whole palette is also exposed as --brand-1.."--brand-N"
+// for anything that wants to use the client's exact colors directly rather than the semantic roles.
+function applyBrandColors(brandColors){
+  const palette=(Array.isArray(brandColors?.palette)?brandColors.palette:[]).filter(c=>/^#[0-9a-fA-F]{6}$/.test(c||''));
+  if(!palette.length) return;
+  const root=document.documentElement.style, primary=palette[0];
+  root.setProperty('--primary',primary);
+  root.setProperty('--primary-2',shadeHex(primary,-0.18));
+  root.setProperty('--primary-soft',shadeHex(primary,0.85));
+  root.setProperty('--accent',palette[1]||hueRotateHex(primary,40));
+  root.setProperty('--tertiary',palette[2]||hueRotateHex(primary,-40));
+  root.setProperty('--quaternary',palette[3]||shadeHex(primary,0.4));
+  palette.forEach((c,i)=>root.setProperty(`--brand-${i+1}`,c));
+  root.setProperty('--brand-count',String(palette.length));
+}
 async function loadAll(){ state.data = await api('/api/admin/bootstrap'); applyBrandColors(state.data.brandColors); if(!can(screens.find(s=>s[0]===state.screen)?.[2] || 'dashboard.view')) state.screen = 'dashboard'; }
 function formObject(form){ const fd=new FormData(form); const obj={}; for(const [k,v] of fd.entries()){ if(v instanceof File && v.size===0) continue; if(obj[k]!==undefined){ if(!Array.isArray(obj[k])) obj[k]=[obj[k]]; obj[k].push(v); } else obj[k]=v; } for(const el of form.querySelectorAll('select[multiple]')) obj[el.name]=[...el.selectedOptions].map(o=>o.value); for(const el of form.querySelectorAll('input[type="checkbox"][data-bool]')) obj[el.name]=el.checked; return obj; }
 function fileToDataUrl(file){ return new Promise((resolve,reject)=>{ if(!file) return resolve(''); const r=new FileReader(); r.onload=()=>resolve(r.result); r.onerror=reject; r.readAsDataURL(file); }); }
