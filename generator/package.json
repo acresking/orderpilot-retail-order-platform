@@ -1,0 +1,16 @@
+{
+  "name": "orderpilot-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local tool for creating and updating white-label OrderPilot client deployments.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.0"
+  }
+}

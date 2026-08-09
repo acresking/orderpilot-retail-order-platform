@@ -6,11 +6,20 @@ const http = require('http');
 const childProcess = require('child_process');
 
 const APP_NAME = 'OrderPilot Admin';
+const RESTART_EXIT_CODE = 87; // must match RESTART_EXIT_CODE in src/server/index.js
 const DEFAULT_PORT = Number(process.env.ORDERPILOT_DESKTOP_PORT || process.env.PORT || 3000);
 const MODE = process.env.ORDERPILOT_DESKTOP_MODE || 'local'; // local | remote
 const REMOTE_URL = process.env.ORDERPILOT_SERVER_URL || process.env.ORDERPILOT_API_BASE_URL || '';
 let serverProcess = null;
 let mainWindow = null;
+
+function appIconPath() {
+  const candidates = [
+    path.join(process.resourcesPath || '', 'public', 'icon-512.png'),
+    path.join(__dirname, '..', 'public', 'icon-512.png'),
+  ];
+  return candidates.find((p) => { try { return require('fs').existsSync(p); } catch (_) { return false; } }) || undefined;
+}
 
 function adminUrl() {
   if (MODE === 'remote') {
@@ -51,6 +60,11 @@ function startLocalServer() {
   serverProcess.stdout?.on('data', d => console.log(String(d).trim()));
   serverProcess.stderr?.on('data', d => console.error(String(d).trim()));
   serverProcess.on('exit', (code) => {
+    if (code === RESTART_EXIT_CODE) {
+      app.relaunch();
+      app.exit(0);
+      return;
+    }
     if (mainWindow && !mainWindow.isDestroyed()) {
       mainWindow.webContents.send('orderpilot-server-exit', { code });
     }
@@ -71,6 +85,7 @@ async function createWindow() {
     minWidth: 1120,
     minHeight: 720,
     title: APP_NAME,
+    icon: appIconPath(),
     backgroundColor: '#0f172a',
     show: false,
     webPreferences: {

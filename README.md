@@ -1,70 +1,106 @@
-# OrderPilot v41 — Windows Build Fixes
+# OrderPilot Retail Order Platform v49.0.0
 
-This is a code-only update. It does not include `data/`, `node_modules/`, `android/`, `ios/`, or old patch files.
+פלטפורמה דיגיטלית מלאה לניהול הזמנות B2B ורשתות קמעונאיות בין חברות הפצה/ספקים לבין רשתות וסניפים.
 
-## What changed
+---
 
-- Fixed Android APK build on Windows by running the Gradle wrapper from `android/gradlew.bat` with the correct working directory.
-- Improved local IP detection so `--local` skips VMware/VirtualBox/WSL/Docker adapters and prefers Wi-Fi/Ethernet.
-- Improved desktop packaging on Windows:
-  - disables automatic code-signing discovery;
-  - tries a Windows portable build first;
-  - falls back to unpacked desktop build;
-  - if Windows symlink permissions still block electron-builder, creates a fallback desktop launcher under `dist-desktop/OrderPilot-Admin-dev-runner`.
-- `flatDir should be avoided` in Android Studio is treated as a warning from Capacitor/Cordova compatibility, not as a build-blocking error.
+## 🏗️ רכיבי המערכת
 
-## One command for local testing
+1. **שרת Backend (Node.js & Express / Custom HTTP):**
+   - RESTful API מהיר ומאובטח לניהול קטלוג, מוצרים, הזמנות, סלי קניות, זיכויים/החזרות, מבצעים ובאנרים.
+   - מאגר נתונים JSON מובנה עם גיבוי אוטומטי.
+   - לוגים חיים ומפורטים בזמן אמת בטרמינל.
+
+2. **תוכנת ניהול חברה (Desktop Admin Software & Web Dashboard - `/admin`):**
+   - **כפתורים מהירים:** הוספת מוצר חדש (`➕`), הקמת מבצע (`🏷️`), הוספת באנר (`🖼️`), ייצוא CSV להזמנות (`📋`).
+   - **ניהול הזמנות ואריזה:** מעקב סטטוסים בלייב (`נשלחה` -> `בטיפול` -> `בליקוט` -> `משטח מוכן` -> `סופקה`) ודיווח חסרים במחסן.
+   - **ניהול מבצעים ובאנרים:** הקמת מבצעים לפי אחוזים/סכום ובאנרים פרסומיים המופיעים באפליקציה.
+   - **ניהול זיכויים והחזרות:** אישור/דחיית בקשות זיכוי שהוגשו על ידי הסניפים.
+   - **ייצוא ל-ERP:** ייצוא קבצי CSV מותאמים למערכות Priority, SAP וחשבשבת.
+
+3. **אפליקציית מובייל לסניפים (Branch Mobile App - `/`):**
+   - **באנרים פרסומיים (Carousel):** תצוגת באנרים בראש האפליקציה.
+   - **כפתורי סינון מהירים:** `⭐ מומלץ`, `🔥 במבצע`, `✨ חדש`, `🔄 מוזמן קבוע`.
+   - **קטלוג חכם:** סינון קטגוריות, תגי כשרות (`בד״ץ`, `מהדרין`, `חלב ישראל`), כמויות בקרטון ומחירים.
+   - **מד התקדמות למינימום הזמנה (Progress Bar):** תצוגה ויזואלית חיה של אחוזי ההגעה למינימום ההזמנה.
+   - **שכפול הזמנה בקליק (One-Tap Reorder):** מעבר מהיר של מוצרי הזמנה קודמת לסל הקניות.
+   - **הגשת בקשת זיכוי/החזרה:** טופס מובנה לדיווח על מוצרים פגומים או חסרים.
+
+---
+
+## 🔑 פרטי התחברות למערכת
+
+### 1. אפליקציית סניפים (`http://127.0.0.1:3000/`):
+
+* **סניף 1 – סניף דיזנגוף 12 (תל אביב):**
+  - **רשת:** רשת מיני מרקט ישראל
+  - **קוד רשת:** `100`
+  - **קוד סניף:** `12`
+  - **סיסמה:** `demo`
+
+* **סניף 2 – סניף הריף (אלעד):**
+  - **רשת:** ברכל
+  - **קוד רשת:** `1234`
+  - **קוד סניף:** `16`
+  - **סיסמה:** `1234`
+
+### 2. פאנל ניהול חברה (`http://127.0.0.1:3000/admin`):
+
+* **מנהל ראשי (Owner):** `admin@company.demo` / `admin123`
+* **מנהל תפעול (Manager):** `manager@company.demo` / `admin123`
+* **פקיד הזמנות (Clerk):** `clerk@company.demo` / `admin123`
+* **אורז מחסן (Packer):** `packer@company.demo` / `admin123`
+
+---
+
+## 🚀 הוראות הרצה
 
 ```powershell
-node scripts/build-installers.js --all --local
-```
-
-If the detected IP is wrong, pass it explicitly:
-
-```powershell
-node scripts/build-installers.js --all --api=http://10.100.102.18:3000
-```
-
-## Expected outputs
-
-```text
-dist-installers/android/OrderPilot-Android-debug.apk
-dist-desktop/
-dist-server/orderpilot-server/
-```
-
-## Run local server
-
-```powershell
+# 1. הרצת השרת המקומי:
 npm run run:local
+
+# 2. גישה בדפדפן:
+# - אפליקציית סניפים: http://127.0.0.1:3000/
+# - פאנל ניהול חברה: http://127.0.0.1:3000/admin
+# - בדיקת תקינות:    http://127.0.0.1:3000/api/health
 ```
 
-Then test from the phone browser:
+---
 
-```text
-http://YOUR_PC_IP:3000/api/health
+## 🏭 מערכת White-Label — הפצה ללקוחות
+
+תיקיית `generator/` בתוך הריפו הזה היא כלי מקומי (Node http server + ממשק דפדפן) ליצירת
+פריסה נפרדת ופרטית לחלוטין לכל לקוח, מתוך הקוד שבריפו הזה כתבנית בסיס.
+
+```bash
+cd generator
+npm install
+npm start   # פותח http://127.0.0.1:4100
 ```
 
-## Notes
+בפאנל: שם חברה + לוגו + פרטי קשר, קביעת סוגי ההזמנה (יבש/מצונן/קפוא/מותאם), בחירת פיצ'רים,
+תמחור חי (הקמה + חודשי, לפני מע״מ — מוצג רק בפאנל הזה, לא נשלח ללקוח), ולחיצת יצירה שמייצרת
+תיקייה עצמאית ובנויה מראש עם מפתחות הצפנה חדשים ומשתמשי ניהול (בעלים + חשבון תמיכה קבוע לספק).
 
-- iOS still requires macOS + Xcode.
-- A production Android release APK/AAB will need signing keys.
-- A production Windows installer should eventually be signed with a code-signing certificate.
+### מודל תמחור
 
+מקור האמת היחיד: [`src/shared/features.js`](src/shared/features.js). חבילת בסיס תמיד כלולה
+(קטלוג, סל, הזמנות, ניהול רשתות/סניפים, מועדפים, התראות מלאי ופוש) ולא ניתנת להסרה — רק
+פיצ'רים מתקדמים (חזרות עם OCR, מבצעים, באנרים, מצב לא מקוון, סריקת ברקוד, סטטיסטיקות, ריבוי
+שפות, ממשקי ERP, ריבוי עובדים) ניתנים להסרה. מספר סוגי ההזמנה נקבע ומתומחר בנפרד — הסוג הראשון
+כלול בבסיס, כל סוג נוסף מחויב לפי `EXTRA_DELIVERY_TYPE_PRICE`.
 
-## OrderPilot v43 - Android Failed to Fetch diagnostics
+### נעילת סוגי הזמנה
 
-This update adds Android local HTTP network security configuration, a visible connection test button on the mobile login screen, and GitHub safety files. It does not include `data/`.
+מספר וסוגי ההזמנה נקבעים על ידי הספק בפאנל היצירה. מהפאנל של הלקוח עצמו ניתן **רק לשנות שם**
+לסוג קיים — הוספה/מחיקה חסומות בשרת (403) גם אם מישהו ינסה לקרוא ל-API ישירות.
 
-## פרטי כניסה
+### עדכוני גרסה ללקוחות קיימים
 
-### אפליקציית סניף
+אין שרת עדכונים מרכזי — כל לקוח פרטי ועצמאי לגמרי. מהפאנל הקטן: **ייצוא חבילת עדכון** יוצר
+ZIP עם קוד בלבד (ללא נתוני לקוח), ששולחים ללקוח בכל דרך; אצל הלקוח, מנהל עם הרשאת "עדכוני
+מערכת" מעלה את הקובץ מתוך הפאנל שלו בלחיצה אחת, השרת מחליף קוד בלבד ומתאתחל אוטומטית.
 
-- קוד רשת: `100`
-- קוד סניף: `12`
-- סיסמה: `demo`
-
-### פאנל חברה
-
-- אימייל: `admin@company.demo`
-- סיסמה: `admin123`
+⚠️ **חשוב:** `generator/` יוצר תיקיות לקוח תחת `../clients/` (מחוץ לריפו הזה) — כל תיקיית לקוח
+מכילה מפתחות הצפנה ונתונים אמיתיים ולעולם לא אמורה להיכנס לשליטת גרסאות, במיוחד לא לריפו
+ציבורי.

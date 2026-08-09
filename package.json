@@ -1,11 +1,12 @@
 {
   "name": "orderpilot-retail-order-platform",
-  "version": "44.0.0",
+  "version": "49.0.1",
   "private": true,
-  "description": "OrderPilot installable Android, desktop and server packaging workflow with Windows Gradle/Electron fixes.",
+  "description": "OrderPilot v49 stable architecture cleanup from v45 with proper app branding.",
   "main": "desktop/main.js",
   "scripts": {
     "start": "node server.js",
+    "start:forever": "scripts\\run-forever.cmd",
     "server:prod": "NODE_ENV=production node server.js",
     "desktop:open": "node server.js",
     "reset-data": "rm -f data/*.json data/db.json && node server.js",
@@ -40,7 +41,9 @@
     "build:desktop:portable": "node scripts/build-installers.js --desktop --api=http://127.0.0.1:3000",
     "prepare:github": "node scripts/prepare-github.js",
     "android:diagnose": "node scripts/android-local-diagnose.js",
-    "github:create": "node scripts/github-create.js"
+    "github:create": "node scripts/github-create.js",
+    "build:web": "node scripts/build-web.js",
+    "check:all": "npm run build:web && node --check server.js && node --check src/server/index.js && node --check public/app.js && node --check public/admin.js && node scripts/project-doctor.js && node scripts/mobile-doctor.js"
   },
   "engines": {
     "node": ">=22"
@@ -49,18 +52,21 @@
     "@capacitor/android": "^8.0.0",
     "@capacitor/app": "^8.0.0",
     "@capacitor/core": "^8.0.0",
+    "@capacitor/filesystem": "^8.0.0",
     "@capacitor/haptics": "^8.0.0",
     "@capacitor/ios": "^8.0.0",
     "@capacitor/keyboard": "^8.0.0",
+    "@capacitor/local-notifications": "^8.0.0",
     "@capacitor/network": "^8.0.0",
     "@capacitor/preferences": "^8.0.0",
     "@capacitor/push-notifications": "^8.0.0",
-    "@capacitor/filesystem": "^8.0.0"
+    "adm-zip": "^0.6.0"
   },
   "devDependencies": {
     "@capacitor/cli": "^8.0.0",
     "electron": "^31.7.7",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^24.13.3",
+    "png2icons": "^2.0.1"
   },
   "build": {
     "appId": "com.orderpilot.desktop",
@@ -80,7 +86,10 @@
       "scripts/package-server.js",
       "scripts/open-android-output.js",
       "scripts/open-dist.js",
-      ".env.example"
+      ".env.example",
+      "src/**/*",
+      "docs/**/*",
+      "scripts/build-web.js"
     ],
     "extraResources": [
       {
@@ -93,20 +102,33 @@
     },
     "mac": {
       "category": "public.app-category.business",
+      "icon": "build/icon.icns",
       "target": [
         "dmg",
         "zip"
       ]
     },
     "win": {
+      "icon": "build/icon.ico",
       "target": [
+        "nsis",
         "portable"
       ],
       "signAndEditExecutable": false,
       "signDlls": false,
       "verifyUpdateCodeSignature": false
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "OrderPilot Admin",
+      "artifactName": "OrderPilot-Admin-Setup-${version}.${ext}"
+    },
     "linux": {
+      "icon": "build/icon.png",
       "target": [
         "AppImage",
         "deb"

@@ -78,12 +78,18 @@ const childEnv = {
   ORDERPILOT_LOCAL_IP: ip,
 };
 
-console.log('OrderPilot local server');
-console.log(`Computer URL: http://localhost:${PORT}`);
-console.log(`Phone URL:    ${apiBase}`);
-console.log(`Health:       ${apiBase}/api/health`);
-console.log('Keep this window open while testing Android/desktop.');
-console.log('If the phone cannot open the Health URL, allow TCP port 3000 in Windows Firewall and verify phone + PC are on the same Wi-Fi.');
+console.log('\n==================================================');
+console.log(' OrderPilot Local Server starting...');
+console.log('==================================================');
+console.log(` Branch App (Computer): http://127.0.0.1:${PORT}/`);
+console.log(` Company Admin Panel:   http://127.0.0.1:${PORT}/admin`);
+console.log(` Phone LAN App:         http://${ip}:${PORT}/`);
+console.log(` Health API Check:      http://127.0.0.1:${PORT}/api/health`);
+console.log('==================================================');
+console.log(' Login Credentials:');
+console.log('   Branch App:  Network Code: 100 | Branch Code: 12 | Password: demo');
+console.log('   Admin Panel: Email: admin@company.demo | Password: admin123');
+console.log('==================================================\n');
 
 const child = spawn(process.execPath, ['server.js'], {
   cwd: ROOT,

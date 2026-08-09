@@ -126,17 +126,30 @@ function apiUrl(){
   process.exit(1);
 }
 function configureEnv(url){
-  const env = [
-    '# OrderPilot environment',
-    `ORDERPILOT_API_BASE_URL=${url}`,
-    `ORDERPILOT_SERVER_URL=${url}`,
-    `ORDERPILOT_DESKTOP_MODE=${url.startsWith('http://127.') || url.startsWith('http://localhost') ? 'local' : 'remote'}`,
-    'ORDERPILOT_HOST=0.0.0.0',
-    'PORT=3000',
-    'NODE_ENV=development',
-    ''
-  ].join('\n');
-  fs.writeFileSync(path.join(root, '.env'), env, 'utf8');
+  // Merge into the existing .env rather than overwriting it wholesale — server-generated secrets
+  // like CODE_PEPPER / DATA_ENCRYPTION_KEY (auto-created on first run) must survive a rebuild, or
+  // encrypted data becomes unrecoverable and existing access codes stop matching.
+  const envPath = path.join(root, '.env');
+  const existing = {};
+  if (fs.existsSync(envPath)) {
+    for (const line of fs.readFileSync(envPath, 'utf8').split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eq = trimmed.indexOf('=');
+      if (eq < 0) continue;
+      existing[trimmed.slice(0, eq).trim()] = trimmed.slice(eq + 1).trim();
+    }
+  }
+  Object.assign(existing, {
+    ORDERPILOT_API_BASE_URL: url,
+    ORDERPILOT_SERVER_URL: url,
+    ORDERPILOT_DESKTOP_MODE: url.startsWith('http://127.') || url.startsWith('http://localhost') ? 'local' : 'remote',
+    ORDERPILOT_HOST: existing.ORDERPILOT_HOST || '0.0.0.0',
+    PORT: existing.PORT || '3000',
+    NODE_ENV: existing.NODE_ENV || 'development',
+  });
+  const env = ['# OrderPilot environment', ...Object.entries(existing).map(([k, v]) => `${k}=${v}`), ''].join('\n');
+  fs.writeFileSync(envPath, env, 'utf8');
   console.log(`Configured .env for ${url}`);
 }
 function enableAndroidCleartext(url){
@@ -151,9 +164,11 @@ function enableAndroidCleartext(url){
   const domainXml = domains.map(d => `    <domain includeSubdomains="true">${d}</domain>`).join('\n');
   fs.writeFileSync(netCfg, `${XML_HEADER}\n<network-security-config>\n  <base-config cleartextTrafficPermitted="true" />\n  <domain-config cleartextTrafficPermitted="true">\n${domainXml}\n  </domain-config>\n</network-security-config>\n`, 'utf8');
   let text = fs.readFileSync(manifest, 'utf8');
-  if (!/uses-permission[^>]+android.permission.INTERNET/.test(text)) {
-    text = text.replace(/<manifest([^>]*)>/, '<manifest$1>\n    <uses-permission android:name="android.permission.INTERNET" />');
-  }
+  const ensurePermission = (perm) => {
+    const needle = `android.permission.${perm}`;
+    if (!text.includes(needle)) text = text.replace(/<manifest([^>]*)>/, `<manifest$1>\n    <uses-permission android:name="${needle}" />`);
+  };
+  ['INTERNET','ACCESS_NETWORK_STATE','CAMERA','POST_NOTIFICATIONS','READ_MEDIA_IMAGES'].forEach(ensurePermission);
   if (!/usesCleartextTraffic=/.test(text)) text = text.replace(/<application\b/, '<application android:usesCleartextTraffic="true"');
   else text = text.replace(/android:usesCleartextTraffic="[^"]*"/, 'android:usesCleartextTraffic="true"');
   if (!/networkSecurityConfig=/.test(text)) text = text.replace(/<application\b/, '<application android:networkSecurityConfig="@xml/network_security_config"');
@@ -220,24 +235,34 @@ function createDesktopFallback(url){
 }
 function buildDesktop(url){
   log('Desktop installer');
+  run(process.execPath, ['scripts/generate-icons.js'], { optional: true });
   cleanDesktopOutput();
   const target = opt.local ? 'desktop' : 'desktop-remote';
   run(process.execPath, ['scripts/configure-target.js', target], { env: { ORDERPILOT_API_BASE_URL: url, ORDERPILOT_SERVER_URL: url }});
-  const env = {
+  // Code signing: set CSC_LINK (path or base64 of a .pfx) + CSC_KEY_PASSWORD in the environment
+  // (or .env) to have electron-builder sign the installer automatically — this is what actually
+  // gets past Windows SmartScreen / Smart App Control. Without those, we explicitly disable
+  // signing so electron-builder doesn't fail trying to auto-discover a certificate that isn't there.
+  const hasCert = !!process.env.CSC_LINK;
+  if (hasCert) console.log('CSC_LINK detected — building a SIGNED installer.');
+  else console.log('No CSC_LINK set — building an UNSIGNED installer (Windows will show a publisher warning). Set CSC_LINK + CSC_KEY_PASSWORD once you have a code-signing certificate.');
+  const env = hasCert ? { USE_HARD_LINKS: 'false' } : {
     CSC_IDENTITY_AUTO_DISCOVERY: 'false',
     ELECTRON_BUILDER_DISABLE_WIN_CODE_SIGN: 'true',
     USE_HARD_LINKS: 'false',
   };
+  const signFlags = hasCert ? [] : ['--config.win.signAndEditExecutable=false','--config.win.signDlls=false'];
   let ok = false;
   if (opt.installer) {
-    ok = runNpx(['electron-builder','--win','portable','--config.win.signAndEditExecutable=false','--config.win.signDlls=false'], { optional: true, env });
+    ok = runNpx(['electron-builder','--win','nsis','portable',...signFlags], { optional: true, env });
   }
   if (!ok || !hasDesktopOutput()) {
-    console.warn('[WARN] Full Windows portable build failed or produced no output. Trying unpacked desktop build.');
-    ok = runNpx(['electron-builder','--dir','--config.win.signAndEditExecutable=false','--config.win.signDlls=false'], { optional: true, env });
+    console.warn('[WARN] Full Windows installer build failed or produced no output. Trying unpacked desktop build.');
+    ok = runNpx(['electron-builder','--dir',...signFlags], { optional: true, env });
   }
   if (!hasDesktopOutput()) createDesktopFallback(url);
   console.log('Desktop output folder: dist-desktop');
+  console.log('Look for "OrderPilot-Admin-Setup-*.exe" — that is the real installer (Next > Next > Finish, Start Menu shortcut, uninstaller). The plain .exe without "Setup" in the name is the portable build, which just runs without installing.');
 }
 function copyDir(src, dst, ignore = () => false){
   if (!fs.existsSync(src) || ignore(src)) return;
@@ -252,7 +277,7 @@ function packageServer(url){
   const out = path.join(root, 'dist-server', 'orderpilot-server');
   fs.rmSync(out, { recursive:true, force:true });
   fs.mkdirSync(out, { recursive:true });
-  const keep = ['server.js','package.json','.env.example','README.md','public','scripts'];
+  const keep = ['server.js','package.json','.env.example','README.md','public','src','scripts'];
   for (const item of keep) {
     const src = path.join(root, item);
     if (fs.existsSync(src)) copyDir(src, path.join(out,item), p => /node_modules|^data$|dist-|android$|ios$|patch_v\d+\.py/.test(path.basename(p)));

@@ -1,10 +1,13 @@
 node_modules/
-data/db.json
 .DS_Store
-# Local/private data and secrets
+# Local/private data and secrets — this repo is a reusable template + the generator tool, never
+# a live deployment. Real client data/keys live in ../clients/, outside version control entirely.
+data/
 .env
 .env.*
 !.env.example
+generator/data/
+generator/exports/
 # Dependencies and generated apps
 android/.gradle/
 android/app/build/
@@ -16,9 +19,11 @@ dist-desktop/
 dist-server/
 out/
 release/
+build/
 # Temporary patch files
 patch_v*.py
 *.bak-*
 # Logs
 *.log
 npm-debug.log*
+android/local.properties

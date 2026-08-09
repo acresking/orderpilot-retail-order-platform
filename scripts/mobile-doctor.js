@@ -21,7 +21,8 @@ for (const file of requiredFiles) {
 }
 
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
-const deps = ['@capacitor/core', '@capacitor/android', '@capacitor/ios', '@capacitor/app', '@capacitor/haptics', '@capacitor/keyboard', '@capacitor/network', '@capacitor/preferences', '@capacitor/push-notifications'];
+const deps = ['@capacitor/core', '@capacitor/android', '@capacitor/ios', '@capacitor/app', '@capacitor/haptics', '@capacitor/keyboard', '@capacitor/network', '@capacitor/preferences', '@capacitor/push-notifications',
+  '@capacitor/local-notifications'];
 for (const dep of deps) {
   const exists = pkg.dependencies?.[dep] || pkg.devDependencies?.[dep];
   console.log(`${exists ? 'OK' : 'MISSING'} ${dep}`);
